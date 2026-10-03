@@ -57,7 +57,7 @@ export function Gallery({ t }: { t: Dict }) {
             onClick={() => setOpen(i)}
             onMouseEnter={() => showCursor(true)}
             onMouseLeave={() => showCursor(false)}
-            className={`group relative overflow-hidden md:cursor-none ${layout[i]}`}
+            className={`group relative h-auto w-full overflow-hidden rounded-none p-0 md:cursor-none ${layout[i]}`}
             aria-label={g.alt}
           >
             <img src={g.src} alt={g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]" />

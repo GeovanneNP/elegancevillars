@@ -20,7 +20,7 @@ export const dict = {
       ["1", "chambre"],
       ["2023", "rénovation"],
     ],
-    interiorKicker: "Contemporary alpine",
+    interiorKicker: "Intérieur alpin contemporain",
     interiorTitle: ["Une rénovation pensée", "dans chaque détail."],
     interiorText:
       "Entièrement rénové en 2023, l'appartement mêle matériaux chaleureux, lignes contemporaines et détails inspirés de l'architecture alpine. Cuisine ouverte, séjour avec cheminée et accès direct au balcon.",
@@ -64,7 +64,7 @@ export const dict = {
       "Cave", "Local à skis", "Cuisine ouverte", "Vue montagnes",
     ],
     galleryTitle: "Galerie",
-    view: "View",
+    view: "Voir",
     ownTitle: ["Votre résidence", "dans les Alpes."],
     ownText:
       "Disponible comme résidence principale ou secondaire et accessible à une clientèle non-résidente.",

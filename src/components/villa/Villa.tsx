@@ -214,7 +214,7 @@ export function Villa() {
              </Button>
           </div>
         </div>
-         <div className="absolute bottom-4 right-5 flex flex-col items-center gap-2 md:bottom-6 md:right-12">
+         <div className="absolute bottom-4 right-5 hidden flex-col items-center gap-2 md:bottom-6 md:right-12 md:flex">
           <span className="eyebrow text-[0.55rem] text-ivory/70">{t.scroll}</span>
           <span className="relative h-10 w-px overflow-hidden bg-ivory/20">
             <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_2.2s_ease-in-out_infinite] bg-ivory" />
@@ -258,7 +258,7 @@ export function Villa() {
          <div className="mt-16 grid grid-cols-2 border-t border-ivory/15 md:mt-24 md:grid-cols-4">
           {t.facts.map(([n, l], i) => (
             <div key={l} className={`border-b border-ivory/15 py-10 md:border-b-0 md:py-14 ${i % 2 ? "pl-6" : "pr-6"} md:px-8 ${i > 0 ? "md:border-l" : ""} ${i % 2 ? "border-l" : ""} border-ivory/15`}>
-              <div data-count={n} className="font-serif text-7xl font-light tabular-nums lining-nums md:text-8xl">{n}</div>
+               <div data-count={n} className="font-serif text-6xl font-light tabular-nums lining-nums md:text-8xl">{n}</div>
               <div className="eyebrow mt-4 text-ivory/55">{l}</div>
             </div>
           ))}
@@ -341,10 +341,10 @@ export function Villa() {
           <span data-vline className="absolute left-0 top-0 h-full w-px origin-top bg-wood" />
           <ul>
             {t.distances.map(([p, d]) => (
-              <li data-dist key={p} className="relative flex items-baseline justify-between border-b py-7 pl-8">
+               <li data-dist key={p} className="relative flex items-baseline justify-between gap-3 border-b py-7 pl-8">
                 <span className="absolute left-[-3px] top-1/2 h-[7px] w-[7px] -translate-y-1/2 rounded-full bg-wood" />
-                <span className="font-serif text-2xl md:text-3xl">{p}</span>
-                <span className="eyebrow text-wood">{d}</span>
+                 <span className="min-w-0 font-serif text-2xl md:text-3xl">{p}</span>
+                 <span className="eyebrow shrink-0 text-wood">{d}</span>
               </li>
             ))}
           </ul>
