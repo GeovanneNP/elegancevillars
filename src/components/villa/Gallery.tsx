@@ -46,7 +46,7 @@ export function Gallery({ t }: { t: Dict }) {
     <section id="gallery" className="bg-ivory px-5 py-32 md:px-12 md:py-48" onMouseMove={move}>
       <div className="mb-20 flex items-end justify-between border-b pb-6">
         <h2 className="font-serif text-6xl font-light md:text-9xl">{t.galleryTitle}</h2>
-        <span className="eyebrow text-muted-foreground">0{n} — Photographies</span>
+         <span className="eyebrow text-muted-foreground">0{n} — {t.galleryCount}</span>
       </div>
       <div className="grid grid-cols-12 gap-4 md:gap-8">
         {galleryImages.map((g, i) => (
@@ -58,9 +58,9 @@ export function Gallery({ t }: { t: Dict }) {
             onMouseEnter={() => showCursor(true)}
             onMouseLeave={() => showCursor(false)}
             className={`group relative h-auto w-full overflow-hidden rounded-none p-0 md:cursor-none ${layout[i]}`}
-            aria-label={g.alt}
+             aria-label={t.galleryAlts[i] ?? g.alt}
           >
-            <img src={g.src} alt={g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]" />
+             <img src={g.src} alt={t.galleryAlts[i] ?? g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]" />
           </Button>
         ))}
       </div>
@@ -76,14 +76,14 @@ export function Gallery({ t }: { t: Dict }) {
         <div className="fixed inset-0 z-[90] flex animate-fade-in flex-col bg-ink text-ivory" role="dialog" aria-modal>
           <div className="flex items-center justify-between px-6 py-5 md:px-12">
             <span className="eyebrow text-ivory/60">{String(open + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span>
-            <Button variant="ghost" onClick={() => setOpen(null)} className="eyebrow text-ivory hover:text-gold">ESC — Fermer</Button>
+             <Button variant="ghost" onClick={() => setOpen(null)} className="eyebrow text-ivory hover:text-gold">ESC — {t.galleryClose}</Button>
           </div>
           <div className="relative flex flex-1 items-center justify-center px-4 md:px-24">
-            <img key={open} src={galleryImages[open]?.src} alt={galleryImages[open]?.alt} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
-            <Button variant="ghost" onClick={() => go(-1)} aria-label="Précédent" className="absolute left-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8">←</Button>
-            <Button variant="ghost" onClick={() => go(1)} aria-label="Suivant" className="absolute right-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8">→</Button>
+             <img key={open} src={galleryImages[open]?.src} alt={t.galleryAlts[open]} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
+             <Button variant="ghost" onClick={() => go(-1)} aria-label={t.galleryPrevious} className="absolute left-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8">←</Button>
+             <Button variant="ghost" onClick={() => go(1)} aria-label={t.galleryNext} className="absolute right-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8">→</Button>
           </div>
-          <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{galleryImages[open]?.alt}</p>
+           <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{t.galleryAlts[open]}</p>
         </div>
       )}
     </section>
