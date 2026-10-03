@@ -34,7 +34,7 @@ export const dict = {
     distances: [
       ["Transports publics", "50 M"],
       ["Commerces", "300 M"],
-      ["Gare d'Aigle", "15 MIN"],
+      ["Aigle", "15 MIN"],
       ["Aéroport de Sion", "30 MIN"],
       ["Lausanne", "55 MIN"],
       ["Genève centre + aéroport", "90 MIN"],
@@ -49,7 +49,7 @@ export const dict = {
       ["Pièces", "2.5"],
       ["Chambre", "1"],
       ["Salle d'eau", "1 — douche / WC"],
-      ["Étage", "2ème"],
+      ["Étage", "2e"],
       ["Balcon", "1"],
       ["Construction", "1980"],
       ["Rénovation", "2023"],
@@ -119,7 +119,7 @@ export const dict = {
     distances: [
       ["Public transport", "50 M"],
       ["Shops", "300 M"],
-      ["Aigle station", "15 MIN"],
+      ["Aigle", "15 MIN"],
       ["Sion Airport", "30 MIN"],
       ["Lausanne", "55 MIN"],
       ["Geneva centre + airport", "90 MIN"],

@@ -14,7 +14,7 @@ function Lines({ lines, className = "" }: { lines: string[]; className?: string 
   return (
     <span data-lines className={className}>
       {lines.map((l) => (
-        <span key={l} className="line-mask"><span>{l}</span></span>
+         <span key={l} className="line-mask"><span>{l}{" "}</span></span>
       ))}
     </span>
   );
