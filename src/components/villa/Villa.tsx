@@ -454,7 +454,7 @@ export function Villa() {
            </div>
         </div>
         <footer className="flex flex-col gap-4 border-t border-ivory/10 px-5 py-8 text-xs text-ivory/40 md:flex-row md:justify-between md:px-12">
-           <span>{t.details[11]?.[0]} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
+           <span>{t.reference} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
           <span>{t.rights}</span>
            <span>Villars-sur-Ollon · Vaud</span>
         </footer>
