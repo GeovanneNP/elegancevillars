@@ -12,5 +12,5 @@
 - [x] Rewrite FR title/description, add EN language signal (og:locale:alternate)
 - [x] Add canonical, og:url, og:image, twitter:image for elegancevillars.ch
 - [x] Create favicon from Brodard Property logo (public/favicon.png, apple-touch-icon)
-- [ ] Favicon applied in __root.tsx, default favicon.ico removed
+- [x] Favicon applied in __root.tsx (favicon.png + apple-touch-icon), default favicon.ico removed
 - [ ] Publish so head changes reach the live URL
