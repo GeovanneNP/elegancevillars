@@ -79,14 +79,14 @@ export function Villa() {
 
       // Parallax speeds
       gsap.utils.toArray<HTMLElement>("[data-speed]").forEach((el) => {
-        const s = parseFloat(el.dataset.speed || "0");
+        const s = parseFloat(el.dataset["speed"] || "0");
         gsap.fromTo(el, { yPercent: -s }, { yPercent: s, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
       });
 
       // Counters
       gsap.utils.toArray<HTMLElement>("[data-count]").forEach((el) => {
-        const end = parseFloat(el.dataset.count!);
-        const dec = el.dataset.count!.includes(".") ? 1 : 0;
+        const end = parseFloat(el.dataset["count"]!);
+        const dec = el.dataset["count"]!.includes(".") ? 1 : 0;
         const o = { v: end > 1000 ? 1980 : 0 };
         gsap.to(o, {
           v: end, duration: 2.2, ease: "power2.out",
@@ -178,7 +178,7 @@ export function Villa() {
           <ul className="hidden gap-8 md:flex">
             {t.nav.map((n, i) => (
               <li key={n}>
-                <button onClick={() => scrollTo(ids[i])} className="eyebrow relative text-ivory/85 transition-colors hover:text-ivory after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-500 hover:after:origin-left hover:after:scale-x-100">
+                <button onClick={() => scrollTo(ids[i] ?? "residence")} className="eyebrow relative text-ivory/85 transition-colors hover:text-ivory after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-current after:transition-transform after:duration-500 hover:after:origin-left hover:after:scale-x-100">
                   {n}
                 </button>
               </li>
