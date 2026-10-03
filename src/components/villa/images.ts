@@ -1,25 +1,23 @@
-import living from "@/assets/living.jpg.asset.json";
-import living2 from "@/assets/living2.jpg.asset.json";
-import kitchen from "@/assets/kitchen.jpg.asset.json";
-import bedroom from "@/assets/bedroom.jpg.asset.json";
-import bedroom2 from "@/assets/bedroom2.jpg.asset.json";
-import bath from "@/assets/bath.jpg.asset.json";
-import balcony from "@/assets/balcony.jpg.asset.json";
-import exterior from "@/assets/exterior.jpg.asset.json";
-import agent from "@/assets/agent.jpg.asset.json";
+import living from "@/assets/living-enhanced.jpg";
+import living2 from "@/assets/living2-enhanced.jpg";
+import kitchen from "@/assets/kitchen-enhanced.jpg";
+import bedroom from "@/assets/bedroom-enhanced.jpg";
+import bedroom2 from "@/assets/bedroom2-enhanced.jpg";
+import bath from "@/assets/bath-enhanced.jpg";
+import balcony from "@/assets/balcony-enhanced.jpg";
+import exterior from "@/assets/exterior-enhanced.jpg";
 import alps from "@/assets/alps.jpg";
 import seasons from "@/assets/seasons.jpg";
 
 export const img = {
-  living: living.url,
-  living2: living2.url,
-  kitchen: kitchen.url,
-  bedroom: bedroom.url,
-  bedroom2: bedroom2.url,
-  bath: bath.url,
-  balcony: balcony.url,
-  exterior: exterior.url,
-  agent: agent.url,
+  living,
+  living2,
+  kitchen,
+  bedroom,
+  bedroom2,
+  bath,
+  balcony,
+  exterior,
   alps,
   seasons,
 };

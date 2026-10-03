@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { galleryImages } from "./images";
 import type { Dict } from "./i18n";
+import { Button } from "@/components/ui/button";
 
 const layout = [
   "col-span-12 aspect-[16/9]",
@@ -49,7 +50,8 @@ export function Gallery({ t }: { t: Dict }) {
       </div>
       <div className="grid grid-cols-12 gap-4 md:gap-8">
         {galleryImages.map((g, i) => (
-          <button
+          <Button
+            variant="ghost"
             key={g.src}
             data-gal
             onClick={() => setOpen(i)}
@@ -59,7 +61,7 @@ export function Gallery({ t }: { t: Dict }) {
             aria-label={g.alt}
           >
             <img src={g.src} alt={g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]" />
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -74,14 +76,14 @@ export function Gallery({ t }: { t: Dict }) {
         <div className="fixed inset-0 z-[90] flex animate-fade-in flex-col bg-ink text-ivory" role="dialog" aria-modal>
           <div className="flex items-center justify-between px-6 py-5 md:px-12">
             <span className="eyebrow text-ivory/60">{String(open + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span>
-            <button onClick={() => setOpen(null)} className="eyebrow hover:text-gold">ESC — Fermer</button>
+            <Button variant="ghost" onClick={() => setOpen(null)} className="eyebrow text-ivory hover:text-gold">ESC — Fermer</Button>
           </div>
           <div className="relative flex flex-1 items-center justify-center px-4 md:px-24">
-            <img key={open} src={galleryImages[open]!.src} alt={galleryImages[open]!.alt} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
-            <button onClick={() => go(-1)} aria-label="Précédent" className="absolute left-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8">←</button>
-            <button onClick={() => go(1)} aria-label="Suivant" className="absolute right-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8">→</button>
+            <img key={open} src={galleryImages[open]?.src} alt={galleryImages[open]?.alt} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
+            <Button variant="ghost" onClick={() => go(-1)} aria-label="Précédent" className="absolute left-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8">←</Button>
+            <Button variant="ghost" onClick={() => go(1)} aria-label="Suivant" className="absolute right-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8">→</Button>
           </div>
-          <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{galleryImages[open]!.alt}</p>
+          <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{galleryImages[open]?.alt}</p>
         </div>
       )}
     </section>
