@@ -15,7 +15,8 @@ export function Preloader({ onDone }: { onDone: () => void }) {
     }
     sessionStorage.setItem("villars-intro", "1");
     document.documentElement.style.overflow = "hidden";
-    const el = ref.current!;
+    const el = ref.current;
+    if (!el) return;
     const tl = gsap.timeline({
       defaults: { ease: "power3.inOut" },
       onComplete: () => {
@@ -23,11 +24,11 @@ export function Preloader({ onDone }: { onDone: () => void }) {
         setShow(false);
       },
     });
-    tl.from(el.querySelectorAll("[data-pl-text]"), { yPercent: 110, duration: 0.8, stagger: 0.08, ease: "power3.out" })
-      .fromTo(el.querySelector("[data-pl-line]"), { scaleX: 0 }, { scaleX: 1, duration: 1 }, "-=0.4")
-      .from(el.querySelector("[data-pl-tag]"), { opacity: 0, y: 8, duration: 0.5 }, "-=0.3")
-      .call(onDone, [], "+=0.15")
-      .to(el, { clipPath: "inset(0 0 100% 0)", duration: 0.9, ease: "expo.inOut" });
+    tl.from(el.querySelectorAll("[data-pl-text]"), { yPercent: 110, duration: 0.55, stagger: 0.06, ease: "power3.out" })
+      .fromTo(el.querySelector("[data-pl-line]"), { scaleX: 0 }, { scaleX: 1, duration: 0.55 }, "-=0.3")
+      .from(el.querySelector("[data-pl-tag]"), { opacity: 0, duration: 0.35 }, "-=0.25")
+      .call(onDone, [], "+=0.05")
+      .to(el, { clipPath: "inset(0 0 100% 0)", duration: 0.65, ease: "expo.inOut" });
     return () => {
       tl.kill();
       document.documentElement.style.overflow = "";

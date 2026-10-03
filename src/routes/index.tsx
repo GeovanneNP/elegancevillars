@@ -3,7 +3,7 @@ import { Villa } from "@/components/villa/Villa";
 
 const title = "Élégance alpine au cœur de Villars — Appartement CHF 590'000";
 const description =
-  "Appartement 2.5 pièces de 48 m² entièrement rénové en 2023 à Villars-sur-Ollon, Alpes vaudoises. Balcon, cheminée, vue montagnes. Switzerland | Sotheby's International Realty.";
+  "Appartement de 2.5 pièces et environ 48 m² rénové en 2023 à Villars-sur-Ollon. Balcon, cheminée et exposition est. Vente directe par le propriétaire.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
