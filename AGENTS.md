@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Landing page sections live in src/components/villa/; FR/EN copy lives in i18n.ts dictionary — keeps copy editable in one place.
+- Scroll animations use GSAP ScrollTrigger + Lenis inside one gsap.context; pinned effects only under gsap.matchMedia(min-width 768px) — mobile stays light.

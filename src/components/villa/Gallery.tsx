@@ -22,6 +22,7 @@ export function Gallery({ t }: { t: Dict }) {
   };
   const showCursor = (v: boolean) => gsap.to(cursor.current, { scale: v ? 1 : 0, duration: 0.35, ease: "power3.out" });
 
+  useEffect(() => { gsap.set(cursor.current, { xPercent: -50, yPercent: -50, scale: 0 }); }, []);
   const n = galleryImages.length;
   const go = useCallback((d: number) => setOpen((i) => (i === null ? i : (i + d + n) % n)), [n]);
 
@@ -64,10 +65,9 @@ export function Gallery({ t }: { t: Dict }) {
 
       <div
         ref={cursor}
-        style={{ transform: "translate(-50%,-50%) scale(0)" }}
-        className="pointer-events-none fixed left-0 top-0 z-50 hidden h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-ivory/90 text-charcoal md:flex"
+        className="pointer-events-none fixed left-0 top-0 z-50 hidden h-24 w-24 items-center justify-center rounded-full bg-ivory/90 text-charcoal md:flex"
       >
-        <span className="eyebrow -ml-12 -mt-12">{t.view}</span>
+        <span className="eyebrow">{t.view}</span>
       </div>
 
       {open !== null && (

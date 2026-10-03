@@ -96,3 +96,8 @@ html.lenis, html.lenis body { height: auto; }
   padding-bottom: 0.08em;
   & > span { display: block; will-change: transform; }
 }
+
+@keyframes scrollcue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
