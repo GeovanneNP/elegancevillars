@@ -6,6 +6,7 @@ import { dict, type Lang } from "./i18n";
 import { img } from "./images";
 import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
+import { DossierDialog } from "./DossierDialog";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/brodard-logo.png.asset.json";
 
@@ -24,6 +25,8 @@ function Lines({ lines, className = "" }: { lines: string[]; className?: string 
 export function Villa() {
   const [lang, setLang] = useState<Lang>("fr");
   const [ready, setReady] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const [dossierOpen, setDossierOpen] = useState(false);
   const t = dict[lang];
   const root = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
@@ -31,6 +34,16 @@ export function Villa() {
   const onDone = useCallback(() => setReady(true), []);
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
+
+  useEffect(() => {
+    const hero = document.querySelector("[data-hero]");
+    if (!hero) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry) setPastHero(entry.boundingClientRect.bottom <= 0);
+    }, { threshold: 0 });
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
 
   // Smooth scroll
   useEffect(() => {
@@ -209,10 +222,14 @@ export function Villa() {
                 <li data-hero-fade key={m} className="eyebrow text-ivory/90">{m}</li>
               ))}
             </ul>
-             <Button variant="ghost" data-hero-fade onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto items-center gap-4 self-start p-0 text-ivory hover:bg-transparent hover:text-ivory">
-              {t.heroCta}
-              <span className="h-px w-12 bg-ivory transition-all duration-700 group-hover:w-20" />
-             </Button>
+             <div data-hero-fade className="flex flex-wrap items-center gap-x-8 gap-y-4">
+               <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto items-center gap-4 p-0 text-ivory hover:bg-transparent hover:text-ivory">
+                 {t.heroCta}<span className="h-px w-8 bg-ivory transition-all duration-700 group-hover:w-12" />
+               </Button>
+               <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow group flex h-auto items-center gap-2 p-0 text-ivory/85 hover:bg-transparent hover:text-ivory">
+                 {t.visitCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+               </Button>
+             </div>
           </div>
         </div>
          <div className="absolute bottom-4 right-5 hidden flex-col items-center gap-2 md:bottom-6 md:right-12 md:flex">
@@ -286,7 +303,7 @@ export function Villa() {
         <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bed-title className="flex flex-col justify-center px-5 py-32 md:absolute md:inset-0 md:px-12 md:py-0">
              <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-8xl lg:text-9xl">
-              <span>{t.bedroomTitle.map((l, i) => (
+               <span>{t.bedroomTitle.map((l, i) => (
                 <span key={l} className={`line-mask ${i === 1 ? "md:pl-[12vw] italic" : ""}`}><span>{l}</span></span>
               ))}</span>
             </h2>
@@ -431,6 +448,9 @@ export function Villa() {
             {t.ownCta}
             <span className="h-px w-10 bg-gold transition-all duration-700 group-hover:w-16" />
            </Button>
+            <Button variant="ghost" data-fade onClick={() => setDossierOpen(true)} className="eyebrow group mt-5 flex h-auto w-full items-center justify-between p-0 py-3 text-charcoal hover:bg-transparent hover:text-swiss-red">
+              {t.dossierCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+            </Button>
         </div>
       </section>
 
@@ -458,6 +478,15 @@ export function Villa() {
            <span>Villars-sur-Ollon · Vaud</span>
         </footer>
       </section>
+       <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
+       {pastHero && !dossierOpen && (
+         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-5 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
+           <div className="flex items-center justify-between gap-3">
+             <span className="font-serif text-2xl tabular-nums whitespace-nowrap">CHF 590'000</span>
+             <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 gap-2 p-0 text-right text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true">→</span></Button>
+           </div>
+         </div>
+       )}
     </div>
   );
 }

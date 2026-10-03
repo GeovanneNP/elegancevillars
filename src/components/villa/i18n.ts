@@ -7,6 +7,8 @@ export const dict = {
     heroTitle: ["Élégance alpine", "au cœur de Villars"],
     heroMeta: ["48 m²", "2.5 pièces", "1 chambre", "CHF 590'000"],
     heroCta: "Découvrir l'appartement",
+    visitCta: "Organiser une visite",
+    dossierCta: "Recevoir le dossier privé",
     scroll: "Découvrir",
     manifesto: ["Entre bois, pierre", "et sommets."],
     manifestoText:
@@ -24,7 +26,7 @@ export const dict = {
     interiorTitle: ["Une rénovation pensée", "dans chaque détail."],
     interiorText:
       "Entièrement rénové en 2023, l'appartement mêle matériaux chaleureux, lignes contemporaines et détails inspirés de l'architecture alpine. Cuisine ouverte, séjour avec cheminée et accès direct au balcon.",
-    bedroomTitle: ["Le calme,", "à proximité", "des pistes."],
+    bedroomTitle: ["Le calme,", "à proximité des pistes."],
     bedroomCaption: "Chambre avec accès au balcon — lumière du matin, exposition est.",
     balconyTitle: "Respirez Villars.",
     balconySub: ["Un balcon privé,", "les Alpes pour horizon."],
@@ -92,6 +94,8 @@ export const dict = {
     heroTitle: ["Alpine elegance", "in the heart of Villars"],
     heroMeta: ["48 m²", "2.5 rooms", "1 bedroom", "CHF 590'000"],
     heroCta: "Explore the apartment",
+    visitCta: "Arrange a viewing",
+    dossierCta: "Request the private dossier",
     scroll: "Explore",
     manifesto: ["Between wood, stone", "and summits."],
     manifestoText:
@@ -109,7 +113,7 @@ export const dict = {
     interiorTitle: ["Thoughtfully renovated", "in every detail."],
     interiorText:
       "Fully renovated in 2023, the apartment blends warm materials, contemporary lines and details inspired by alpine architecture. Open kitchen, living room with fireplace and direct access to the balcony.",
-    bedroomTitle: ["Quiet moments,", "close to", "the slopes."],
+    bedroomTitle: ["Quiet moments,", "close to the slopes."],
     bedroomCaption: "Bedroom opening onto the balcony — morning light, east-facing.",
     balconyTitle: "Breathe Villars.",
     balconySub: ["A private balcony,", "the Alps on the horizon."],
