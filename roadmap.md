@@ -19,3 +19,9 @@
 - [x] Place the supplied Brodard Property logo in the entrance and top navigation.
 - [x] Replace black page surfaces with Swiss red or light editorial surfaces.
 - [x] Check the opening and full page on desktop and mobile.
+
+## Direct-sale enquiries (Oct 3)
+- [x] Add a discreet viewing action beside exploration in the opening.
+- [x] Add the price and viewing action after the opening on mobile.
+- [x] Add a private dossier request form with name, email and optional phone; store requests privately for manual follow-up.
+- [x] Give the bedroom headline an editorial line break in both languages.
