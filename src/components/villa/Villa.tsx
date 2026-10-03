@@ -201,7 +201,6 @@ export function Villa() {
           <img data-hero-img src={img.living} alt="Séjour de l'appartement à Villars-sur-Ollon" className="h-full w-full object-cover" />
         </div>
         <div className="absolute inset-0 bg-ink/35" />
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-ink/25" />
         <div className="relative flex h-full flex-col justify-end px-5 pb-28 md:px-12 md:pb-24">
           <div data-hero-title>
             <p data-hero-fade className="eyebrow mb-6 text-ivory/80">{t.heroKicker}</p>
@@ -265,7 +264,7 @@ export function Villa() {
         <div className="mt-24 grid grid-cols-2 border-t border-ivory/15 md:grid-cols-4">
           {t.facts.map(([n, l], i) => (
             <div key={l} className={`border-b border-ivory/15 py-10 md:border-b-0 md:py-14 ${i % 2 ? "pl-6" : "pr-6"} md:px-8 ${i > 0 ? "md:border-l" : ""} ${i % 2 ? "border-l" : ""} border-ivory/15`}>
-              <div data-count={n} className="font-serif text-7xl font-light tabular-nums md:text-8xl">{n}</div>
+              <div data-count={n} className="font-serif text-7xl font-light tabular-nums lining-nums md:text-8xl">{n}</div>
               <div className="eyebrow mt-4 text-ivory/55">{l}</div>
             </div>
           ))}

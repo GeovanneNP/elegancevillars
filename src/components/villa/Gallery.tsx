@@ -77,11 +77,11 @@ export function Gallery({ t }: { t: Dict }) {
             <button onClick={() => setOpen(null)} className="eyebrow hover:text-gold">ESC — Fermer</button>
           </div>
           <div className="relative flex flex-1 items-center justify-center px-4 md:px-24">
-            <img key={open} src={galleryImages[open].src} alt={galleryImages[open].alt} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
+            <img key={open} src={galleryImages[open]!.src} alt={galleryImages[open]!.alt} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
             <button onClick={() => go(-1)} aria-label="Précédent" className="absolute left-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8">←</button>
             <button onClick={() => go(1)} aria-label="Suivant" className="absolute right-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8">→</button>
           </div>
-          <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{galleryImages[open].alt}</p>
+          <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{galleryImages[open]!.alt}</p>
         </div>
       )}
     </section>
