@@ -29,6 +29,8 @@ export function Villa() {
   const marquee = useRef<gsap.core.Tween | null>(null);
   const onDone = useCallback(() => setReady(true), []);
 
+  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
+
   // Smooth scroll
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -163,8 +165,8 @@ export function Villa() {
 
       {/* NAV */}
       <header className="absolute inset-x-0 top-0 z-40 flex items-start justify-between px-5 py-6 text-ivory md:px-12 md:py-8">
-         <div className="leading-tight">
-           <div className="eyebrow text-[0.6rem] text-ivory/80">Vaud · Suisse</div>
+           <div className="leading-tight">
+            <div className="eyebrow text-[0.6rem] text-ivory/80">Vaud · {t.country}</div>
            <div className="font-serif text-xl md:text-2xl">Villars-sur-Ollon</div>
         </div>
         <nav className="flex items-center gap-6 md:gap-10">
@@ -192,7 +194,7 @@ export function Villa() {
       {/* HERO */}
        <section data-hero className="relative h-[90svh] min-h-[570px] overflow-hidden bg-ink text-ivory md:h-[94svh]">
         <div data-hero-wrap className="absolute inset-0">
-           <img data-hero-img src={img.living} alt="Séjour de l'appartement à Villars-sur-Ollon" fetchPriority="high" className="h-full w-full object-cover object-[48%_center]" />
+            <img data-hero-img src={img.living} alt={t.imageAlts.hero} fetchPriority="high" className="h-full w-full object-cover object-[48%_center]" />
         </div>
          <div className="absolute inset-0 bg-ink/30" />
          <div className="relative flex h-full flex-col justify-end px-5 pb-20 md:px-12 md:pb-20">
@@ -237,7 +239,7 @@ export function Villa() {
        <section data-living className="relative bg-ivory md:h-[170vh]">
          <div className="relative h-[78svh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-living-frame className="absolute inset-0 overflow-hidden">
-            <img data-living-img src={img.living2} alt="Espace de vie, bois et pierre" loading="lazy" className="h-full w-full object-cover" />
+             <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="h-full w-full object-cover" />
              <div className="absolute inset-0 bg-ink/25" />
           </div>
           <div data-living-text className="absolute bottom-10 left-5 text-ivory md:bottom-16 md:left-12">
@@ -268,7 +270,7 @@ export function Villa() {
       {/* INTERIOR */}
       <section className="grid grid-cols-12 items-center gap-6 bg-stone px-5 py-32 md:px-12 md:py-48">
         <div className="relative col-span-12 aspect-[4/5] overflow-hidden md:col-span-7 md:aspect-[5/6]">
-          <img data-speed="6" src={img.kitchen} alt="Cuisine ouverte et salle à manger" loading="lazy" className="absolute inset-0 h-[115%] w-full -translate-y-[7%] object-cover" />
+           <img data-speed="6" src={img.kitchen} alt={t.imageAlts.kitchen} loading="lazy" className="absolute inset-0 h-[115%] w-full -translate-y-[7%] object-cover" />
         </div>
         <div className="col-span-12 md:col-span-4 md:col-start-9">
           <p data-fade className="eyebrow mb-8 text-wood">{t.interiorKicker}</p>
@@ -291,11 +293,11 @@ export function Villa() {
             </h2>
           </div>
           <div data-bed-img className="relative h-[70vh] overflow-hidden md:absolute md:inset-0 md:h-auto">
-            <img src={img.bedroom} alt="Chambre avec accès au balcon" loading="lazy" className="h-full w-full object-cover" />
+             <img src={img.bedroom} alt={t.imageAlts.bedroom} loading="lazy" className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-ink/15" />
           </div>
           <figure data-bed-img2 className="relative mx-5 -mt-24 w-[60%] md:absolute md:bottom-12 md:right-12 md:mx-0 md:mt-0 md:w-[24vw]">
-            <img src={img.bedroom2} alt="Détail de la chambre, mur en pierre" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+             <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" className="aspect-[4/5] w-full object-cover" />
             <figcaption className="mt-3 text-xs leading-relaxed text-ivory/75">{t.bedroomCaption}</figcaption>
           </figure>
           <div className="h-16 md:hidden" />
@@ -306,7 +308,7 @@ export function Villa() {
        <section data-balcony className="relative bg-ivory md:h-[180vh]">
         <div className="relative h-[90vh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bal-frame className="absolute inset-0 overflow-hidden">
-            <img src={img.balcony} alt="Balcon privé avec vue sur les Alpes" loading="lazy" className="h-full w-full object-cover" />
+             <img src={img.balcony} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover" />
              <div className="absolute inset-0 bg-ink/35" />
           </div>
           <div data-bal-text className="absolute inset-x-5 bottom-14 text-ivory md:inset-x-12 md:bottom-20">
@@ -324,7 +326,7 @@ export function Villa() {
           </h2>
           <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.locationText}</p>
           <div data-map className="mt-16 max-w-xl">
-            <svg viewBox="0 0 600 300" className="w-full text-charcoal" fill="none" stroke="currentColor" aria-label="Carte stylisée des Alpes vaudoises">
+             <svg viewBox="0 0 600 300" className="w-full text-charcoal" fill="none" stroke="currentColor" aria-label={t.imageAlts.map}>
               <path data-draw strokeWidth="0.8" opacity="0.5" d="M0 250 L60 190 L95 215 L150 120 L190 170 L240 80 L290 150 L330 110 L380 175 L430 60 L480 140 L530 100 L600 180" />
               <path data-draw strokeWidth="0.6" opacity="0.3" d="M0 280 L80 230 L130 250 L200 190 L260 230 L320 180 L400 240 L470 200 L540 240 L600 220" />
               <path data-draw strokeWidth="0.6" strokeDasharray="3 4" opacity="0.6" d="M60 60 C 140 120, 220 140, 300 175 S 470 230, 560 270" />
@@ -353,7 +355,7 @@ export function Villa() {
 
       {/* SEASONS */}
       <section className="relative overflow-hidden bg-ink py-40 text-ivory md:py-56">
-        <img data-speed="10" src={img.seasons} alt="Villars sous la neige au crépuscule" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[120%] w-full -translate-y-[10%] object-cover opacity-60" />
+         <img data-speed="10" src={img.seasons} alt={t.imageAlts.seasons} loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[120%] w-full -translate-y-[10%] object-cover opacity-60" />
         <div className="absolute inset-0 bg-ink/40" />
         <div className="relative px-5 md:px-12">
            <h2 className="font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
@@ -436,7 +438,7 @@ export function Villa() {
       {/* CONTACT */}
       <section id="contact" className="relative bg-ink text-ivory">
         <div className="relative h-[50vh] overflow-hidden">
-          <img data-speed="12" src={img.alps} alt="Les Alpes vaudoises à l'aube" loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[130%] w-full -translate-y-[15%] object-cover opacity-80" />
+           <img data-speed="12" src={img.alps} alt={t.imageAlts.alps} loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[130%] w-full -translate-y-[15%] object-cover opacity-80" />
         </div>
         <div className="grid grid-cols-12 gap-6 px-5 py-28 md:px-12 md:py-40">
           <div className="col-span-12 md:col-span-5">
@@ -446,12 +448,13 @@ export function Villa() {
             <p data-fade className="eyebrow mt-12 text-ivory/50">{t.contactText}</p>
              <div data-fade className="mt-10 h-px w-16 bg-ivory/40" />
           </div>
-           <div data-fade className="col-span-12 mt-10 flex items-end border-t border-ivory/20 pt-8 md:col-span-5 md:col-start-8 md:mt-0">
-             <p className="max-w-md font-serif text-3xl leading-snug text-ivory/75 md:text-4xl">{t.contactPending}</p>
+           <div data-fade className="col-span-12 mt-10 flex flex-col justify-end border-t border-ivory/20 pt-8 md:col-span-5 md:col-start-8 md:mt-0">
+              <a href={`mailto:Marketing@uptechswiss.ch?subject=${encodeURIComponent(t.mailSubject)}`} className="break-all font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactEmail}: Marketing@uptechswiss.ch`}>Marketing@uptechswiss.ch</a>
+              <a href="tel:+41765426230" className="mt-6 self-start font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactPhone}: +41 76 542 62 30`}>+41 76 542 62 30</a>
            </div>
         </div>
         <footer className="flex flex-col gap-4 border-t border-ivory/10 px-5 py-8 text-xs text-ivory/40 md:flex-row md:justify-between md:px-12">
-          <span>Réf. 044598 — Villars-sur-Ollon, Vaud, Switzerland</span>
+           <span>{t.details[11]?.[0]} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
           <span>{t.rights}</span>
            <span>Villars-sur-Ollon · Vaud</span>
         </footer>

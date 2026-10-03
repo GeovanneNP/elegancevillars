@@ -2,7 +2,7 @@ export type Lang = "fr" | "en";
 
 export const dict = {
   fr: {
-    nav: ["Résidence", "Lieu", "Galerie", "Détails", "Contact"],
+    nav: ["Appartement", "Situation", "Galerie", "Détails", "Contact"],
     heroKicker: "Villars-sur-Ollon — Vaud",
     heroTitle: ["Élégance alpine", "au cœur de Villars"],
     heroMeta: ["48 m²", "2.5 pièces", "1 chambre", "CHF 590'000"],
@@ -10,7 +10,7 @@ export const dict = {
     scroll: "Découvrir",
     manifesto: ["Entre bois, pierre", "et sommets."],
     manifestoText:
-      "Nichée au cœur des Alpes vaudoises, cette résidence associe l'authenticité alpine au confort contemporain.",
+      "Niché au cœur des Alpes vaudoises, cet appartement associe l'authenticité alpine au confort contemporain.",
     livingTitle: "L'espace de vie",
     livingWords: ["Bois naturel.", "Pierre.", "Lumière."],
     factsTitle: ["Un appartement.", "Une autre manière de vivre Villars."],
@@ -24,7 +24,7 @@ export const dict = {
     interiorTitle: ["Une rénovation pensée", "dans chaque détail."],
     interiorText:
       "Entièrement rénové en 2023, l'appartement mêle matériaux chaleureux, lignes contemporaines et détails inspirés de l'architecture alpine. Cuisine ouverte, séjour avec cheminée et accès direct au balcon.",
-    bedroomTitle: ["Le calme,", "à quelques mètres", "des pistes."],
+    bedroomTitle: ["Le calme,", "à proximité", "des pistes."],
     bedroomCaption: "Chambre avec accès au balcon — lumière du matin, exposition est.",
     balconyTitle: "Respirez Villars.",
     balconySub: ["Un balcon privé,", "les Alpes pour horizon."],
@@ -70,7 +70,7 @@ export const dict = {
     galleryAlts: ["Séjour avec cheminée en pierre", "Chambre, mur en pierre", "Cuisine ouverte et table en bois", "Salle d'eau en marbre", "Espace de vie et salle à manger", "Balcon avec vue sur les montagnes", "Le bâtiment au centre de Villars"],
     imageAlts: { hero: "Séjour de l'appartement à Villars-sur-Ollon", living: "Espace de vie, bois et pierre", kitchen: "Cuisine ouverte et salle à manger", bedroom: "Chambre avec accès au balcon", bedroomDetail: "Détail de la chambre, mur en pierre", balcony: "Balcon privé avec vue sur les Alpes", map: "Carte stylisée des Alpes vaudoises", seasons: "Paysage alpin enneigé au crépuscule, illustration", alps: "Paysage des Alpes vaudoises à l'aube, illustration" },
     view: "Voir",
-    ownTitle: ["Votre résidence", "dans les Alpes."],
+    ownTitle: ["Votre appartement", "dans les Alpes."],
     ownText:
       "Disponible comme résidence principale ou secondaire et accessible à une clientèle non-résidente.",
     price: "Prix",
@@ -86,7 +86,7 @@ export const dict = {
     rights: "Les informations sont fournies à titre indicatif et sans engagement.",
   },
   en: {
-    nav: ["Residence", "Location", "Gallery", "Details", "Contact"],
+    nav: ["Apartment", "Location", "Gallery", "Details", "Contact"],
     heroKicker: "Villars-sur-Ollon — Vaud",
     heroTitle: ["Alpine elegance", "in the heart of Villars"],
     heroMeta: ["48 m²", "2.5 rooms", "1 bedroom", "CHF 590'000"],
@@ -94,7 +94,7 @@ export const dict = {
     scroll: "Explore",
     manifesto: ["Between wood, stone", "and summits."],
     manifestoText:
-      "Nestled in the heart of the Vaud Alps, this residence pairs alpine authenticity with contemporary comfort.",
+      "Nestled in the Vaud Alps, this apartment pairs alpine character with contemporary comfort.",
     livingTitle: "The living space",
     livingWords: ["Natural wood.", "Stone.", "Light."],
     factsTitle: ["One apartment.", "Another way to experience Villars."],
@@ -104,8 +104,8 @@ export const dict = {
       ["1", "bedroom"],
       ["2023", "renovation"],
     ],
-    interiorKicker: "Contemporary alpine",
-    interiorTitle: ["A renovation considered", "in every detail."],
+    interiorKicker: "Contemporary alpine interior",
+    interiorTitle: ["Thoughtfully renovated", "in every detail."],
     interiorText:
       "Fully renovated in 2023, the apartment blends warm materials, contemporary lines and details inspired by alpine architecture. Open kitchen, living room with fireplace and direct access to the balcony.",
     bedroomTitle: ["Quiet moments,", "close to", "the slopes."],
@@ -138,7 +138,6 @@ export const dict = {
       ["Built", "1980"],
       ["Renovated", "2023"],
       ["Charges", "CHF 400.- / month"],
-      ["Heating", "Gas / Underfloor / Fireplace"],
       ["Exposure", "East"],
       ["Parking", "Public parking"],
       ["Reference", "044598"],
@@ -148,8 +147,14 @@ export const dict = {
       "Cellar", "Ski room", "Open kitchen", "Mountain view",
     ],
     galleryTitle: "Gallery",
+    galleryCount: "Photographs",
+    galleryClose: "Close",
+    galleryPrevious: "Previous",
+    galleryNext: "Next",
+    galleryAlts: ["Living room with stone fireplace", "Bedroom with stone wall", "Open-plan kitchen and wooden table", "Marble shower room", "Living and dining area", "Balcony with mountain views", "The building in central Villars"],
+    imageAlts: { hero: "Living room of the apartment in Villars-sur-Ollon", living: "Living area with wood and stone", kitchen: "Open-plan kitchen and dining area", bedroom: "Bedroom with balcony access", bedroomDetail: "Bedroom detail with stone wall", balcony: "Private balcony with Alpine views", map: "Illustrated map of the Vaud Alps", seasons: "Snowy Alpine landscape at dusk, illustration", alps: "Vaud Alps at dawn, illustration" },
     view: "View",
-    ownTitle: ["Your residence", "in the Alps."],
+    ownTitle: ["Your apartment", "in the Alps."],
     ownText:
       "Available as a main or secondary residence and open to non-resident buyers.",
     price: "Price",
@@ -158,8 +163,9 @@ export const dict = {
     ownCta: "Arrange a viewing",
     contactTitle: ["See it", "for yourself."],
     contactText: "Direct sale by the owner.",
-    contactPending: "The owner's contact details will be available shortly.",
-    form: { name: "Name", email: "Email", phone: "Phone", message: "Message", send: "Send request" },
+    contactEmail: "Send an email",
+    contactPhone: "Call",
+    country: "Switzerland",
     mailSubject: "Enquiry — Apartment Villars-sur-Ollon, ref. 044598",
     rights: "Information provided for guidance only and without commitment.",
   },
