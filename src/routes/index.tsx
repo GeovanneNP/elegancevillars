@@ -1,9 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Villa } from "@/components/villa/Villa";
 
-const title = "Élégance alpine au cœur de Villars — Appartement CHF 590'000";
+const title =
+  "Appartement 2.5 pièces à vendre à Villars-sur-Ollon — CHF 590'000 | Brodard Property";
 const description =
-  "Appartement de 2.5 pièces et environ 48 m² rénové en 2023 à Villars-sur-Ollon. Balcon, cheminée et exposition est. Vente directe par le propriétaire.";
+  "Rénové en 2023, 48 m², balcon avec vue sur les Alpes et cheminée. Résidence principale ou secondaire — vente directe par le propriétaire. Réf. 044598.";
+const url = "https://www.elegancevillars.ch/";
+const ogImage = "https://www.elegancevillars.ch/og-villars.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -13,8 +16,27 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: url },
+      { property: "og:site_name", content: "Brodard Property" },
+      { property: "og:locale", content: "fr_FR" },
+      { property: "og:locale:alternate", content: "en_US" },
+      {
+        property: "og:image",
+        content: ogImage,
+      },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content:
+          "Immeuble alpin à Villars-sur-Ollon — Appartement à vendre, CHF 590 000",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: ogImage },
     ],
+    links: [{ rel: "canonical", href: url }],
   }),
   component: Villa,
 });
