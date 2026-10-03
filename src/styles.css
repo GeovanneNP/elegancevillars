@@ -37,6 +37,7 @@
   --color-charcoal: var(--charcoal);
   --color-ink: var(--ink);
   --color-paper: var(--paper);
+  --color-swiss-red: var(--swiss-red);
 }
 
 :root {
@@ -48,6 +49,7 @@
   --charcoal: oklch(0.24 0.004 75);
   --ink: oklch(0.13 0 0);
   --paper: oklch(1 0 0);
+  --swiss-red: oklch(0.39 0.15 24);
   --background: var(--ivory);
   --foreground: var(--charcoal);
   --card: var(--ivory);

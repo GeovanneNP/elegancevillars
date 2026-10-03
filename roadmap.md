@@ -14,3 +14,8 @@
 - [x] Create favicon from Brodard Property logo (public/favicon.png, apple-touch-icon)
 - [x] Favicon applied in __root.tsx (favicon.png + apple-touch-icon), default favicon.ico removed
 - [ ] Publish so head changes reach the live URL
+
+## Branded entrance (Oct 3)
+- [ ] Place the supplied Brodard Property logo in the entrance and top navigation.
+- [ ] Replace black page surfaces with Swiss red or light editorial surfaces.
+- [ ] Check the opening and full page on desktop and mobile.

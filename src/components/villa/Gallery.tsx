@@ -73,7 +73,7 @@ export function Gallery({ t }: { t: Dict }) {
       </div>
 
       {open !== null && (
-        <div className="fixed inset-0 z-[90] flex animate-fade-in flex-col bg-ink text-ivory" role="dialog" aria-modal>
+        <div className="fixed inset-0 z-[90] flex animate-fade-in flex-col bg-swiss-red text-ivory" role="dialog" aria-modal>
           <div className="flex items-center justify-between px-6 py-5 md:px-12">
             <span className="eyebrow text-ivory/60">{String(open + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span>
              <Button variant="ghost" onClick={() => setOpen(null)} className="eyebrow text-ivory hover:text-gold">ESC — {t.galleryClose}</Button>
