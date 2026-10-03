@@ -18,4 +18,4 @@
 ## Branded entrance (Oct 3)
 - [x] Place the supplied Brodard Property logo in the entrance and top navigation.
 - [x] Replace black page surfaces with Swiss red or light editorial surfaces.
-- [ ] Check the opening and full page on desktop and mobile.
+- [x] Check the opening and full page on desktop and mobile.
