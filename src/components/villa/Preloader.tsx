@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import logo from "@/assets/brodard-logo.png.asset.json";
 
 export function Preloader({ onDone }: { onDone: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,7 +25,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
         setShow(false);
       },
     });
-    tl.from(el.querySelectorAll("[data-pl-text]"), { yPercent: 110, duration: 0.55, stagger: 0.06, ease: "power3.out" })
+    tl.from(el.querySelector("[data-pl-logo]"), { opacity: 0, y: 18, duration: 0.8, ease: "power3.out" })
       .fromTo(el.querySelector("[data-pl-line]"), { scaleX: 0 }, { scaleX: 1, duration: 0.55 }, "-=0.3")
       .from(el.querySelector("[data-pl-tag]"), { opacity: 0, duration: 0.35 }, "-=0.25")
       .call(onDone, [], "+=0.05")
@@ -40,18 +41,12 @@ export function Preloader({ onDone }: { onDone: () => void }) {
     <div
       ref={ref}
       style={{ clipPath: "inset(0 0 0% 0)" }}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink text-ivory"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-swiss-red text-ivory"
     >
-      <div className="flex w-[min(80vw,420px)] flex-col items-center text-center">
-        <div className="flex w-full items-end justify-between">
-          <span className="line-mask"><span data-pl-text className="font-serif text-4xl tracking-[0.2em]">VILLARS</span></span>
-          <span className="line-mask"><span data-pl-text className="eyebrow text-ivory/60">46°18'N</span></span>
-        </div>
-        <div data-pl-line className="my-5 h-px w-full origin-left bg-ivory/40" />
-        <div className="flex w-full items-start justify-between">
-          <span className="line-mask"><span data-pl-text className="eyebrow text-ivory/60">Swiss Alps</span></span>
-          <span data-pl-tag className="font-serif text-xl italic text-ivory/90">Élégance alpine</span>
-        </div>
+      <div className="flex w-[min(84vw,560px)] flex-col items-center text-center">
+        <img data-pl-logo src={logo.url} alt="Brodard Property" className="w-full object-contain" />
+        <div data-pl-line className="mt-8 h-px w-full origin-left bg-ivory/40" />
+        <span data-pl-tag className="eyebrow mt-5 text-ivory/75">Villars-sur-Ollon · Suisse</span>
       </div>
     </div>
   );
