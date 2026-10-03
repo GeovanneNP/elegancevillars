@@ -7,6 +7,7 @@ import { img } from "./images";
 import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/brodard-logo.png.asset.json";
 
 const ids = ["residence", "location", "gallery", "details", "contact"];
 
@@ -164,11 +165,10 @@ export function Villa() {
       <Preloader onDone={onDone} />
 
       {/* NAV */}
-      <header className="absolute inset-x-0 top-0 z-40 flex items-start justify-between px-5 py-6 text-ivory md:px-12 md:py-8">
-           <div className="leading-tight">
-            <div className="eyebrow text-[0.6rem] text-ivory/80">Vaud · {t.country}</div>
-           <div className="font-serif text-xl md:text-2xl">Villars-sur-Ollon</div>
-        </div>
+       <header className="relative z-40 flex min-h-20 items-center justify-between gap-4 bg-swiss-red px-5 py-3 text-ivory md:min-h-24 md:px-12">
+         <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block w-44 shrink-0 md:w-56">
+           <img src={logo.url} alt="Brodard Property" className="w-full object-contain" />
+         </a>
         <nav className="flex items-center gap-6 md:gap-10">
           <ul className="hidden gap-8 md:flex">
             {t.nav.map((n, i) => (
@@ -192,11 +192,11 @@ export function Villa() {
       </header>
 
       {/* HERO */}
-       <section data-hero className="relative h-[90svh] min-h-[570px] overflow-hidden bg-ink text-ivory md:h-[94svh]">
+        <section id="top" data-hero className="relative h-[calc(90svh-5rem)] min-h-[560px] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)]">
         <div data-hero-wrap className="absolute inset-0">
             <img data-hero-img src={img.living} alt={t.imageAlts.hero} fetchPriority="high" className="h-full w-full object-cover object-[48%_center]" />
         </div>
-         <div className="absolute inset-0 bg-ink/30" />
+          <div className="absolute inset-0 bg-swiss-red/35" />
          <div className="relative flex h-full flex-col justify-end px-5 pb-20 md:px-12 md:pb-20">
           <div data-hero-title>
             <p data-hero-fade className="eyebrow mb-6 text-ivory/80">{t.heroKicker}</p>
@@ -240,7 +240,7 @@ export function Villa() {
          <div className="relative h-[78svh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-living-frame className="absolute inset-0 overflow-hidden">
              <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="h-full w-full object-cover" />
-             <div className="absolute inset-0 bg-ink/25" />
+              <div className="absolute inset-0 bg-swiss-red/20" />
           </div>
           <div data-living-text className="absolute bottom-10 left-5 text-ivory md:bottom-16 md:left-12">
             <p className="eyebrow mb-4 text-ivory/80">01</p>
@@ -253,7 +253,7 @@ export function Villa() {
       </section>
 
       {/* FACTS */}
-      <section className="bg-ink px-5 py-32 text-ivory md:px-12 md:py-48">
+      <section className="bg-swiss-red px-5 py-32 text-ivory md:px-12 md:py-48">
         <h2 className="max-w-5xl font-serif text-5xl font-light leading-[1.02] md:text-7xl">
           <Lines lines={t.factsTitle} />
         </h2>
@@ -283,7 +283,7 @@ export function Villa() {
       </section>
 
       {/* BEDROOM */}
-       <section data-bedroom className="relative bg-ink text-ivory md:h-[190vh]">
+        <section data-bedroom className="relative bg-ivory text-charcoal md:h-[190vh]">
         <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bed-title className="flex flex-col justify-center px-5 py-32 md:absolute md:inset-0 md:px-12 md:py-0">
              <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-8xl lg:text-9xl">
@@ -294,11 +294,11 @@ export function Villa() {
           </div>
           <div data-bed-img className="relative h-[70vh] overflow-hidden md:absolute md:inset-0 md:h-auto">
              <img src={img.bedroom} alt={t.imageAlts.bedroom} loading="lazy" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-ink/15" />
+             <div className="absolute inset-0 bg-swiss-red/10" />
           </div>
           <figure data-bed-img2 className="relative mx-5 -mt-24 w-[60%] md:absolute md:bottom-12 md:right-12 md:mx-0 md:mt-0 md:w-[24vw]">
              <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" className="aspect-[4/5] w-full object-cover" />
-            <figcaption className="mt-3 text-xs leading-relaxed text-ivory/75">{t.bedroomCaption}</figcaption>
+             <figcaption className="mt-3 text-xs leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
           </figure>
           <div className="h-16 md:hidden" />
         </div>
@@ -309,7 +309,7 @@ export function Villa() {
         <div className="relative h-[90vh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bal-frame className="absolute inset-0 overflow-hidden">
              <img src={img.balcony} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover" />
-             <div className="absolute inset-0 bg-ink/35" />
+              <div className="absolute inset-0 bg-swiss-red/30" />
           </div>
           <div data-bal-text className="absolute inset-x-5 bottom-14 text-ivory md:inset-x-12 md:bottom-20">
              <h2 className="font-serif text-6xl font-light leading-[0.9] md:text-8xl lg:text-9xl">{t.balconyTitle}</h2>
@@ -354,9 +354,9 @@ export function Villa() {
       </section>
 
       {/* SEASONS */}
-      <section className="relative overflow-hidden bg-ink py-40 text-ivory md:py-56">
-         <img data-speed="10" src={img.seasons} alt={t.imageAlts.seasons} loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[120%] w-full -translate-y-[10%] object-cover opacity-60" />
-        <div className="absolute inset-0 bg-ink/40" />
+      <section className="relative overflow-hidden bg-swiss-red py-40 text-ivory md:py-56">
+          <img data-speed="10" src={img.seasons} alt={t.imageAlts.seasons} loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[120%] w-full -translate-y-[10%] object-cover opacity-80" />
+         <div className="absolute inset-0 bg-swiss-red/35" />
         <div className="relative px-5 md:px-12">
            <h2 className="font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
             <Lines lines={t.seasonsTitle} />
@@ -428,7 +428,7 @@ export function Villa() {
             <div className="eyebrow text-muted-foreground">{t.availability}</div>
             <div className="mt-3 font-serif text-3xl">{t.availabilityValue}</div>
           </div>
-           <Button variant="default" data-fade onClick={() => scrollTo("contact")} className="eyebrow group mt-10 flex h-auto w-full items-center justify-between bg-charcoal px-7 py-6 text-ivory transition-colors hover:bg-ink">
+            <Button variant="default" data-fade onClick={() => scrollTo("contact")} className="eyebrow group mt-10 flex h-auto w-full items-center justify-between bg-swiss-red px-7 py-6 text-ivory transition-colors hover:bg-swiss-red/85">
             {t.ownCta}
             <span className="h-px w-10 bg-gold transition-all duration-700 group-hover:w-16" />
            </Button>
@@ -436,7 +436,7 @@ export function Villa() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="relative bg-ink text-ivory">
+       <section id="contact" className="relative bg-swiss-red text-ivory">
         <div className="relative h-[50vh] overflow-hidden">
            <img data-speed="12" src={img.alps} alt={t.imageAlts.alps} loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[130%] w-full -translate-y-[15%] object-cover opacity-80" />
         </div>
