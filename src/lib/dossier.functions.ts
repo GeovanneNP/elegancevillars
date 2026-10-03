@@ -10,7 +10,7 @@ const requestSchema = z.object({
 });
 
 export const requestDossier = createServerFn({ method: "POST" })
-  .inputValidator((input) => requestSchema.parse(input))
+  .validator((input) => requestSchema.parse(input))
   .handler(async ({ data }) => {
     // Hidden field keeps simple automated submissions out of the private list.
     if (data.website) return { ok: true };
