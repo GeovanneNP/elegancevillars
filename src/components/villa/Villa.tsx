@@ -166,7 +166,7 @@ export function Villa() {
 
       {/* NAV */}
        <header className="relative z-40 flex min-h-20 items-center justify-between gap-4 bg-swiss-red px-5 py-3 text-ivory md:min-h-24 md:px-12">
-         <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block w-44 shrink-0 md:w-56">
+         <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block w-40 shrink-0 md:w-56">
            <img src={logo.url} alt="Brodard Property" className="w-full object-contain" />
          </a>
         <nav className="flex items-center gap-6 md:gap-10">
@@ -179,7 +179,6 @@ export function Villa() {
               </li>
             ))}
           </ul>
-           <Button variant="ghost" onClick={() => scrollTo("gallery")} className="eyebrow h-auto p-0 text-ivory hover:bg-transparent md:hidden">{t.nav[2]}</Button>
            <div className="eyebrow flex gap-2">
             {(["fr", "en"] as Lang[]).map((l, i) => (
               <span key={l} className="flex gap-2">
@@ -196,7 +195,7 @@ export function Villa() {
         <div data-hero-wrap className="absolute inset-0">
             <img data-hero-img src={img.living} alt={t.imageAlts.hero} fetchPriority="high" className="h-full w-full object-cover object-[48%_center]" />
         </div>
-          <div className="absolute inset-0 bg-swiss-red/35" />
+          <div className="absolute inset-0 bg-swiss-red/20" />
          <div className="relative flex h-full flex-col justify-end px-5 pb-20 md:px-12 md:pb-20">
           <div data-hero-title>
             <p data-hero-fade className="eyebrow mb-6 text-ivory/80">{t.heroKicker}</p>
