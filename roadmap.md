@@ -27,8 +27,8 @@
 - [x] Give the bedroom headline an editorial line break in both languages.
 
 ## Villars location and lifestyle expansion (Oct 5)
-- [ ] Expand the existing Situation block with key distances and an animated mobility timeline.
-- [ ] Add the mountain, leisure, wellness, international schools and nearby experiences sequence.
-- [ ] Evolve the existing Four Seasons section without duplicating it.
-- [ ] Replace the simple location sketch with an accessible interactive editorial map.
-- [ ] Complete French/English copy and verify desktop, 430 px, 390 px and reduced-motion views.
+- [x] Expand the existing Situation block with key distances and an animated mobility timeline.
+- [x] Add the mountain, leisure, wellness, international schools and nearby experiences sequence.
+- [x] Evolve the existing Four Seasons section without duplicating it.
+- [x] Replace the simple location sketch with an accessible interactive editorial map.
+- [x] Complete French/English copy and verify desktop, 430 px, 390 px and reduced-motion views.
