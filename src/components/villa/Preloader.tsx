@@ -17,7 +17,11 @@ export function Preloader({ onDone }: { onDone: () => void }) {
     sessionStorage.setItem("villars-intro", "1");
     document.documentElement.style.overflow = "hidden";
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      document.documentElement.style.overflow = "";
+      onDone();
+      return;
+    }
     const tl = gsap.timeline({
       defaults: { ease: "power3.inOut" },
       onComplete: () => {
@@ -29,7 +33,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
       .fromTo(el.querySelector("[data-pl-line]"), { scaleX: 0 }, { scaleX: 1, duration: 0.55 }, "-=0.3")
       .from(el.querySelector("[data-pl-tag]"), { opacity: 0, duration: 0.35 }, "-=0.25")
       .call(onDone, [], "+=0.05")
-      .to(el, { clipPath: "inset(0 0 100% 0)", duration: 0.65, ease: "expo.inOut" });
+      .to(el, { clipPath: "inset(0 0 100% 0)", duration: 0.55, ease: "expo.inOut" });
     return () => {
       tl.kill();
       document.documentElement.style.overflow = "";

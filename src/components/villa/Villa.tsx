@@ -210,7 +210,14 @@ export function Villa() {
     window.addEventListener("resize", refresh);
     window.addEventListener("orientationchange", refresh);
     ScrollTrigger.refresh();
-    return () => ctx.revert();
+    return () => {
+      window.clearTimeout(refreshTimer);
+      window.removeEventListener("resize", refresh);
+      window.removeEventListener("orientationchange", refresh);
+      images.forEach((image) => image.removeEventListener("load", refresh));
+      marquee.current = null;
+      ctx.revert();
+    };
   }, [ready]);
 
   // Refresh measurements when language changes text length
@@ -227,7 +234,7 @@ export function Villa() {
   };
 
   return (
-    <div ref={root} className="overflow-x-clip">
+    <div ref={root} className="overflow-x-clip pb-20 md:pb-0">
       <Preloader onDone={onDone} />
 
       {/* NAV */}
@@ -305,7 +312,7 @@ export function Villa() {
       </section>
 
       {/* LIVING STORY */}
-       <section data-living className="relative bg-ivory md:h-[170vh]">
+       <section data-living className="relative bg-ivory md:h-[150svh]">
          <div className="relative h-[78svh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-living-frame className="absolute inset-0 overflow-hidden">
              <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="h-full w-full object-cover" />
@@ -352,7 +359,7 @@ export function Villa() {
       </section>
 
       {/* BEDROOM */}
-        <section data-bedroom className="relative bg-ivory text-charcoal md:h-[190vh]">
+       <section data-bedroom className="relative bg-ivory text-charcoal md:h-[170svh]">
         <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bed-title className="flex flex-col justify-center px-5 py-32 md:absolute md:inset-0 md:px-12 md:py-0">
              <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-8xl lg:text-9xl">
@@ -374,7 +381,7 @@ export function Villa() {
       </section>
 
       {/* BALCONY */}
-       <section data-balcony className="relative bg-ivory md:h-[180vh]">
+       <section data-balcony className="relative bg-ivory md:h-[160svh]">
         <div className="relative h-[90vh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bal-frame className="absolute inset-0 overflow-hidden">
              <img src={img.balcony} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover" />
