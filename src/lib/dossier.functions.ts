@@ -5,7 +5,7 @@ const requestSchema = z.object({
   name: z.string().trim().min(2).max(120),
   email: z.string().trim().email().max(254),
   phone: z.string().trim().max(40),
-  language: z.enum(["fr", "en"]),
+  language: z.enum(["fr", "en", "de"]),
   website: z.string().max(200),
 });
 

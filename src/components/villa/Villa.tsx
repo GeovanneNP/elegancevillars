@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
-import { dict, type Lang } from "./i18n";
+import { dict, langs, type Lang } from "./i18n";
 import { img } from "./images";
 import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
@@ -35,7 +35,14 @@ export function Villa() {
   const marquee = useRef<gsap.core.Tween | null>(null);
   const onDone = useCallback(() => setReady(true), []);
 
+  useEffect(() => {
+    const saved = window.localStorage.getItem("villars-lang") as Lang | null;
+    const browser = navigator.language.slice(0, 2) as Lang;
+    const initial = saved && langs.includes(saved) ? saved : langs.includes(browser) ? browser : "fr";
+    if (initial !== "fr") setLang(initial);
+  }, []);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
+  const chooseLang = (l: Lang) => { setLang(l); window.localStorage.setItem("villars-lang", l); };
 
   useEffect(() => {
     const hero = document.querySelector("[data-hero]");
@@ -211,10 +218,10 @@ export function Villa() {
             ))}
           </ul>
            <div className="eyebrow flex gap-2">
-            {(["fr", "en"] as Lang[]).map((l, i) => (
+            {langs.map((l, i) => (
               <span key={l} className="flex gap-2">
                 {i > 0 && <span className="text-ivory/40">|</span>}
-                 <Button variant="ghost" onClick={() => setLang(l)} className={`eyebrow h-auto p-0 hover:bg-transparent ${lang === l ? "text-ivory" : "text-ivory/50 hover:text-ivory"}`}>{l.toUpperCase()}</Button>
+                 <Button variant="ghost" onClick={() => chooseLang(l)} aria-pressed={lang === l} aria-label={l.toUpperCase()} className={`eyebrow h-auto p-0 hover:bg-transparent ${lang === l ? "text-ivory" : "text-ivory/50 hover:text-ivory"}`}>{l.toUpperCase()}</Button>
               </span>
             ))}
           </div>
@@ -436,6 +443,7 @@ export function Villa() {
            <div data-fade className="col-span-12 mt-10 flex flex-col justify-end border-t border-ivory/20 pt-8 md:col-span-5 md:col-start-8 md:mt-0">
               <a href={`mailto:Marketing@uptechswiss.ch?subject=${encodeURIComponent(t.mailSubject)}`} className="break-all font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactEmail}: Marketing@uptechswiss.ch`}>Marketing@uptechswiss.ch</a>
               <a href="tel:+41765426230" className="mt-6 self-start font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactPhone}: +41 76 542 62 30`}>+41 76 542 62 30</a>
+              <a href={`https://wa.me/41765426230?text=${encodeURIComponent(t.whatsappMessage)}`} target="_blank" rel="noreferrer" className="eyebrow mt-8 self-start border-b border-ivory/40 pb-1 text-ivory/80 transition-colors hover:text-ivory">{t.whatsapp} →</a>
            </div>
         </div>
         <footer className="flex flex-col gap-4 border-t border-ivory/10 px-5 py-8 text-xs text-ivory/40 md:flex-row md:justify-between md:px-12">
