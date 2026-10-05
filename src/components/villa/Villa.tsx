@@ -12,12 +12,18 @@ import { Button } from "@/components/ui/button";
 import logo from "@/assets/brodard-logo.png.asset.json";
 
 const ids = ["residence", "location", "gallery", "details", "contact"];
+const motion = {
+  ease: "power3.out",
+  revealStart: "top 86%",
+  clipStart: "top 88%",
+  scrub: 0.55,
+} as const;
 
 function Lines({ lines, className = "" }: { lines: string[]; className?: string }) {
   return (
     <span data-lines className={className}>
-      {lines.map((l) => (
-         <span key={l} className="line-mask"><span>{l}{" "}</span></span>
+      {lines.map((l, index) => (
+         <span key={index} className="line-mask"><span>{l}{" "}</span></span>
       ))}
     </span>
   );
@@ -27,6 +33,7 @@ export function Villa() {
   const [lang, setLang] = useState<Lang>("fr");
   const [ready, setReady] = useState(false);
   const [pastHero, setPastHero] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
   const [activeSeason, setActiveSeason] = useState(0);
   const t = dict[lang];
@@ -40,6 +47,14 @@ export function Villa() {
     const browser = navigator.language.slice(0, 2) as Lang;
     const initial = saved && langs.includes(saved) ? saved : langs.includes(browser) ? browser : "fr";
     if (initial !== "fr") setLang(initial);
+  }, []);
+
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    if (!contact) return;
+    const observer = new IntersectionObserver(([entry]) => setContactVisible(Boolean(entry?.isIntersecting)), { threshold: 0.05 });
+    observer.observe(contact);
+    return () => observer.disconnect();
   }, []);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   const chooseLang = (l: Lang) => { setLang(l); window.localStorage.setItem("villars-lang", l); };
@@ -58,7 +73,7 @@ export function Villa() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({ duration: 1.05, easing: (x) => 1 - Math.pow(1 - x, 4) });
+    const lenis = new Lenis({ duration: 0.82, easing: (x) => 1 - Math.pow(1 - x, 4), smoothWheel: true });
     lenisRef.current = lenis;
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);
@@ -75,38 +90,40 @@ export function Villa() {
     if (!ready) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
+    let mm: gsap.MatchMedia | undefined;
     const ctx = gsap.context(() => {
-      const ease = "power3.out";
+      const finishOnLeave = (self: ScrollTrigger) => self.animation?.progress(1);
 
       // Hero intro
-       gsap.fromTo("[data-hero-img]", { scale: 1.06 }, { scale: 1, duration: 2.4, ease: "power2.out" });
-      gsap.from("[data-hero] .line-mask > span", { yPercent: 110, duration: 1.3, stagger: 0.1, ease: "expo.out", delay: 0.1 });
-       gsap.from("[data-hero-fade]", { opacity: 0, duration: 1, stagger: 0.08, delay: 0.6, ease });
+      gsap.fromTo("[data-hero-img]", { scale: 1.045 }, { scale: 1, duration: 1.8, ease: "power2.out" });
+      gsap.from("[data-hero] .line-mask > span", { yPercent: 105, duration: 1.05, stagger: 0.08, ease: "expo.out", delay: 0.05 });
+      gsap.from("[data-hero-fade]", { opacity: 0, duration: 0.8, stagger: 0.06, delay: 0.4, ease: motion.ease });
 
       // Hero camera on scroll
-      const heroTl = gsap.timeline({ scrollTrigger: { trigger: "[data-hero]", start: "top top", end: "bottom top", scrub: true } });
-      heroTl.to("[data-hero-wrap]", { scale: 1.12, ease: "none" }, 0)
-        .to("[data-hero-title]", { yPercent: -40, ease: "none" }, 0)
+      const heroTl = gsap.timeline({ scrollTrigger: { trigger: "[data-hero]", start: "top top", end: "bottom 12%", scrub: motion.scrub, invalidateOnRefresh: true } });
+      heroTl.to("[data-hero-wrap]", { scale: 1.075, ease: "none" }, 0)
+        .to("[data-hero-title]", { yPercent: -24, ease: "none" }, 0)
         .to("[data-hero-meta]", { opacity: 0, y: -20, ease: "none" }, 0);
 
       // Line reveals (except hero)
       gsap.utils.toArray<HTMLElement>("[data-lines]").forEach((el) => {
         if (el.closest("[data-hero]") || el.closest("[data-pin-text]")) return;
-        gsap.from(el.querySelectorAll(".line-mask > span"), {
-          yPercent: 110, duration: 1.3, stagger: 0.12, ease: "expo.out",
-          scrollTrigger: { trigger: el, start: "top 85%" },
+        gsap.fromTo(el.querySelectorAll(".line-mask > span"), { yPercent: 105 }, {
+          yPercent: 0, duration: 0.9, stagger: 0.08, ease: "expo.out",
+          scrollTrigger: { trigger: el, start: motion.revealStart, onLeave: finishOnLeave },
         });
       });
 
       // Soft fades
        gsap.utils.toArray<HTMLElement>("[data-fade]").forEach((el) => {
-         gsap.from(el, { opacity: 0, duration: 1.1, ease, scrollTrigger: { trigger: el, start: "top 88%" } });
+         gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.75, ease: motion.ease, scrollTrigger: { trigger: el, start: "top 90%", onLeave: finishOnLeave } });
        });
 
       // Parallax speeds
       gsap.utils.toArray<HTMLElement>("[data-speed]").forEach((el) => {
         const s = parseFloat(el.dataset["speed"] || "0");
-        gsap.fromTo(el, { yPercent: -s }, { yPercent: s, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
+        const distance = Math.min(Math.abs(s), 7) * Math.sign(s || 1);
+        gsap.fromTo(el, { yPercent: -distance }, { yPercent: distance, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: motion.scrub, invalidateOnRefresh: true } });
       });
 
       // Counters
@@ -119,77 +136,106 @@ export function Villa() {
         gsap.to(o, {
           v: end, duration: 2.2, ease: "power2.out",
           onUpdate: () => { el.textContent = o.v.toFixed(dec); },
-          scrollTrigger: { trigger: el, start: "top 85%" },
+          scrollTrigger: { trigger: el, start: motion.revealStart, once: true, onLeave: finishOnLeave },
         });
       });
 
       // Clip reveal for images
        gsap.utils.toArray<HTMLElement>("[data-gal], [data-clip]").forEach((el) => {
-         gsap.fromTo(el, { clipPath: "inset(8% 0 8% 0)" }, { clipPath: "inset(0% 0 0% 0)", duration: 1.5, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 85%" } });
+         gsap.fromTo(el, { clipPath: "inset(6% 0 6% 0)" }, { clipPath: "inset(0% 0 0% 0)", duration: 0.95, ease: "expo.out", scrollTrigger: { trigger: el, start: motion.clipStart, onLeave: finishOnLeave } });
       });
 
       // Location timeline + map
       const timelinePath = document.querySelector<SVGPathElement>("[data-timeline-path]");
       if (timelinePath) {
         const length = timelinePath.getTotalLength();
-        gsap.fromTo(timelinePath, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, ease: "none", scrollTrigger: { trigger: "[data-mobility]", start: "top 72%", end: "bottom 62%", scrub: true } });
+        gsap.fromTo(timelinePath, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, ease: "none", scrollTrigger: { trigger: "[data-mobility]", start: "top 76%", end: "bottom 48%", scrub: motion.scrub, invalidateOnRefresh: true } });
       }
       gsap.utils.toArray<HTMLElement>("[data-timeline-point]").forEach((el) => {
         const point = el.querySelector("span");
         if (!point) return;
-        gsap.fromTo(point, { scale: 0.65 }, { scale: 1.25, duration: 0.25, yoyo: true, repeat: 1, scrollTrigger: { trigger: el, start: "top 68%" } });
+        gsap.fromTo(point, { scale: 0.7 }, { scale: 1, duration: 0.3, scrollTrigger: { trigger: el, start: "top 70%", onLeave: finishOnLeave } });
       });
       gsap.utils.toArray<SVGPathElement>("[data-draw]").forEach((p) => {
         const len = p.getTotalLength();
-        gsap.fromTo(p, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 2.8, ease: "power2.inOut", scrollTrigger: { trigger: "[data-map]", start: "top 75%" } });
+        gsap.fromTo(p, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, ease: "none", scrollTrigger: { trigger: "[data-map]", start: "top 82%", end: "bottom 55%", scrub: motion.scrub, invalidateOnRefresh: true } });
       });
 
       // Bretaye route
-      gsap.fromTo("[data-bretaye-line]", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: "[data-bretaye]", start: "top 75%", end: "bottom 65%", scrub: true } });
-      gsap.fromTo("[data-bretaye-dot]", { left: "0%" }, { left: "100%", ease: "none", scrollTrigger: { trigger: "[data-bretaye]", start: "top 75%", end: "bottom 65%", scrub: true } });
+      gsap.fromTo("[data-bretaye-line]", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: "[data-bretaye-track]", start: "top 82%", end: "bottom 45%", scrub: motion.scrub, invalidateOnRefresh: true } });
+      gsap.fromTo("[data-bretaye-dot]", { left: "0%" }, { left: "100%", ease: "none", scrollTrigger: { trigger: "[data-bretaye-track]", start: "top 82%", end: "bottom 45%", scrub: motion.scrub, invalidateOnRefresh: true } });
 
       // Marquee
-      marquee.current = gsap.to("[data-marquee]", { xPercent: -50, duration: 40, ease: "none", repeat: -1 });
+      marquee.current = gsap.to("[data-marquee]", { xPercent: -50, duration: 48, ease: "none", repeat: -1, paused: true });
+      ScrollTrigger.create({
+        trigger: "[data-marquee]",
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => marquee.current?.play(),
+        onEnterBack: () => marquee.current?.play(),
+        onLeave: () => marquee.current?.pause(),
+        onLeaveBack: () => marquee.current?.pause(),
+      });
 
       // Desktop-only pinned sequences
-      const mm = gsap.matchMedia();
+      mm = gsap.matchMedia();
       mm.add("(min-width: 768px)", () => {
         gsap.utils.toArray<HTMLElement>("[data-season-step]").forEach((el, index) => {
           ScrollTrigger.create({
             trigger: el,
             start: "top center",
-            end: "bottom center",
+            end: "bottom 42%",
             onEnter: () => setActiveSeason(index),
             onEnterBack: () => setActiveSeason(index),
           });
         });
         // Living room expand
-        const lv = gsap.timeline({ scrollTrigger: { trigger: "[data-living]", start: "top top", end: "bottom bottom", scrub: 0.8 } });
+        const lv = gsap.timeline({ scrollTrigger: { trigger: "[data-living]", start: "top top", end: "bottom bottom", scrub: motion.scrub, invalidateOnRefresh: true } });
         lv.fromTo("[data-living-frame]", { clipPath: "inset(14% 15% 14% 15%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none", duration: 1 }, 0)
           .fromTo("[data-living-img]", { scale: 1.15, yPercent: -4 }, { scale: 1, yPercent: 4, ease: "none", duration: 1 }, 0)
-           .from("[data-living-text] > *", { opacity: 0, stagger: 0.08, duration: 0.25 }, 0.15)
-           .to("[data-living-text] > *", { opacity: 0, stagger: 0.05, duration: 0.2 }, 0.75);
+           .from("[data-living-text] > *", { opacity: 0, y: 12, stagger: 0.05, duration: 0.2 }, 0.1)
+           .to("[data-living-text] > *", { opacity: 0, y: -10, stagger: 0.03, duration: 0.16 }, 0.84);
 
         // Bedroom cover
-        const bd = gsap.timeline({ scrollTrigger: { trigger: "[data-bedroom]", start: "top top", end: "bottom bottom", scrub: 0.8 } });
+        const bd = gsap.timeline({ scrollTrigger: { trigger: "[data-bedroom]", start: "top top", end: "bottom bottom", scrub: motion.scrub, invalidateOnRefresh: true } });
         bd.from("[data-bed-title] .line-mask > span", { yPercent: 110, stagger: 0.1, duration: 0.25 }, 0)
-          .fromTo("[data-bed-img]", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: 0.5 }, 0.35)
-          .fromTo("[data-bed-img] img", { scale: 1.2 }, { scale: 1, ease: "none", duration: 0.65 }, 0.35)
-          .fromTo("[data-bed-img2]", { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.25 }, 0.75);
+          .fromTo("[data-bed-img]", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: 0.48 }, 0.28)
+          .fromTo("[data-bed-img] img", { scale: 1.14 }, { scale: 1, ease: "none", duration: 0.65 }, 0.28)
+          .fromTo("[data-bed-img2]", { yPercent: 35, opacity: 0 }, { yPercent: 0, opacity: 1, ease: "power2.out", duration: 0.22 }, 0.72);
 
         // Balcony open
-        const bc = gsap.timeline({ scrollTrigger: { trigger: "[data-balcony]", start: "top top", end: "bottom bottom", scrub: 0.8 } });
+        const bc = gsap.timeline({ scrollTrigger: { trigger: "[data-balcony]", start: "top top", end: "bottom bottom", scrub: motion.scrub, invalidateOnRefresh: true } });
         bc.fromTo("[data-bal-frame]", { clipPath: "inset(30% 36% 30% 36%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none", duration: 0.7 }, 0)
           .fromTo("[data-bal-frame] img", { scale: 1.3 }, { scale: 1.02, ease: "none", duration: 1 }, 0)
-           .from("[data-bal-text] > *", { opacity: 0, stagger: 0.1, duration: 0.25 }, 0.55);
+           .from("[data-bal-text] > *", { opacity: 0, y: 12, stagger: 0.08, duration: 0.22 }, 0.5);
       });
     }, root);
+    const refresh = () => ScrollTrigger.refresh();
+    const refreshTimer = window.setTimeout(refresh, 80);
+    const images = Array.from(root.current?.querySelectorAll("img") ?? []);
+    images.forEach((image) => {
+      if (!image.complete) image.addEventListener("load", refresh, { once: true });
+    });
+    document.fonts?.ready.then(refresh);
+    window.addEventListener("resize", refresh);
+    window.addEventListener("orientationchange", refresh);
     ScrollTrigger.refresh();
-    return () => ctx.revert();
+    return () => {
+      window.clearTimeout(refreshTimer);
+      window.removeEventListener("resize", refresh);
+      window.removeEventListener("orientationchange", refresh);
+      images.forEach((image) => image.removeEventListener("load", refresh));
+      marquee.current = null;
+      mm?.revert();
+      ctx.revert();
+    };
   }, [ready]);
 
   // Refresh measurements when language changes text length
-  useEffect(() => { ScrollTrigger.refresh(); }, [lang]);
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => ScrollTrigger.refresh());
+    return () => window.cancelAnimationFrame(frame);
+  }, [lang]);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -199,7 +245,7 @@ export function Villa() {
   };
 
   return (
-    <div ref={root} className="overflow-x-clip">
+    <div ref={root} className="overflow-x-clip pb-20 md:pb-0">
       <Preloader onDone={onDone} />
 
       {/* NAV */}
@@ -277,7 +323,7 @@ export function Villa() {
       </section>
 
       {/* LIVING STORY */}
-       <section data-living className="relative bg-ivory md:h-[170vh]">
+       <section data-living className="relative bg-ivory md:h-[150svh]">
          <div className="relative h-[78svh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-living-frame className="absolute inset-0 overflow-hidden">
              <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="h-full w-full object-cover" />
@@ -324,12 +370,12 @@ export function Villa() {
       </section>
 
       {/* BEDROOM */}
-        <section data-bedroom className="relative bg-ivory text-charcoal md:h-[190vh]">
+       <section data-bedroom className="relative bg-ivory text-charcoal md:h-[170svh]">
         <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bed-title className="flex flex-col justify-center px-5 py-32 md:absolute md:inset-0 md:px-12 md:py-0">
              <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-8xl lg:text-9xl">
                <span>{t.bedroomTitle.map((l, i) => (
-                <span key={l} className={`line-mask ${i === 1 ? "md:pl-[12vw] italic" : ""}`}><span>{l}</span></span>
+                 <span key={i} className={`line-mask ${i === 1 ? "md:pl-[12vw] italic" : ""}`}><span>{l}</span></span>
               ))}</span>
             </h2>
           </div>
@@ -346,7 +392,7 @@ export function Villa() {
       </section>
 
       {/* BALCONY */}
-       <section data-balcony className="relative bg-ivory md:h-[180vh]">
+       <section data-balcony className="relative bg-ivory md:h-[160svh]">
         <div className="relative h-[90vh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bal-frame className="absolute inset-0 overflow-hidden">
              <img src={img.balcony} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover" />
@@ -453,11 +499,11 @@ export function Villa() {
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
-       {pastHero && !dossierOpen && (
-         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-5 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
-           <div className="flex items-center justify-between gap-3">
-             <span className="font-serif text-2xl tabular-nums whitespace-nowrap">CHF 590'000</span>
-             <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 gap-2 p-0 text-right text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true">→</span></Button>
+       {pastHero && !contactVisible && !dossierOpen && (
+          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
+              <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 590'000</span>
+              <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right text-[0.58rem] leading-relaxed text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></Button>
            </div>
          </div>
        )}

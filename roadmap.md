@@ -47,3 +47,13 @@
 - [x] WhatsApp contact link
 - [x] Map contours, valley/lake hints, larger tap targets
 - [ ] Publish so search changes reach the live URL
+
+## Motion and cartography refinement (Oct 5)
+- [x] Unify scroll timing and guarantee visible completion of entrances.
+- [x] Refresh motion measurements after fonts, images, resize, orientation and language changes.
+- [x] Shorten and rebalance the apartment's pinned sequences.
+- [x] Complete the Four Seasons experience with approved real photography on desktop and mobile.
+- [x] Improve the editorial map hierarchy, persistent Villars anchor, labels and touch/keyboard navigation.
+- [x] Pause continuous motion off-screen and strengthen reduced-motion behavior.
+- [x] Verify the complete experience at desktop, low-height laptop, 430 px and 390 px in FR, EN and DE.
+- [ ] Publish so the refinements reach the live URL.

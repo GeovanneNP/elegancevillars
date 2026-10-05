@@ -17,13 +17,21 @@ const layout = [
 export function Gallery({ t }: { t: Dict }) {
   const [open, setOpen] = useState<number | null>(null);
   const cursor = useRef<HTMLDivElement>(null);
+  const reduceMotion = useRef(false);
 
   const move = (e: React.MouseEvent) => {
+    if (reduceMotion.current || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     gsap.to(cursor.current, { x: e.clientX, y: e.clientY, duration: 0.35, ease: "power3.out" });
   };
-  const showCursor = (v: boolean) => gsap.to(cursor.current, { scale: v ? 1 : 0, duration: 0.35, ease: "power3.out" });
+  const showCursor = (v: boolean) => {
+    if (reduceMotion.current || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    gsap.to(cursor.current, { scale: v ? 1 : 0, duration: 0.35, ease: "power3.out" });
+  };
 
-  useEffect(() => { gsap.set(cursor.current, { xPercent: -50, yPercent: -50, scale: 0 }); }, []);
+  useEffect(() => {
+    reduceMotion.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    gsap.set(cursor.current, { xPercent: -50, yPercent: -50, scale: 0 });
+  }, []);
   const n = galleryImages.length;
   const go = useCallback((d: number) => setOpen((i) => (i === null ? i : (i + d + n) % n)), [n]);
 
@@ -57,10 +65,10 @@ export function Gallery({ t }: { t: Dict }) {
             onClick={() => setOpen(i)}
             onMouseEnter={() => showCursor(true)}
             onMouseLeave={() => showCursor(false)}
-            className={`group relative h-auto w-full overflow-hidden rounded-none p-0 md:cursor-none ${layout[i]}`}
+            className={`group relative h-auto w-full overflow-hidden rounded-none p-0 [@media(hover:hover)_and_(pointer:fine)]:md:cursor-none ${layout[i]}`}
              aria-label={t.galleryAlts[i] ?? g.alt}
           >
-             <img src={g.src} alt={t.galleryAlts[i] ?? g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]" />
+             <img src={g.src} alt={t.galleryAlts[i] ?? g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.035]" />
           </Button>
         ))}
       </div>
