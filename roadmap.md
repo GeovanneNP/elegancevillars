@@ -25,3 +25,10 @@
 - [x] Add the price and viewing action after the opening on mobile.
 - [x] Add a private dossier request form with name, email and optional phone; store requests privately for manual follow-up.
 - [x] Give the bedroom headline an editorial line break in both languages.
+
+## Villars location and lifestyle expansion (Oct 5)
+- [ ] Expand the existing Situation block with key distances and an animated mobility timeline.
+- [ ] Add the mountain, leisure, wellness, international schools and nearby experiences sequence.
+- [ ] Evolve the existing Four Seasons section without duplicating it.
+- [ ] Replace the simple location sketch with an accessible interactive editorial map.
+- [ ] Complete French/English copy and verify desktop, 430 px, 390 px and reduced-motion views.
