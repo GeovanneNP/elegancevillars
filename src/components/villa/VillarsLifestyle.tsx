@@ -14,6 +14,9 @@ const mapPoints = [
   [43, 63], [27, 73], [84, 10], [15, 84], [4, 92],
 ] as const;
 
+const mapTiers = ["origin", "local", "local", "accessible", "accessible", "local", "regional", "regional", "beyond", "beyond"] as const;
+const seasonImages = [img.rocOrsay, img.lacChavonnesReflection, img.lacChavonnes, img.villarsPanorama] as const;
+
 const photoCredits = {
   villars: { author: "Wouter Hagens", license: "CC BY-SA 3.0", href: "https://commons.wikimedia.org/wiki/File:Villars-sur-Ollon_mountains.jpg" },
   roc: { author: "Alexey Filatov", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:T%C3%A9l%C3%A9cabine_Roc_d%27Orsay_2000_in_Villars-sur-Ollon.jpg" },
@@ -30,7 +33,7 @@ function PhotoCredit({ label, credit }: { label: string; credit: (typeof photoCr
 }
 
 export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
-  const [activeMapPoint, setActiveMapPoint] = useState(0);
+  const [activeMapPoint, setActiveMapPoint] = useState(1);
   const activeCoordinates = mapPoints[activeMapPoint] ?? [48, 56];
 
   return (
@@ -128,9 +131,9 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
               <span className="font-serif text-4xl md:text-6xl">{t.bretayeFrom}</span>
               <span className="font-serif text-4xl md:text-6xl">{t.bretayeTo}</span>
             </div>
-            <div className="relative mt-8 h-px bg-ivory/30">
+            <div data-bretaye-track className="relative mt-8 h-px bg-ivory/30">
               <span data-bretaye-line className="absolute inset-y-0 left-0 w-full origin-left bg-ivory" />
-              <span data-bretaye-dot className="absolute left-0 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-ivory" />
+              <span data-bretaye-dot className="absolute left-0 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ivory" />
             </div>
           </div>
           <p className="eyebrow col-span-12 text-ivory/70 md:col-span-3 md:col-start-10">{t.bretayeTime}</p>
@@ -228,8 +231,23 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
       <section data-seasons className="bg-swiss-red text-ivory md:grid md:grid-cols-12">
         <div className="relative hidden min-h-svh overflow-hidden md:sticky md:top-0 md:col-span-7 md:block md:h-svh">
-          <div className="absolute inset-0 flex items-center justify-center font-serif text-[40vw] font-light text-ivory/5" aria-hidden="true">{String(activeSeason + 1).padStart(2, "0")}</div>
-          <h2 className="absolute bottom-16 left-12 font-serif text-7xl font-light uppercase leading-[0.88] lg:text-9xl">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
+          {seasonImages.map((source, index) => (
+            <img
+              key={source}
+              src={source}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none ${activeSeason === index ? "scale-100 opacity-55" : "scale-[1.025] opacity-0"}`}
+            />
+          ))}
+          <div className="absolute inset-0 bg-swiss-red/45" />
+          <div className="absolute inset-0 flex items-center justify-center font-serif text-[40vw] font-light text-ivory/10" aria-hidden="true">{String(activeSeason + 1).padStart(2, "0")}</div>
+          <div className="absolute inset-x-12 bottom-14">
+            <p className="eyebrow mb-5 text-ivory/70">{t.seasonStates[activeSeason]?.[1]}</p>
+            <h2 className="font-serif text-7xl font-light uppercase leading-[0.88] lg:text-9xl">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
+            <p className="mt-7 max-w-md font-serif text-2xl italic text-ivory/85">{t.seasonStates[activeSeason]?.[3]}</p>
+          </div>
         </div>
         <div className="md:col-span-5">
           <div className="px-5 py-24 md:hidden">
@@ -237,7 +255,8 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <p className="mt-8 text-ivory/80">{t.seasonsText}</p>
           </div>
           {t.seasonStates.map(([number, name, activities, copy], index) => (
-            <article key={name} data-season-step className="flex min-h-0 flex-col justify-center border-t border-ivory/20 px-5 py-16 md:min-h-[70svh] md:px-12">
+            <article key={name} data-season-step className="flex min-h-0 flex-col justify-center border-t border-ivory/20 px-5 py-16 md:min-h-[68svh] md:px-12">
+              <img src={seasonImages[index]} alt="" aria-hidden="true" loading="lazy" className="mb-10 aspect-[16/9] w-full object-cover opacity-70 md:hidden" />
               <Button variant="ghost" onClick={() => onSeasonChange(index)} className="h-auto justify-start p-0 text-left text-ivory hover:bg-transparent hover:text-ivory">
                 <span className="eyebrow mr-6 text-ivory/50">{number}</span><span className="font-serif text-5xl font-light md:text-6xl">{name}</span>
               </Button>
@@ -264,21 +283,43 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           <div className="col-span-12 md:col-span-4">
             <h2 className="font-serif text-6xl font-light leading-none md:text-7xl">{t.mapTitle}</h2>
             <p className="eyebrow mt-8 text-muted-foreground">{t.mapNote}</p>
-            <p aria-live="polite" className="mt-14 font-serif text-3xl italic">{t.mapPlaces[activeMapPoint]}</p>
+            <div className="mt-12 border-t">
+              {t.mapPlaces.map((place, index) => (
+                <Button
+                  key={place}
+                  variant="ghost"
+                  onMouseEnter={() => setActiveMapPoint(index)}
+                  onFocus={() => setActiveMapPoint(index)}
+                  onClick={() => setActiveMapPoint(index)}
+                  aria-pressed={activeMapPoint === index}
+                  className={`flex h-auto w-full justify-between rounded-none border-b px-0 py-3 text-left hover:bg-transparent ${activeMapPoint === index ? "text-swiss-red" : "text-charcoal/65 hover:text-charcoal"}`}
+                >
+                  <span className="eyebrow">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="font-serif text-xl">{place}</span>
+                </Button>
+              ))}
+            </div>
+            <p aria-live="polite" className="mt-8 font-serif text-3xl italic text-swiss-red">{t.mapPlaces[activeMapPoint]}</p>
           </div>
-          <div data-map className="relative col-span-12 mt-10 aspect-[4/5] md:col-span-7 md:col-start-6 md:mt-0 md:aspect-[16/9]">
-            <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full text-charcoal" fill="none" aria-label={t.imageAlts.map}>
-              <path d="M0 100 L0 74 C8 70 14 76 22 80 C30 85 32 94 26 100 Z" fill="currentColor" opacity=".05" />
-              <path d="M60 30 C66 38 70 46 68 54 C64 66 72 76 84 82" stroke="currentColor" strokeWidth=".14" opacity=".2" />
-              <path d="M66 22 C74 32 80 44 78 56 C76 68 84 76 94 80" stroke="currentColor" strokeWidth=".14" opacity=".14" />
-              <path d="M26 100 C34 86 38 76 44 66 C50 58 52 44 58 30" stroke="currentColor" strokeWidth=".35" strokeDasharray=".6 1" opacity=".25" />
-              <path data-draw d="M2 89 C18 80 22 70 46 57 S72 28 88 8" stroke="currentColor" strokeWidth=".22" opacity=".25" />
-              <path data-draw d="M12 92 C30 77 39 71 48 56 S66 42 82 13" stroke="currentColor" strokeWidth=".18" opacity=".4" />
-              <path d={`M48 56 L${activeCoordinates[0]} ${activeCoordinates[1]}`} stroke="currentColor" strokeWidth=".3" strokeDasharray="1 1.5" opacity=".7" />
+          <div data-map className="relative col-span-12 mt-12 aspect-[4/5] overflow-hidden border-y md:col-span-7 md:col-start-6 md:mt-0 md:aspect-[16/10]">
+            <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full text-charcoal" fill="none" role="img" aria-label={t.imageAlts.map}>
+              <path d="M3 91 C16 84 22 85 30 91 C37 96 44 97 51 93 C59 88 66 87 74 91 C83 96 91 94 97 88" stroke="currentColor" strokeWidth=".45" opacity=".16" />
+              <path d="M-4 79 C13 69 25 72 36 81 C46 89 56 87 65 78 C75 68 87 68 104 76" stroke="currentColor" strokeWidth=".28" opacity=".14" />
+              <path d="M-5 67 C12 57 24 58 37 68 C49 77 62 74 71 63 C80 52 92 52 105 59" stroke="currentColor" strokeWidth=".22" opacity=".12" />
+              <path d="M-4 54 C10 45 23 44 35 52 C47 60 60 57 70 45 C79 35 92 32 104 37" stroke="currentColor" strokeWidth=".18" opacity=".1" />
+              <path d="M-2 42 C13 33 28 31 41 38 C54 45 67 39 78 28 C86 19 94 17 103 18" stroke="currentColor" strokeWidth=".16" opacity=".09" />
+              <path d="M0 100 L0 82 C9 79 16 82 23 88 C29 93 29 98 26 100 Z" fill="currentColor" opacity=".055" />
+              <path d="M7 94 C24 84 36 77 48 66 S65 39 89 9" stroke="currentColor" strokeWidth=".35" strokeDasharray=".7 1.3" opacity=".28" />
+              <path data-draw d="M5 88 C21 79 31 70 47 58 S70 28 91 8" stroke="currentColor" strokeWidth=".28" opacity=".34" />
+              <path data-draw d="M13 94 C31 78 40 70 48 56 S67 39 84 12" stroke="currentColor" strokeWidth=".2" opacity=".55" />
+              <path d={`M48 56 L${activeCoordinates[0]} ${activeCoordinates[1]}`} stroke="currentColor" strokeWidth=".42" strokeDasharray="1 1.4" opacity=".72" />
+              <circle cx="48" cy="56" r="2.4" stroke="currentColor" strokeWidth=".35" opacity=".9" />
+              <circle cx="48" cy="56" r=".75" fill="currentColor" />
             </svg>
             {mapPoints.map(([x, y], index) => (
-              <Button key={t.mapPlaces[index]} variant="ghost" onMouseEnter={() => setActiveMapPoint(index)} onFocus={() => setActiveMapPoint(index)} onClick={() => setActiveMapPoint(index)} aria-pressed={activeMapPoint === index} className={`absolute h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full p-0 transition-transform hover:bg-transparent focus-visible:ring-1 focus-visible:ring-swiss-red ${activeMapPoint === index ? "scale-125 text-swiss-red" : "text-wood"}`} style={{ left: `${x}%`, top: `${y}%` }}>
-                <span className="h-2 w-2 rounded-full bg-current" />
+              <Button key={t.mapPlaces[index]} variant="ghost" onMouseEnter={() => setActiveMapPoint(index)} onFocus={() => setActiveMapPoint(index)} onClick={() => setActiveMapPoint(index)} aria-pressed={activeMapPoint === index} className={`group absolute h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full p-0 transition-transform hover:bg-transparent focus-visible:ring-2 focus-visible:ring-swiss-red ${activeMapPoint === index ? "z-10 scale-125 text-swiss-red" : "text-charcoal/60"}`} style={{ left: `${x}%`, top: `${y}%` }}>
+                <span className={`${mapTiers[index] === "local" || mapTiers[index] === "origin" ? "h-2 w-2 bg-current" : "h-3 w-3 border border-current"} rounded-full`} />
+                <span className={`pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap bg-ivory px-1 font-serif text-sm transition-opacity ${activeMapPoint === index || index === 0 ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"}`}>{t.mapPlaces[index]}</span>
                 <span className="sr-only">{t.mapPlaces[index]}</span>
               </Button>
             ))}
