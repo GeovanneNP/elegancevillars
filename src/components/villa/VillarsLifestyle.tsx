@@ -43,7 +43,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           <p data-fade className="eyebrow col-span-12 text-wood md:col-span-3">{t.locationLabel}</p>
           <div className="col-span-12 md:col-span-8 md:col-start-5">
             <h2 className="font-serif text-6xl font-light leading-[0.9] md:text-8xl lg:text-9xl">
-              <span data-lines>{t.locationTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
+              <span data-lines>{t.locationTitle.map((line, index) => <span key={index} className="line-mask"><span>{line}</span></span>)}</span>
             </h2>
             <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.locationText}</p>
           </div>
@@ -91,7 +91,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
         <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.mountainLabel}</p>
         <h2 className="mt-8 max-w-5xl font-serif text-6xl font-light leading-[0.9] md:text-8xl lg:text-9xl">
-          <span data-lines>{t.mountainTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
+          <span data-lines>{t.mountainTitle.map((line, index) => <span key={index} className="line-mask"><span>{line}</span></span>)}</span>
         </h2>
         <div className="mt-24 grid grid-cols-12 gap-6 md:mt-36">
           <figure data-clip className="col-span-12 overflow-hidden md:col-span-8">
@@ -113,7 +113,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         <div className="col-span-12 md:col-span-5">
           <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.rocLabel}</p>
           <h2 className="mt-8 font-serif text-6xl font-light leading-[0.9] md:text-7xl lg:text-8xl">
-            <span data-lines>{t.rocTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
+            <span data-lines>{t.rocTitle.map((line, index) => <span key={index} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
           <p data-fade className="mt-10 max-w-sm text-lg leading-relaxed text-charcoal/80">{t.rocText}</p>
         </div>
@@ -168,7 +168,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         <div className="relative flex min-h-[80svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
           <p className="eyebrow text-ivory/80">{t.accessLevel} · {t.golfLabel}</p>
           <h2 className="max-w-5xl font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
-            <span data-lines>{t.golfTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
+            <span data-lines>{t.golfTitle.map((line, index) => <span key={index} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
           <div className="flex flex-col gap-4 border-t border-ivory/30 pt-6 md:flex-row md:items-end md:justify-between">
             <div>{t.golfStats.map((stat) => <p key={stat} className="eyebrow mt-2 text-ivory/80">{stat}</p>)}</div>
@@ -180,7 +180,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="grid grid-cols-12 gap-6 bg-stone px-5 py-32 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-5">
           <h2 className="font-serif text-6xl font-light leading-[0.9] md:text-8xl">
-            <span data-lines>{t.wellnessTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
+            <span data-lines>{t.wellnessTitle.map((line, index) => <span key={index} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
           <div className="mt-16 border-t">
             {t.wellnessItems.map(([name, items]) => (
@@ -217,7 +217,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-6">
           <h2 className="font-serif text-6xl font-light leading-[0.9] md:text-8xl">
-            <span data-lines>{t.internationalTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
+            <span data-lines>{t.internationalTitle.map((line, index) => <span key={index} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
         </div>
         <div className="col-span-12 mt-12 md:col-span-5 md:col-start-8 md:mt-0">
@@ -270,7 +270,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
         <div className="grid grid-cols-12 gap-6">
           <h2 className="col-span-12 font-serif text-6xl font-light leading-[0.9] md:col-span-6 md:text-8xl">
-            <span data-lines>{t.nearbyTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
+            <span data-lines>{t.nearbyTitle.map((line, index) => <span key={index} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
           <div className="col-span-12 mt-12 border-t md:col-span-5 md:col-start-8 md:mt-0">
             {t.nearby.map(([place, items], index) => <div data-fade key={place} className="border-b py-7"><p className="eyebrow mb-4 text-wood">{index < 2 ? t.regionalLevel : t.beyondLevel}</p><h3 className="font-serif text-3xl">{place}</h3><p className="eyebrow mt-3 leading-relaxed text-muted-foreground">{items}</p>{index !== 1 && <figure className="mt-8"><img src={index === 0 ? img.chateauAigle : img.chillonLeman} alt={index === 0 ? t.imageAlts.aigle : t.imageAlts.chillon} loading="lazy" width={2400} height={index === 0 ? 1600 : 1800} className="aspect-[3/2] w-full object-cover" /><PhotoCredit label={t.photoCredit} credit={index === 0 ? photoCredits.aigle : photoCredits.chillon} /></figure>}</div>)}

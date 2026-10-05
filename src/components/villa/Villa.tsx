@@ -22,8 +22,8 @@ const motion = {
 function Lines({ lines, className = "" }: { lines: string[]; className?: string }) {
   return (
     <span data-lines className={className}>
-      {lines.map((l) => (
-         <span key={l} className="line-mask"><span>{l}{" "}</span></span>
+      {lines.map((l, index) => (
+         <span key={index} className="line-mask"><span>{l}{" "}</span></span>
       ))}
     </span>
   );
@@ -90,6 +90,7 @@ export function Villa() {
     if (!ready) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) return;
+    let mm: gsap.MatchMedia | undefined;
     const ctx = gsap.context(() => {
       const finishOnLeave = (self: ScrollTrigger) => self.animation?.progress(1);
 
@@ -177,7 +178,7 @@ export function Villa() {
       });
 
       // Desktop-only pinned sequences
-      const mm = gsap.matchMedia();
+      mm = gsap.matchMedia();
       mm.add("(min-width: 768px)", () => {
         gsap.utils.toArray<HTMLElement>("[data-season-step]").forEach((el, index) => {
           ScrollTrigger.create({
@@ -225,6 +226,7 @@ export function Villa() {
       window.removeEventListener("orientationchange", refresh);
       images.forEach((image) => image.removeEventListener("load", refresh));
       marquee.current = null;
+      mm?.revert();
       ctx.revert();
     };
   }, [ready]);
@@ -373,7 +375,7 @@ export function Villa() {
           <div data-bed-title className="flex flex-col justify-center px-5 py-32 md:absolute md:inset-0 md:px-12 md:py-0">
              <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-8xl lg:text-9xl">
                <span>{t.bedroomTitle.map((l, i) => (
-                <span key={l} className={`line-mask ${i === 1 ? "md:pl-[12vw] italic" : ""}`}><span>{l}</span></span>
+                 <span key={i} className={`line-mask ${i === 1 ? "md:pl-[12vw] italic" : ""}`}><span>{l}</span></span>
               ))}</span>
             </h2>
           </div>
