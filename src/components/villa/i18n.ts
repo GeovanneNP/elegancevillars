@@ -7,14 +7,14 @@ const base = {
     heroKicker: "Villars-sur-Ollon — Vaud",
     heroTitle: ["Élégance alpine", "au cœur de Villars"],
     heroMeta: ["48 m²", "2.5 pièces", "1 chambre", "CHF 590'000"],
-    heroCta: "Découvrir l'appartement",
+    heroCta: "Découvrir l’appartement",
     visitCta: "Organiser une visite",
     dossierCta: "Recevoir le dossier privé",
     scroll: "Découvrir",
     manifesto: ["Entre bois, pierre", "et sommets."],
     manifestoText:
-      "Niché au cœur des Alpes vaudoises, cet appartement associe l'authenticité alpine au confort contemporain.",
-    livingTitle: "L'espace de vie",
+      "Niché au cœur des Alpes vaudoises, cet appartement associe l’authenticité alpine au confort contemporain.",
+    livingTitle: "L’espace de vie",
     livingWords: ["Bois naturel.", "Pierre.", "Lumière."],
     factsTitle: ["Un appartement.", "Une autre manière de vivre Villars."],
     facts: [
@@ -26,7 +26,7 @@ const base = {
     interiorKicker: "Intérieur alpin contemporain",
     interiorTitle: ["Une rénovation pensée", "dans chaque détail."],
     interiorText:
-      "Entièrement rénové en 2023, l'appartement mêle matériaux chaleureux, lignes contemporaines et détails inspirés de l'architecture alpine. Cuisine ouverte, séjour avec cheminée et accès direct au balcon.",
+      "Entièrement rénové en 2023, l’appartement mêle matériaux chaleureux, lignes contemporaines et détails inspirés de l’architecture alpine. Cuisine ouverte, séjour avec cheminée et accès direct au balcon.",
     bedroomTitle: ["Le calme,", "à proximité des pistes."],
     bedroomCaption: "Chambre avec accès au balcon — lumière du matin, exposition est.",
     balconyTitle: "Respirez Villars.",
@@ -87,7 +87,7 @@ const base = {
     schools: ["Aiglon College", "Collège Alpin Beau Soleil", "La Garenne", "Préfleuri", "Villars Palace Academy"],
     seasonsTitle: ["Un lieu.", "Quatre saisons."],
     seasonsText:
-      "Station des quatre saisons, Villars offre en toute période une vie au grand air — sur les pistes l'hiver, sur les sentiers et les greens l'été.",
+      "Station des quatre saisons, Villars offre en toute période une vie au grand air — sur les pistes l’hiver, sur les sentiers et les greens l’été.",
     seasonStates: [
       ["01", "Hiver", "Ski · Snowboard · Montagne · Glacier", "La montagne dans toute son intensité."],
       ["02", "Printemps", "Randonnée · Nature · Lac · Wellness", "Les sentiers et les paysages reprennent vie."],
@@ -98,7 +98,7 @@ const base = {
     nearby: [
       ["Aigle", "Château d’Aigle · Vignobles · Patrimoine"],
       ["Bex", "Mines de Sel · Patrimoine suisse"],
-      ["Région du Lac Léman", "Montreux · Lac Léman · Château de Chillon"],
+      ["Région du Lac Léman", "Montreux · lac Léman · Château de Chillon"],
     ],
     mapTitle: "Autour de Villars",
     mapNote: "Illustration géographique simplifiée.",
@@ -108,7 +108,7 @@ const base = {
       ["Surface", "~48 m²"],
       ["Pièces", "2.5"],
       ["Chambre", "1"],
-      ["Salle d'eau", "1 — douche / WC"],
+      ["Salle d’eau", "1 — douche / WC"],
       ["Étage", "2e"],
       ["Balcon", "1"],
       ["Construction", "1980"],
@@ -127,8 +127,8 @@ const base = {
     galleryClose: "Fermer",
     galleryPrevious: "Précédent",
     galleryNext: "Suivant",
-    galleryAlts: ["Séjour avec cheminée en pierre", "Chambre, mur en pierre", "Cuisine ouverte et table en bois", "Salle d'eau en marbre", "Espace de vie et salle à manger", "Balcon avec vue sur les montagnes", "Le bâtiment au centre de Villars"],
-    imageAlts: { hero: "Séjour de l'appartement à Villars-sur-Ollon", living: "Espace de vie, bois et pierre", kitchen: "Cuisine ouverte et salle à manger", bedroom: "Chambre avec accès au balcon", bedroomDetail: "Détail de la chambre, mur en pierre", balcony: "Balcon privé avec vue sur les Alpes", map: "Carte stylisée des Alpes vaudoises", alps: "Paysage des Alpes vaudoises à l'aube, illustration", villars: "Panorama réel des montagnes depuis Villars-sur-Ollon", roc: "Télécabine Roc d’Orsay 2000 à Villars-sur-Ollon", bretaye: "Train rouge BVB sur la ligne de Villars", lake: "Lac des Chavonnes dans les Alpes vaudoises", glacier: "Passerelle et sommets de Glacier 3000", peakWalk: "Peak Walk entre les sommets de Scex Rouge", aigle: "Château d’Aigle au milieu des vignobles", chillon: "Château de Chillon au bord du Lac Léman" },
+    galleryAlts: ["Séjour avec cheminée en pierre", "Chambre, mur en pierre", "Cuisine ouverte et table en bois", "Salle d’eau en marbre", "Espace de vie et salle à manger", "Balcon avec vue sur les montagnes", "Le bâtiment au centre de Villars"],
+    imageAlts: { hero: "Séjour de l’appartement à Villars-sur-Ollon", living: "Espace de vie, bois et pierre", kitchen: "Cuisine ouverte et salle à manger", bedroom: "Chambre avec accès au balcon", bedroomDetail: "Détail de la chambre, mur en pierre", balcony: "Balcon privé avec vue sur les Alpes", map: "Carte stylisée des Alpes vaudoises", alps: "Paysage des Alpes vaudoises à l’aube, illustration", villars: "Panorama réel des montagnes depuis Villars-sur-Ollon", roc: "Télécabine Roc d’Orsay 2000 à Villars-sur-Ollon", bretaye: "Train rouge BVB sur la ligne de Villars", lake: "Lac des Chavonnes dans les Alpes vaudoises", glacier: "Passerelle et sommets de Glacier 3000", peakWalk: "Peak Walk entre les sommets de Scex Rouge", aigle: "Château d’Aigle au milieu des vignobles", chillon: "Château de Chillon au bord du lac Léman" },
     view: "Voir",
     ownTitle: ["Votre appartement", "dans les Alpes."],
     ownText:
