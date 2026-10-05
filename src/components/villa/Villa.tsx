@@ -7,6 +7,7 @@ import { img } from "./images";
 import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
 import { DossierDialog } from "./DossierDialog";
+import { VillarsLifestyle } from "./VillarsLifestyle";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/brodard-logo.png.asset.json";
 
@@ -27,6 +28,7 @@ export function Villa() {
   const [ready, setReady] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
+  const [activeSeason, setActiveSeason] = useState(0);
   const t = dict[lang];
   const root = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
@@ -119,18 +121,25 @@ export function Villa() {
          gsap.fromTo(el, { clipPath: "inset(8% 0 8% 0)" }, { clipPath: "inset(0% 0 0% 0)", duration: 1.5, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 85%" } });
       });
 
-      // Location line + map
-      gsap.fromTo("[data-vline]", { scaleY: 0 }, { scaleY: 1, ease: "none", scrollTrigger: { trigger: "[data-distances]", start: "top 70%", end: "bottom 60%", scrub: true } });
-      gsap.utils.toArray<HTMLElement>("[data-dist]").forEach((el) => {
-         gsap.from(el, { opacity: 0, duration: 1, ease, scrollTrigger: { trigger: el, start: "top 80%" } });
+      // Location timeline + map
+      const timelinePath = document.querySelector<SVGPathElement>("[data-timeline-path]");
+      if (timelinePath) {
+        const length = timelinePath.getTotalLength();
+        gsap.fromTo(timelinePath, { strokeDasharray: length, strokeDashoffset: length }, { strokeDashoffset: 0, ease: "none", scrollTrigger: { trigger: "[data-mobility]", start: "top 72%", end: "bottom 62%", scrub: true } });
+      }
+      gsap.utils.toArray<HTMLElement>("[data-timeline-point]").forEach((el) => {
+        const point = el.querySelector("span");
+        if (!point) return;
+        gsap.fromTo(point, { scale: 0.65 }, { scale: 1.25, duration: 0.25, yoyo: true, repeat: 1, scrollTrigger: { trigger: el, start: "top 68%" } });
       });
       gsap.utils.toArray<SVGPathElement>("[data-draw]").forEach((p) => {
         const len = p.getTotalLength();
         gsap.fromTo(p, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 2.8, ease: "power2.inOut", scrollTrigger: { trigger: "[data-map]", start: "top 75%" } });
       });
 
-      // Seasons words
-      gsap.from("[data-season]", { opacity: 0, yPercent: 60, stagger: 0.12, duration: 1.1, ease, scrollTrigger: { trigger: "[data-seasons-list]", start: "top 80%" } });
+      // Bretaye route
+      gsap.fromTo("[data-bretaye-line]", { scaleX: 0 }, { scaleX: 1, ease: "none", scrollTrigger: { trigger: "[data-bretaye]", start: "top 75%", end: "bottom 65%", scrub: true } });
+      gsap.fromTo("[data-bretaye-dot]", { left: "0%" }, { left: "100%", ease: "none", scrollTrigger: { trigger: "[data-bretaye]", start: "top 75%", end: "bottom 65%", scrub: true } });
 
       // Marquee
       marquee.current = gsap.to("[data-marquee]", { xPercent: -50, duration: 40, ease: "none", repeat: -1 });
@@ -138,6 +147,15 @@ export function Villa() {
       // Desktop-only pinned sequences
       const mm = gsap.matchMedia();
       mm.add("(min-width: 768px)", () => {
+        gsap.utils.toArray<HTMLElement>("[data-season-step]").forEach((el, index) => {
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => setActiveSeason(index),
+            onEnterBack: () => setActiveSeason(index),
+          });
+        });
         // Living room expand
         const lv = gsap.timeline({ scrollTrigger: { trigger: "[data-living]", start: "top top", end: "bottom bottom", scrub: 0.8 } });
         lv.fromTo("[data-living-frame]", { clipPath: "inset(14% 15% 14% 15%)" }, { clipPath: "inset(0% 0% 0% 0%)", ease: "none", duration: 1 }, 0)
@@ -334,59 +352,7 @@ export function Villa() {
         </div>
       </section>
 
-      {/* LOCATION */}
-      <section id="location" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
-        <div className="col-span-12 md:col-span-6">
-           <h2 className="font-serif text-6xl font-light leading-[0.9] md:text-7xl lg:text-8xl">
-            <Lines lines={t.locationTitle} />
-          </h2>
-          <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.locationText}</p>
-          <div data-map className="mt-16 max-w-xl">
-             <svg viewBox="0 0 600 300" className="w-full text-charcoal" fill="none" stroke="currentColor" aria-label={t.imageAlts.map}>
-              <path data-draw strokeWidth="0.8" opacity="0.5" d="M0 250 L60 190 L95 215 L150 120 L190 170 L240 80 L290 150 L330 110 L380 175 L430 60 L480 140 L530 100 L600 180" />
-              <path data-draw strokeWidth="0.6" opacity="0.3" d="M0 280 L80 230 L130 250 L200 190 L260 230 L320 180 L400 240 L470 200 L540 240 L600 220" />
-              <path data-draw strokeWidth="0.6" strokeDasharray="3 4" opacity="0.6" d="M60 60 C 140 120, 220 140, 300 175 S 470 230, 560 270" />
-              <circle cx="300" cy="175" r="4" fill="currentColor" stroke="none" />
-              <circle cx="300" cy="175" r="12" strokeWidth="0.6" />
-              <text x="314" y="170" className="fill-current" stroke="none" fontSize="11" letterSpacing="3">VILLARS</text>
-              <text x="20" y="54" className="fill-current" stroke="none" fontSize="9" letterSpacing="2" opacity="0.6">LAUSANNE</text>
-              <text x="490" y="290" className="fill-current" stroke="none" fontSize="9" letterSpacing="2" opacity="0.6">SION</text>
-              <text x="190" y="140" className="fill-current" stroke="none" fontSize="9" letterSpacing="2" opacity="0.6">AIGLE</text>
-            </svg>
-          </div>
-        </div>
-        <div data-distances className="relative col-span-12 mt-12 md:col-span-5 md:col-start-8 md:mt-0">
-          <span data-vline className="absolute left-0 top-0 h-full w-px origin-top bg-wood" />
-          <ul>
-            {t.distances.map(([p, d]) => (
-               <li data-dist key={p} className="relative flex items-baseline justify-between gap-3 border-b py-7 pl-8">
-                <span className="absolute left-[-3px] top-1/2 h-[7px] w-[7px] -translate-y-1/2 rounded-full bg-wood" />
-                 <span className="min-w-0 font-serif text-2xl md:text-3xl">{p}</span>
-                 <span className="eyebrow shrink-0 text-wood">{d}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* SEASONS */}
-      <section className="relative overflow-hidden bg-swiss-red py-40 text-ivory md:py-56">
-          <img data-speed="10" src={img.seasons} alt={t.imageAlts.seasons} loading="lazy" width={1920} height={1088} className="absolute inset-0 h-[120%] w-full -translate-y-[10%] object-cover opacity-80" />
-         <div className="absolute inset-0 bg-swiss-red/35" />
-        <div className="relative px-5 md:px-12">
-           <h2 className="font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
-            <Lines lines={t.seasonsTitle} />
-          </h2>
-          <div className="mt-20 grid grid-cols-12 gap-6">
-            <p data-fade className="col-span-12 max-w-md text-lg leading-relaxed text-ivory/85 md:col-span-4">{t.seasonsText}</p>
-            <ul data-seasons-list className="col-span-12 flex flex-wrap gap-x-10 gap-y-4 md:col-span-7 md:col-start-6">
-              {t.seasons.map((s) => (
-                <li key={s} className="overflow-hidden"><span data-season className="block font-serif text-4xl italic md:text-5xl">{s}</span></li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+      <VillarsLifestyle t={t} activeSeason={activeSeason} onSeasonChange={setActiveSeason} />
 
       {/* DETAILS */}
       <section id="details" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
