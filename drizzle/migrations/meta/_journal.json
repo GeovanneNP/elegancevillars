@@ -8,6 +8,13 @@
       "when": 1791038619034,
       "tag": "0000_create_private_dossier_requests",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791228538813,
+      "tag": "0001_dossier_language_de",
+      "breakpoints": true
     }
   ]
 }
