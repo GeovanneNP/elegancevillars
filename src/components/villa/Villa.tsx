@@ -33,6 +33,7 @@ export function Villa() {
   const [lang, setLang] = useState<Lang>("fr");
   const [ready, setReady] = useState(false);
   const [pastHero, setPastHero] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
   const [activeSeason, setActiveSeason] = useState(0);
   const t = dict[lang];
@@ -46,6 +47,14 @@ export function Villa() {
     const browser = navigator.language.slice(0, 2) as Lang;
     const initial = saved && langs.includes(saved) ? saved : langs.includes(browser) ? browser : "fr";
     if (initial !== "fr") setLang(initial);
+  }, []);
+
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    if (!contact) return;
+    const observer = new IntersectionObserver(([entry]) => setContactVisible(Boolean(entry?.isIntersecting)), { threshold: 0.05 });
+    observer.observe(contact);
+    return () => observer.disconnect();
   }, []);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   const chooseLang = (l: Lang) => { setLang(l); window.localStorage.setItem("villars-lang", l); };
@@ -488,7 +497,7 @@ export function Villa() {
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
-       {pastHero && !dossierOpen && (
+       {pastHero && !contactVisible && !dossierOpen && (
          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-5 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
            <div className="flex items-center justify-between gap-3">
              <span className="font-serif text-2xl tabular-nums whitespace-nowrap">CHF 590'000</span>
