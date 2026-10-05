@@ -268,12 +268,16 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           </div>
           <div data-map className="relative col-span-12 mt-10 aspect-[4/5] md:col-span-7 md:col-start-6 md:mt-0 md:aspect-[16/9]">
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full text-charcoal" fill="none" aria-label={t.imageAlts.map}>
+              <path d="M0 100 L0 74 C8 70 14 76 22 80 C30 85 32 94 26 100 Z" fill="currentColor" opacity=".05" />
+              <path d="M60 30 C66 38 70 46 68 54 C64 66 72 76 84 82" stroke="currentColor" strokeWidth=".14" opacity=".2" />
+              <path d="M66 22 C74 32 80 44 78 56 C76 68 84 76 94 80" stroke="currentColor" strokeWidth=".14" opacity=".14" />
+              <path d="M26 100 C34 86 38 76 44 66 C50 58 52 44 58 30" stroke="currentColor" strokeWidth=".35" strokeDasharray=".6 1" opacity=".25" />
               <path data-draw d="M2 89 C18 80 22 70 46 57 S72 28 88 8" stroke="currentColor" strokeWidth=".22" opacity=".25" />
               <path data-draw d="M12 92 C30 77 39 71 48 56 S66 42 82 13" stroke="currentColor" strokeWidth=".18" opacity=".4" />
               <path d={`M48 56 L${activeCoordinates[0]} ${activeCoordinates[1]}`} stroke="currentColor" strokeWidth=".3" strokeDasharray="1 1.5" opacity=".7" />
             </svg>
             {mapPoints.map(([x, y], index) => (
-              <Button key={t.mapPlaces[index]} variant="ghost" onMouseEnter={() => setActiveMapPoint(index)} onFocus={() => setActiveMapPoint(index)} onClick={() => setActiveMapPoint(index)} aria-pressed={activeMapPoint === index} className={`absolute h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full p-0 hover:bg-transparent ${activeMapPoint === index ? "scale-125 text-swiss-red" : "text-wood"}`} style={{ left: `${x}%`, top: `${y}%` }}>
+              <Button key={t.mapPlaces[index]} variant="ghost" onMouseEnter={() => setActiveMapPoint(index)} onFocus={() => setActiveMapPoint(index)} onClick={() => setActiveMapPoint(index)} aria-pressed={activeMapPoint === index} className={`absolute h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full p-0 transition-transform hover:bg-transparent focus-visible:ring-1 focus-visible:ring-swiss-red ${activeMapPoint === index ? "scale-125 text-swiss-red" : "text-wood"}`} style={{ left: `${x}%`, top: `${y}%` }}>
                 <span className="h-2 w-2 rounded-full bg-current" />
                 <span className="sr-only">{t.mapPlaces[index]}</span>
               </Button>

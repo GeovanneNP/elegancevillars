@@ -39,3 +39,11 @@
 - [x] Remove unsupported photographs for Golf Club Villars, Les Bains, Villars Palace and Mines de Sel de Bex.
 - [x] Organize the narrative into Villars, accessible from Villars, regional and Beyond Villars levels.
 - [x] Verify the final French/English experience at desktop, 430 px and 390 px.
+
+## German, SEO, contact and refinements (Oct 5)
+- [x] German language with FR | EN | DE switch, remembered choice
+- [x] French copy: English leftovers translated
+- [x] Property structured data, hreflang, de_CH, sitemap
+- [x] WhatsApp contact link
+- [x] Map contours, valley/lake hints, larger tap targets
+- [ ] Publish so search changes reach the live URL

@@ -33,6 +33,19 @@ const copy = {
     error: "Your request could not be sent. Please try again or email us directly.",
     close: "Close",
   },
+  de: {
+    title: "Privates Dossier anfordern",
+    intro: "Hinterlassen Sie Ihre Angaben, um Informationen zur Wohnung zu erhalten.",
+    name: "Name",
+    email: "E-Mail",
+    phone: "Telefon (optional)",
+    send: "Dossier anfordern",
+    sending: "Wird gesendet…",
+    success: "Ihre Anfrage ist eingegangen.",
+    followup: "Wir melden uns persönlich bei Ihnen zum Dossier.",
+    error: "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.",
+    close: "Schliessen",
+  },
 };
 
 export function DossierDialog({ open, onOpenChange, lang }: { open: boolean; onOpenChange: (open: boolean) => void; lang: Lang }) {

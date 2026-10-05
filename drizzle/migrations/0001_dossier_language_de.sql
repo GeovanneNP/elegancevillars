@@ -1,0 +1,2 @@
+ALTER TABLE public.dossier_requests DROP CONSTRAINT dossier_requests_language_check;
+ALTER TABLE public.dossier_requests ADD CONSTRAINT dossier_requests_language_check CHECK (language IN ('fr','en','de'));
