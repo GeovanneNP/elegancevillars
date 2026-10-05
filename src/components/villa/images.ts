@@ -7,15 +7,15 @@ import bath from "@/assets/bath-enhanced.webp";
 import balcony from "@/assets/balcony-enhanced.webp";
 import exterior from "@/assets/exterior-enhanced.webp";
 import alps from "@/assets/alps.jpg";
-import seasons from "@/assets/seasons.jpg";
-import villarsSki from "@/assets/villars-ski.webp";
-import rocOrsay from "@/assets/roc-orsay.webp";
-import lacChavonnes from "@/assets/lac-chavonnes.webp";
-import villarsGolf from "@/assets/villars-golf.webp";
-import villarsWellness from "@/assets/villars-wellness.webp";
-import glacier3000 from "@/assets/glacier-3000.webp";
-import villarsSpring from "@/assets/villars-spring.webp";
-import villarsAutumn from "@/assets/villars-autumn.webp";
+import villarsPanoramaAsset from "@/assets/villars-panorama.webp.asset.json";
+import rocOrsayAsset from "@/assets/roc-orsay-real.webp.asset.json";
+import bretayeTrainAsset from "@/assets/bretaye-train.webp.asset.json";
+import lacChavonnesAsset from "@/assets/lac-chavonnes-wide.webp.asset.json";
+import lacChavonnesReflectionAsset from "@/assets/lac-chavonnes-reflection.webp.asset.json";
+import glacier3000Asset from "@/assets/glacier-3000-real.webp.asset.json";
+import peakWalkAsset from "@/assets/peak-walk-real.webp.asset.json";
+import chateauAigleAsset from "@/assets/chateau-aigle.webp.asset.json";
+import chillonLemanAsset from "@/assets/chillon-leman.webp.asset.json";
 
 export const img = {
   living,
@@ -27,15 +27,15 @@ export const img = {
   balcony,
   exterior,
   alps,
-  seasons,
-  villarsSki,
-  rocOrsay,
-  lacChavonnes,
-  villarsGolf,
-  villarsWellness,
-  glacier3000,
-  villarsSpring,
-  villarsAutumn,
+  villarsPanorama: villarsPanoramaAsset.url,
+  rocOrsay: rocOrsayAsset.url,
+  bretayeTrain: bretayeTrainAsset.url,
+  lacChavonnes: lacChavonnesAsset.url,
+  lacChavonnesReflection: lacChavonnesReflectionAsset.url,
+  glacier3000: glacier3000Asset.url,
+  peakWalk: peakWalkAsset.url,
+  chateauAigle: chateauAigleAsset.url,
+  chillonLeman: chillonLemanAsset.url,
 };
 
 export const galleryImages = [
