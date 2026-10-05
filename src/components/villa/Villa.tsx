@@ -498,10 +498,10 @@ export function Villa() {
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
        {pastHero && !contactVisible && !dossierOpen && (
-         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-5 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
-           <div className="flex items-center justify-between gap-3">
-             <span className="font-serif text-2xl tabular-nums whitespace-nowrap">CHF 590'000</span>
-             <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 gap-2 p-0 text-right text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true">→</span></Button>
+          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
+              <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 590'000</span>
+              <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right text-[0.58rem] leading-relaxed text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></Button>
            </div>
          </div>
        )}

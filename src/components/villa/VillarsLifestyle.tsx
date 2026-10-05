@@ -319,7 +319,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             {mapPoints.map(([x, y], index) => (
               <Button key={t.mapPlaces[index]} variant="ghost" onMouseEnter={() => setActiveMapPoint(index)} onFocus={() => setActiveMapPoint(index)} onClick={() => setActiveMapPoint(index)} aria-pressed={activeMapPoint === index} className={`group absolute h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full p-0 transition-transform hover:bg-transparent focus-visible:ring-2 focus-visible:ring-swiss-red ${activeMapPoint === index ? "z-10 scale-125 text-swiss-red" : "text-charcoal/60"}`} style={{ left: `${x}%`, top: `${y}%` }}>
                 <span className={`${mapTiers[index] === "local" || mapTiers[index] === "origin" ? "h-2 w-2 bg-current" : "h-3 w-3 border border-current"} rounded-full`} />
-                <span className={`pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap bg-ivory px-1 font-serif text-sm transition-opacity ${activeMapPoint === index || index === 0 ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"}`}>{t.mapPlaces[index]}</span>
+                <span className={`pointer-events-none absolute left-1/2 -translate-x-1/2 whitespace-nowrap bg-ivory px-1 font-serif text-sm transition-opacity ${index === 0 ? "top-full mt-1" : "bottom-full mb-1"} ${activeMapPoint === index || index === 0 ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"}`}>{t.mapPlaces[index]}</span>
                 <span className="sr-only">{t.mapPlaces[index]}</span>
               </Button>
             ))}

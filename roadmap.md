@@ -55,5 +55,5 @@
 - [x] Complete the Four Seasons experience with approved real photography on desktop and mobile.
 - [x] Improve the editorial map hierarchy, persistent Villars anchor, labels and touch/keyboard navigation.
 - [x] Pause continuous motion off-screen and strengthen reduced-motion behavior.
-- [ ] Verify the complete experience at desktop, low-height laptop, 430 px and 390 px in FR, EN and DE.
+- [x] Verify the complete experience at desktop, low-height laptop, 430 px and 390 px in FR, EN and DE.
 - [ ] Publish so the refinements reach the live URL.
