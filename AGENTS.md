@@ -16,3 +16,4 @@
 - Dossier enquiries are validated in a public server function and stored in a locked Cloud table for manual owner follow-up; no dossier file is available to send automatically.
 - The Villars location and lifestyle narrative is isolated in VillarsLifestyle and mounted in the original location slot — this preserves every approved property and conversion section unchanged.
 - Location photography must be a verified real view of the named place, carry its visible reuse credit, and be registered in the asset credit file — this prevents synthetic or unlicensed tourism imagery from being presented as factual.
+- The page is trilingual (FR default, EN, DE); every dictionary language is typed against the French Dict so missing keys fail the typecheck.
