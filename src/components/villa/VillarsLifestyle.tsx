@@ -22,6 +22,7 @@ function AtmosphereCaption({ children }: { children: string }) {
 
 export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
   const [activeMapPoint, setActiveMapPoint] = useState(0);
+  const activeCoordinates = mapPoints[activeMapPoint] ?? [48, 56];
 
   return (
     <div data-lifestyle>
@@ -255,7 +256,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full text-charcoal" fill="none" aria-label={t.imageAlts.map}>
               <path data-draw d="M2 89 C18 80 22 70 46 57 S72 28 88 8" stroke="currentColor" strokeWidth=".22" opacity=".25" />
               <path data-draw d="M12 92 C30 77 39 71 48 56 S66 42 82 13" stroke="currentColor" strokeWidth=".18" opacity=".4" />
-              <path d={`M${mapPoints[0][0]} ${mapPoints[0][1]} L${mapPoints[activeMapPoint][0]} ${mapPoints[activeMapPoint][1]}`} stroke="currentColor" strokeWidth=".3" strokeDasharray="1 1.5" opacity=".7" />
+              <path d={`M48 56 L${activeCoordinates[0]} ${activeCoordinates[1]}`} stroke="currentColor" strokeWidth=".3" strokeDasharray="1 1.5" opacity=".7" />
             </svg>
             {mapPoints.map(([x, y], index) => (
               <Button key={t.mapPlaces[index]} variant="ghost" onMouseEnter={() => setActiveMapPoint(index)} onFocus={() => setActiveMapPoint(index)} onClick={() => setActiveMapPoint(index)} aria-pressed={activeMapPoint === index} className={`absolute h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full p-0 hover:bg-transparent ${activeMapPoint === index ? "scale-125 text-swiss-red" : "text-wood"}`} style={{ left: `${x}%`, top: `${y}%` }}>
