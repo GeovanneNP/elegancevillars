@@ -14,10 +14,19 @@ const mapPoints = [
   [43, 63], [27, 73], [84, 10], [15, 84], [4, 92],
 ] as const;
 
-const seasonImages = [img.seasons, img.villarsSpring, img.lacChavonnes, img.villarsAutumn];
+const photoCredits = {
+  villars: { author: "Wouter Hagens", license: "CC BY-SA 3.0", href: "https://commons.wikimedia.org/wiki/File:Villars-sur-Ollon_mountains.jpg" },
+  roc: { author: "Alexey Filatov", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:T%C3%A9l%C3%A9cabine_Roc_d%27Orsay_2000_in_Villars-sur-Ollon.jpg" },
+  bretaye: { author: "flybyeigenheer", license: "CC BY-SA 2.0", href: "https://commons.wikimedia.org/wiki/File:BVB_BDeh_2-4_25_zwischen_B%C3%A9vieux-Villars_(29360738720).jpg" },
+  lake: { author: "Calimo", license: "CC BY-SA 3.0", href: "https://commons.wikimedia.org/wiki/File:Lac_des_Chavonnes.jpg" },
+  lakeReflection: { author: "André Mouraux", license: "CC BY 2.0", href: "https://commons.wikimedia.org/wiki/File:Lac_des_Chavonnes_(23730784).jpg" },
+  peakWalk: { author: "Zacharie Grossen", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:Easy_Summit.jpg" },
+  aigle: { author: "Falk2", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:L03_498_Schloss_Aigle.jpg" },
+  chillon: { author: "Christian David", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:Chillon_viewed_from_south_2021.jpg" },
+} as const;
 
-function AtmosphereCaption({ children }: { children: string }) {
-  return <figcaption className="eyebrow mt-3 text-[0.6rem] text-muted-foreground">{children}</figcaption>;
+function PhotoCredit({ label, credit }: { label: string; credit: (typeof photoCredits)[keyof typeof photoCredits] }) {
+  return <figcaption className="eyebrow mt-3 text-[0.6rem] text-muted-foreground">{label}: <a href={credit.href} target="_blank" rel="noreferrer" className="underline decoration-current/40 underline-offset-4">{credit.author} · {credit.license}</a></figcaption>;
 }
 
 export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
@@ -35,6 +44,10 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             </h2>
             <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.locationText}</p>
           </div>
+          <figure data-clip className="col-span-12 mt-16 overflow-hidden md:col-span-10 md:col-start-3 md:mt-24">
+            <img src={img.villarsPanorama} alt={t.imageAlts.villars} width={2400} height={854} className="aspect-[16/7] w-full object-cover" />
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.villars} />
+          </figure>
         </div>
 
         <div className="mt-28 border-t md:mt-40">
@@ -73,14 +86,14 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       </section>
 
       <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
-        <p data-fade className="eyebrow text-wood">{t.mountainLabel}</p>
+        <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.mountainLabel}</p>
         <h2 className="mt-8 max-w-5xl font-serif text-6xl font-light leading-[0.9] md:text-8xl lg:text-9xl">
           <span data-lines>{t.mountainTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
         </h2>
         <div className="mt-24 grid grid-cols-12 gap-6 md:mt-36">
           <figure data-clip className="col-span-12 overflow-hidden md:col-span-8">
-            <img src={img.villarsSki} alt={t.imageAlts.ski} loading="lazy" width={1600} height={1072} className="aspect-[3/2] w-full object-cover" />
-            <AtmosphereCaption>{t.atmosphereCaption}</AtmosphereCaption>
+            <img src={img.villarsPanorama} alt={t.imageAlts.villars} loading="lazy" width={2400} height={854} className="aspect-[3/2] w-full object-cover" />
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.villars} />
           </figure>
           <div className="col-span-12 self-end md:col-span-3 md:col-start-10">
             <div className="flex flex-wrap gap-x-4 gap-y-1 border-b pb-6">
@@ -95,7 +108,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
       <section className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-5">
-          <p data-fade className="eyebrow text-wood">{t.rocLabel}</p>
+          <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.rocLabel}</p>
           <h2 className="mt-8 font-serif text-6xl font-light leading-[0.9] md:text-7xl lg:text-8xl">
             <span data-lines>{t.rocTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
@@ -103,11 +116,12 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         </div>
         <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-6 md:col-start-7 md:mt-0">
           <img src={img.rocOrsay} alt={t.imageAlts.roc} loading="lazy" width={1600} height={1200} className="aspect-[4/5] w-full object-cover" />
-          <AtmosphereCaption>{t.atmosphereCaption}</AtmosphereCaption>
+          <PhotoCredit label={t.photoCredit} credit={photoCredits.roc} />
         </figure>
       </section>
 
       <section data-bretaye className="bg-swiss-red px-5 py-28 text-ivory md:px-12 md:py-40">
+        <p className="eyebrow mb-16 text-ivory/65">{t.accessLevel}</p>
         <div className="grid grid-cols-12 items-end gap-6">
           <div className="col-span-12 md:col-span-8">
             <div className="flex items-center justify-between gap-5">
@@ -121,6 +135,10 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           </div>
           <p className="eyebrow col-span-12 text-ivory/70 md:col-span-3 md:col-start-10">{t.bretayeTime}</p>
           <p data-fade className="col-span-12 mt-10 max-w-md text-lg leading-relaxed text-ivory/85 md:col-span-4 md:col-start-7">{t.bretayeText}</p>
+          <figure data-clip className="col-span-12 mt-12 md:col-span-8 md:col-start-3">
+            <img src={img.bretayeTrain} alt={t.imageAlts.bretaye} loading="lazy" width={2400} height={1600} className="aspect-[3/2] w-full object-cover" />
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.bretaye} />
+          </figure>
         </div>
       </section>
 
@@ -134,16 +152,18 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           </div>
           <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-7 md:mt-20">
             <img src={img.lacChavonnes} alt={t.imageAlts.lake} loading="lazy" width={1600} height={1072} className="aspect-[3/2] w-full object-cover" />
-            <AtmosphereCaption>{t.atmosphereCaption}</AtmosphereCaption>
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.lake} />
+          </figure>
+          <figure data-clip className="col-span-9 mt-8 overflow-hidden md:col-span-4 md:col-start-2 md:-mt-16">
+            <img src={img.lacChavonnesReflection} alt={t.imageAlts.lake} loading="lazy" width={2272} height={1514} className="aspect-[3/2] w-full object-cover" />
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.lakeReflection} />
           </figure>
         </div>
       </section>
 
       <section className="relative min-h-[80svh] overflow-hidden bg-swiss-red text-ivory">
-        <img src={img.villarsGolf} alt={t.imageAlts.golf} loading="lazy" width={1600} height={1072} className="absolute inset-0 h-full w-full object-cover opacity-75" />
-        <div className="absolute inset-0 bg-swiss-red/35" />
         <div className="relative flex min-h-[80svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
-          <p className="eyebrow text-ivory/80">{t.golfLabel}</p>
+          <p className="eyebrow text-ivory/80">{t.accessLevel} · {t.golfLabel}</p>
           <h2 className="max-w-5xl font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
             <span data-lines>{t.golfTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
@@ -168,17 +188,14 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             ))}
           </div>
         </div>
-        <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-6 md:col-start-7 md:mt-20">
-          <img src={img.villarsWellness} alt={t.imageAlts.wellness} loading="lazy" width={1600} height={1072} className="aspect-[4/5] w-full object-cover" />
-          <AtmosphereCaption>{t.atmosphereCaption}</AtmosphereCaption>
-        </figure>
+        <p className="eyebrow col-span-12 mt-16 border-t pt-6 text-muted-foreground md:col-span-5 md:col-start-8">{t.locationLevel}</p>
       </section>
 
       <section className="relative min-h-[85svh] overflow-hidden bg-swiss-red text-ivory">
-        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={1600} height={1072} className="absolute inset-0 h-full w-full object-cover opacity-75" />
+        <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="absolute inset-0 h-full w-full object-cover opacity-75" />
         <div className="absolute inset-0 bg-swiss-red/30" />
         <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
-          <p className="eyebrow text-ivory/80">{t.beyondLabel}</p>
+          <p className="eyebrow text-ivory/80">{t.regionalLevel}</p>
           <div>
             <h2 className="font-serif text-7xl font-light md:text-9xl">{t.glacierTitle}</h2>
             <p className="mt-6 max-w-3xl font-serif text-4xl font-light leading-none md:text-6xl">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
@@ -187,6 +204,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/70">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
             <p className="col-span-12 max-w-sm self-end font-serif text-2xl italic md:col-span-4 md:col-start-8 md:text-3xl">{t.glacierText}</p>
           </div>
+          <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
         </div>
       </section>
 
@@ -207,10 +225,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
       <section data-seasons className="bg-swiss-red text-ivory md:grid md:grid-cols-12">
         <div className="relative hidden min-h-svh overflow-hidden md:sticky md:top-0 md:col-span-7 md:block md:h-svh">
-          {seasonImages.map((src, index) => (
-            <img key={src} src={src} alt={[t.imageAlts.seasons, t.imageAlts.spring, t.imageAlts.lake, t.imageAlts.autumn][index]} loading="lazy" width={1920} height={1088} className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${activeSeason === index ? "opacity-80" : "opacity-0"}`} />
-          ))}
-          <div className="absolute inset-0 bg-swiss-red/25" />
+          <div className="absolute inset-0 flex items-center justify-center font-serif text-[40vw] font-light text-ivory/5" aria-hidden="true">{String(activeSeason + 1).padStart(2, "0")}</div>
           <h2 className="absolute bottom-16 left-12 font-serif text-7xl font-light uppercase leading-[0.88] lg:text-9xl">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
         </div>
         <div className="md:col-span-5">
@@ -220,10 +235,6 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           </div>
           {t.seasonStates.map(([number, name, activities, copy], index) => (
             <article key={name} data-season-step className="flex min-h-0 flex-col justify-center border-t border-ivory/20 px-5 py-16 md:min-h-[70svh] md:px-12">
-              <figure className="mb-8 md:hidden">
-                <img src={seasonImages[index]} alt={[t.imageAlts.seasons, t.imageAlts.spring, t.imageAlts.lake, t.imageAlts.autumn][index]} loading="lazy" width={1600} height={1072} className="aspect-[4/3] w-full object-cover" />
-                <AtmosphereCaption>{t.atmosphereCaption}</AtmosphereCaption>
-              </figure>
               <Button variant="ghost" onClick={() => onSeasonChange(index)} className="h-auto justify-start p-0 text-left text-ivory hover:bg-transparent hover:text-ivory">
                 <span className="eyebrow mr-6 text-ivory/50">{number}</span><span className="font-serif text-5xl font-light md:text-6xl">{name}</span>
               </Button>
@@ -240,7 +251,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <span data-lines>{t.nearbyTitle.map((line) => <span key={line} className="line-mask"><span>{line}</span></span>)}</span>
           </h2>
           <div className="col-span-12 mt-12 border-t md:col-span-5 md:col-start-8 md:mt-0">
-            {t.nearby.map(([place, items]) => <div data-fade key={place} className="border-b py-7"><h3 className="font-serif text-3xl">{place}</h3><p className="eyebrow mt-3 leading-relaxed text-muted-foreground">{items}</p></div>)}
+            {t.nearby.map(([place, items], index) => <div data-fade key={place} className="border-b py-7"><p className="eyebrow mb-4 text-wood">{index < 2 ? t.regionalLevel : t.beyondLevel}</p><h3 className="font-serif text-3xl">{place}</h3><p className="eyebrow mt-3 leading-relaxed text-muted-foreground">{items}</p>{index !== 1 && <figure className="mt-8"><img src={index === 0 ? img.chateauAigle : img.chillonLeman} alt={index === 0 ? t.imageAlts.aigle : t.imageAlts.chillon} loading="lazy" width={2400} height={index === 0 ? 1600 : 1800} className="aspect-[3/2] w-full object-cover" /><PhotoCredit label={t.photoCredit} credit={index === 0 ? photoCredits.aigle : photoCredits.chillon} /></figure>}</div>)}
           </div>
         </div>
       </section>
