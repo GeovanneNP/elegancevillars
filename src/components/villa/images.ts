@@ -8,6 +8,14 @@ import balcony from "@/assets/balcony-enhanced.webp";
 import exterior from "@/assets/exterior-enhanced.webp";
 import alps from "@/assets/alps.jpg";
 import seasons from "@/assets/seasons.jpg";
+import villarsSki from "@/assets/villars-ski.webp";
+import rocOrsay from "@/assets/roc-orsay.webp";
+import lacChavonnes from "@/assets/lac-chavonnes.webp";
+import villarsGolf from "@/assets/villars-golf.webp";
+import villarsWellness from "@/assets/villars-wellness.webp";
+import glacier3000 from "@/assets/glacier-3000.webp";
+import villarsSpring from "@/assets/villars-spring.webp";
+import villarsAutumn from "@/assets/villars-autumn.webp";
 
 export const img = {
   living,
@@ -20,6 +28,14 @@ export const img = {
   exterior,
   alps,
   seasons,
+  villarsSki,
+  rocOrsay,
+  lacChavonnes,
+  villarsGolf,
+  villarsWellness,
+  glacier3000,
+  villarsSpring,
+  villarsAutumn,
 };
 
 export const galleryImages = [
