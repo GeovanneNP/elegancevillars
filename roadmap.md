@@ -32,3 +32,10 @@
 - [x] Evolve the existing Four Seasons section without duplicating it.
 - [x] Replace the simple location sketch with an accessible interactive editorial map.
 - [x] Complete French/English copy and verify desktop, 430 px, 390 px and reduced-motion views.
+
+## Verified location photography (Oct 5)
+- [x] Replace synthetic lifestyle imagery with real, location-specific, commercially reusable photography.
+- [x] Add visible author/license credits and a source register for every optimized derivative.
+- [x] Remove unsupported photographs for Golf Club Villars, Les Bains, Villars Palace and Mines de Sel de Bex.
+- [x] Organize the narrative into Villars, accessible from Villars, regional and Beyond Villars levels.
+- [ ] Verify the final French/English experience at desktop, 430 px and 390 px.
