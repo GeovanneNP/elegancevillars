@@ -30,6 +30,8 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
   return (
     <div data-lifestyle>
+      <LocationExperience t={t} />
+
       <section id="location" className="bg-ivory px-5 py-32 md:px-12 md:py-48">
         <div className="grid grid-cols-12 gap-6">
           <p data-fade className="eyebrow col-span-12 text-wood md:col-span-3">{t.locationLabel}</p>
@@ -46,8 +48,6 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         </div>
 
       </section>
-
-      <LocationExperience t={t} />
 
       <section data-bretaye className="bg-swiss-red px-5 py-28 text-ivory md:px-12 md:py-40">
         <p className="eyebrow mb-16 text-ivory/65">{t.accessLevel}</p>
