@@ -52,9 +52,9 @@ export function Gallery({ t }: { t: Dict }) {
 
   return (
     <section id="gallery" className="bg-ivory px-5 py-32 md:px-12 md:py-48" onMouseMove={move}>
-      <div className="mb-20 flex items-end justify-between border-b pb-6">
-        <h2 className="font-serif text-6xl font-light md:text-9xl">{t.galleryTitle}</h2>
-         <span className="eyebrow text-muted-foreground">0{n} — {t.galleryCount}</span>
+      <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-b pb-6 md:mb-20">
+        <h2 className="min-w-0 break-words font-serif text-5xl font-light sm:text-6xl md:text-9xl">{t.galleryTitle}</h2>
+         <span className="eyebrow shrink-0 text-right text-[0.58rem] text-muted-foreground sm:text-[0.6875rem]">0{n} — {t.galleryCount}</span>
       </div>
       <div className="grid grid-cols-12 gap-4 md:gap-8">
         {galleryImages.map((g, i) => (

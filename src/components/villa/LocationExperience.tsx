@@ -48,11 +48,11 @@ export function LocationExperience({ t }: Props) {
               <LocationMap names={loc.pois} category={category} activeId={activeId} onSelect={setActiveId} label={loc.mapLabel} routeLabel={loc.routeNote} />
             </Suspense>
           </ClientOnly>
-          <nav aria-label={loc.label} className="absolute left-4 top-4 flex items-center gap-3 md:left-8 md:top-8">
+          <nav aria-label={loc.label} className="absolute inset-x-3 top-3 grid grid-cols-3 items-start gap-2 md:inset-x-auto md:left-8 md:top-8 md:flex md:items-center md:gap-3">
             {categories.map((c, i) => (
-              <span key={c} className="flex items-center gap-3">
-                {i > 0 && <span className="h-px w-4 bg-swiss-red/25" aria-hidden="true" />}
-                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`eyebrow py-3 transition-colors ${category === c ? "text-swiss-red" : "text-swiss-red/45 hover:text-swiss-red/80"}`}>
+              <span key={c} className="flex min-w-0 items-center gap-3">
+                {i > 0 && <span className="hidden h-px w-4 bg-swiss-red/25 md:block" aria-hidden="true" />}
+                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`min-w-0 py-3 text-center font-sans text-[0.56rem] uppercase tracking-[0.16em] transition-colors md:text-left md:text-[0.6875rem] md:tracking-[0.32em] ${category === c ? "text-swiss-red" : "text-swiss-red/45 hover:text-swiss-red/80"}`}>
                   <span className={`border-b pb-1 ${category === c ? "border-swiss-red" : "border-transparent"}`}>{loc.filters[i]}</span>
                 </button>
               </span>
@@ -74,7 +74,7 @@ export function LocationExperience({ t }: Props) {
             <ul className="mt-10 space-y-1">
               {loc.palace.lines.map((l) => <li key={l} className="font-serif text-2xl text-charcoal/85">{l}</li>)}
             </ul>
-            <div className="mt-10 flex items-end justify-between gap-6 border-t pt-5">
+            <div className="mt-10 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-t pt-5">
               <p className="eyebrow text-charcoal">{loc.palace.distance}</p>
               <p className="eyebrow text-right text-muted-foreground normal-case tracking-[0.14em]">{loc.palace.address}</p>
             </div>
@@ -99,16 +99,16 @@ export function LocationExperience({ t }: Props) {
               {loc.edu.schools.map((s) => {
                 const active = activeId === s.id;
                 return (
-                  <li key={s.id} data-category="education" data-poi={s.id} className="w-[82%] shrink-0 snap-start border-t pr-6 md:w-auto md:pr-0">
+                  <li key={s.id} data-category="education" data-poi={s.id} className="w-[88%] shrink-0 snap-start border-t pr-5 md:w-auto md:pr-0">
                     <button
                       type="button"
                       onMouseEnter={() => { setCategory("education"); setActiveId(s.id as PoiId); }}
                       onFocus={() => { setCategory("education"); setActiveId(s.id as PoiId); }}
                       onClick={() => { setCategory("education"); setActiveId(s.id as PoiId); }}
                       aria-pressed={active}
-                      className={`grid w-full grid-cols-[1fr_auto] gap-x-6 py-7 text-left transition-opacity duration-500 ${active ? "opacity-100" : "md:opacity-55 hover:opacity-100"}`}
+                      className={`grid w-full grid-cols-[minmax(0,1fr)_auto] gap-x-3 py-7 text-left transition-opacity duration-500 sm:gap-x-6 ${active ? "opacity-100" : "md:opacity-55 hover:opacity-100"}`}
                     >
-                      <span className="font-serif text-2xl leading-tight md:text-3xl">
+                      <span className="min-w-0 break-words font-serif text-xl leading-tight sm:text-2xl md:text-3xl">
                         <span className={`mr-3 inline-block h-2 w-2 rounded-full align-middle transition-colors ${active ? "bg-swiss-red" : "bg-charcoal/25"}`} />
                         {s.name}
                       </span>

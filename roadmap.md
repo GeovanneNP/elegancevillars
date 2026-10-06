@@ -81,3 +81,8 @@
 - [x] Add the supplied ski and Villars Palace photography with trilingual factual narratives.
 - [x] Move Four Seasons directly after Glacier 3000 and recolour key light-section titles in Swiss red.
 - [x] Verify the new sequence on desktop and mobile without overflow or browser errors.
+
+## Mobile correction and section removal (Oct 6)
+- [x] Remove the “Tout est à portée de Villars” section and its panorama completely.
+- [x] Correct mobile typography, wrapping, map filters, school carousel, details, gallery header, contact and dossier dialog.
+- [x] Verify the complete page at 390 px, 430 px and reduced motion.
