@@ -133,3 +133,4 @@ html.lenis, html.lenis body { height: auto; }
 .loc-marker[data-state="active"] { z-index: 5; }
 .loc-marker[data-state="active"] .loc-dot { background: var(--swiss-red); transform: scale(1.5); box-shadow: 0 0 0 1px var(--ivory), 0 0 0 10px oklch(0.39 0.15 24 / 30%); }
 .loc-marker[data-state="active"] .loc-sub { display: block; }
+.loc-marker[data-id="villars"] .loc-label { left: auto; right: 34px; align-items: flex-end; }
