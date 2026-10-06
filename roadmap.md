@@ -86,3 +86,10 @@
 - [x] Remove the “Tout est à portée de Villars” section and its panorama completely.
 - [x] Correct mobile typography, wrapping, map filters, school carousel, details, gallery header, contact and dossier dialog.
 - [x] Verify the complete page at 390 px, 430 px and reduced motion.
+
+## Full responsive and published-map audit (Oct 6)
+- [x] Compare the preview and published domain across mobile, laptop and desktop widths.
+- [x] Remove viewport-dependent map startup and add timeout, error handling, resize recovery and a visible fallback.
+- [x] Rebalance mobile section rhythm, headings, header, gallery viewer, school carousel and fixed-action clearance.
+- [x] Debounce animation measurements during viewport and orientation changes.
+- [ ] Re-verify all key sections and effects at mobile, laptop, desktop and reduced motion.

@@ -42,7 +42,7 @@ export function LocationExperience({ t }: Props) {
     <section id="vivre-villars" data-location-experience className="bg-ivory">
       <div className="md:grid md:grid-cols-12">
         {/* Map: sticky on desktop, simple block on mobile */}
-        <div className="relative h-[72svh] md:sticky md:top-0 md:order-2 md:col-span-7 md:h-svh">
+        <div className="relative h-[68svh] min-h-[520px] md:sticky md:top-0 md:order-2 md:col-span-7 md:h-svh">
           <ClientOnly fallback={fallback}>
             <Suspense fallback={fallback}>
               <LocationMap names={loc.pois} category={category} activeId={activeId} onSelect={setActiveId} label={loc.mapLabel} routeLabel={loc.routeNote} />
@@ -62,7 +62,7 @@ export function LocationExperience({ t }: Props) {
 
         <div className="px-5 md:order-1 md:col-span-5 md:px-12">
           {/* 01 Lifestyle — Villars Palace */}
-          <article ref={(el) => { blocks.current[0] = el; }} data-category="lifestyle" data-poi="palace" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
+          <article ref={(el) => { blocks.current[0] = el; }} data-category="lifestyle" data-poi="palace" className="flex flex-col justify-center border-b py-20 md:min-h-svh md:py-24">
             <p className="eyebrow text-wood">{loc.palace.eyebrow}</p>
             <p className="eyebrow mt-10 text-muted-foreground">{loc.tiers[0]}</p>
             <h3 className="mt-4 font-serif text-5xl font-light uppercase leading-[0.9] text-swiss-red md:text-7xl">{loc.palace.name}</h3>
@@ -82,7 +82,7 @@ export function LocationExperience({ t }: Props) {
           </article>
 
           {/* 02 Montagne */}
-          <article ref={(el) => { blocks.current[1] = el; }} data-category="montagne" data-poi="roc" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
+          <article ref={(el) => { blocks.current[1] = el; }} data-category="montagne" data-poi="roc" className="flex flex-col justify-center border-b py-20 md:min-h-svh md:py-24">
             <p className="eyebrow text-wood">{loc.mountain.eyebrow}</p>
             <p className="mt-10 font-serif text-[5rem] font-light leading-none tabular-nums md:text-[9rem]">{loc.mountain.time}</p>
             <h3 className="mt-4 font-serif text-3xl md:text-4xl">{loc.mountain.title}</h3>
@@ -91,15 +91,15 @@ export function LocationExperience({ t }: Props) {
           </article>
 
           {/* 03 Éducation */}
-          <article ref={(el) => { blocks.current[2] = el; }} data-category="education" className="flex flex-col justify-center py-24 md:min-h-svh">
+          <article ref={(el) => { blocks.current[2] = el; }} data-category="education" className="flex flex-col justify-center py-20 md:min-h-svh md:py-24">
             <p className="eyebrow text-wood">{loc.edu.eyebrow}</p>
             <h3 data-category="education" data-poi="beausoleil" className="mt-8 font-serif text-4xl font-light uppercase leading-[0.9] md:text-6xl">{loc.edu.title[0]}<br />{loc.edu.title[1]}</h3>
             <p className="mt-6 max-w-sm text-lg leading-relaxed text-charcoal/80">{loc.edu.text}</p>
-            <ol className="-mx-5 mt-12 flex snap-x snap-mandatory gap-0 overflow-x-auto px-5 md:mx-0 md:block md:overflow-visible md:px-0">
+            <ol className="-mx-5 mt-12 flex snap-x snap-mandatory gap-0 overflow-x-auto px-5 [scroll-padding-left:1.25rem] md:mx-0 md:block md:overflow-visible md:px-0">
               {loc.edu.schools.map((s) => {
                 const active = activeId === s.id;
                 return (
-                  <li key={s.id} data-category="education" data-poi={s.id} className="w-[88%] shrink-0 snap-start border-t pr-5 md:w-auto md:pr-0">
+                  <li key={s.id} data-category="education" data-poi={s.id} className="w-[88%] shrink-0 snap-start border-t pr-5 [scroll-snap-stop:always] md:w-auto md:pr-0">
                     <button
                       type="button"
                       onMouseEnter={() => { setCategory("education"); setActiveId(s.id as PoiId); }}
@@ -132,7 +132,7 @@ export function LocationExperience({ t }: Props) {
         </div>
       </div>
 
-      <div className="px-5 py-32 md:px-12 md:py-48">
+      <div className="px-5 py-24 md:px-12 md:py-48">
         <div className="grid grid-cols-12 gap-6">
           <p className="eyebrow col-span-12 text-wood md:col-span-3">{loc.label}</p>
           <div className="col-span-12 md:col-span-8 md:col-start-5">

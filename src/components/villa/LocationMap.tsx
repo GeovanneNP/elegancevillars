@@ -65,21 +65,16 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
   const [ready, setReady] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    const el = container.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([entry]) => entry?.isIntersecting && setVisible(true), { rootMargin: "600px" });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!visible || !container.current) return;
+    if (!container.current) return;
     let cancelled = false;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 12000);
     (async () => {
-      const [maplibregl, res] = await Promise.all([import("maplibre-gl"), fetch(STYLE_URL)]);
+      const [maplibregl, res] = await Promise.all([import("maplibre-gl"), fetch(STYLE_URL, { signal: controller.signal, cache: "force-cache" })]);
+      if (!res.ok) throw new Error(`Map style request failed (${res.status})`);
       maplibregl.setWorkerUrl(mapWorkerUrl);
       const style = restyleMap((await res.json()) as StyleSpecification);
       if (cancelled || !container.current) return;
@@ -103,6 +98,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
         const roc = pois.find((p) => p.id === "roc")!.lngLat;
         map.addSource("route", { type: "geojson", data: { type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: [villars, roc] } } });
         map.addLayer({ id: "route", type: "line", source: "route", paint: { "line-color": WINE, "line-width": 2, "line-dasharray": [2, 1.5] } });
+        map.resize();
         setReady(true);
       });
       for (const poi of pois) {
@@ -117,15 +113,25 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
         markers.current.set(poi.id, { marker, el });
       }
       setReady((r) => r);
-    })().catch((error) => console.error("Map failed to load", error));
+    })().catch((error) => {
+      if (!cancelled) {
+        setFailed(true);
+        console.error("Map failed to load", error);
+      }
+    });
+    const resize = () => mapRef.current?.resize();
+    window.addEventListener("resize", resize);
     return () => {
       cancelled = true;
+      window.clearTimeout(timeout);
+      controller.abort();
+      window.removeEventListener("resize", resize);
       markers.current.forEach(({ marker }) => marker.remove());
       markers.current.clear();
       mapRef.current?.remove();
       mapRef.current = null;
     };
-  }, [visible]);
+  }, []);
 
   // Labels and highlighted state
   useEffect(() => {
@@ -187,8 +193,16 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
   }, [activeId, ready]);
 
   return (
-    <div className="relative h-full w-full" style={{ background: BG }}>
+    <div className="relative h-full w-full bg-paper">
       <div ref={container} role="region" aria-label={label} className="loc-map h-full w-full" />
+      {!ready && !failed && <div className="pointer-events-none absolute inset-0 bg-paper" aria-hidden="true" />}
+      {failed && (
+        <div className="absolute inset-0 grid place-items-center bg-ivory px-8 text-center">
+          <a href="https://www.openstreetmap.org/?mlat=46.2989&mlon=7.0556#map=15/46.2989/7.0556" target="_blank" rel="noreferrer" className="font-serif text-2xl text-swiss-red underline decoration-swiss-red/30 underline-offset-8">
+            Villars-sur-Ollon
+          </a>
+        </div>
+      )}
       <p className="eyebrow pointer-events-none absolute bottom-3 left-4 max-w-[55%] text-[0.55rem] normal-case tracking-[0.12em] text-swiss-red/70">
         <span className="mr-2 inline-block h-px w-5 align-middle" style={{ background: WINE, borderTop: `1px dashed ${IVORY}00` }} />
         {routeLabel}
