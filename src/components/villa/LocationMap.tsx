@@ -160,7 +160,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
 
   return (
     <div className="relative h-full w-full" style={{ background: BG }}>
-      <div ref={container} role="region" aria-label={label} className="loc-map absolute inset-0" />
+      <div ref={container} role="region" aria-label={label} className="loc-map h-full w-full" />
       <p className="eyebrow pointer-events-none absolute bottom-3 left-4 max-w-[70%] text-[0.55rem] normal-case tracking-[0.12em] text-ivory/55">
         <span className="mr-2 inline-block h-px w-5 align-middle" style={{ background: WINE, borderTop: `1px dashed ${IVORY}00` }} />
         {routeLabel}
