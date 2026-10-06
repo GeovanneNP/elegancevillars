@@ -85,4 +85,4 @@
 ## Mobile correction and section removal (Oct 6)
 - [x] Remove the “Tout est à portée de Villars” section and its panorama completely.
 - [x] Correct mobile typography, wrapping, map filters, school carousel, details, gallery header, contact and dossier dialog.
-- [ ] Verify the complete page at 390 px, 430 px and reduced motion.
+- [x] Verify the complete page at 390 px, 430 px and reduced motion.
