@@ -69,4 +69,4 @@
 - [x] Restyle the real map with an ivory ground and Swiss-red cartography, labels, markers and route.
 - [x] Crop the visible embedded signature from the train photo while preserving its legal credit.
 - [x] Recolour the amenities marquee text and separators in Swiss red.
-- [ ] Verify the reordered experience on desktop, 430 px and 390 px.
+- [x] Verify the reordered experience on desktop, 430 px and 390 px.
