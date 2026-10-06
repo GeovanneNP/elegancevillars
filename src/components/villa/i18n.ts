@@ -432,7 +432,7 @@ const de: Dict = {
   lakeWalk: "Rund 30 Minuten zu Fuss ab Bretaye.",
   golfTitle: ["Golfen über", "den Wolken."],
   golfLabel: "Golf Club Villars",
-  golfStats: ["1’660 M ÜBER MEER", "GEGRÜNDET 1922"],
+  golfStats: ["1’660 m ü. M.", "GEGRÜNDET 1922"],
   golfText: "Ein alpiner Platz, umgeben von Gipfeln.",
   wellnessTitle: ["Nach den Bergen,", "zur Ruhe kommen."],
   wellnessItems: [["Les Bains de Villars", "Hammams · Saunas · Beheiztes Aussenbad · Alpenblick"], ["Villars Palace", "Wellness · Gastronomie · Luxushotellerie"]],
