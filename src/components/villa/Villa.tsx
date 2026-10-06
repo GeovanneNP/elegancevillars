@@ -426,7 +426,7 @@ export function Villa() {
 
       {/* AMENITIES */}
       <section
-        className="overflow-hidden border-y bg-stone py-10"
+        className="overflow-hidden border-y bg-stone py-10 text-swiss-red"
         onMouseEnter={() => marquee.current && gsap.to(marquee.current, { timeScale: 0.25, duration: 0.8 })}
         onMouseLeave={() => marquee.current && gsap.to(marquee.current, { timeScale: 1, duration: 0.8 })}
       >
@@ -436,7 +436,7 @@ export function Villa() {
               {t.amenities.map((a) => (
                 <span key={a} className="flex items-center font-serif text-5xl font-light uppercase md:text-7xl">
                   <span className="px-8">{a}</span>
-                  <span className="h-2 w-2 rounded-full bg-wood" />
+                  <span className="h-2 w-2 rounded-full bg-swiss-red" />
                 </span>
               ))}
             </div>

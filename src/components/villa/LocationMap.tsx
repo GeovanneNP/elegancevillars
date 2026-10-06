@@ -7,7 +7,7 @@ import { pois, type Category, type PoiId } from "./locationPlaces";
 // Map paint cannot read CSS variables: these mirror the --swiss-red / --ivory tokens.
 const WINE = "#830b18";
 const IVORY = "#f4f1ea";
-const BG = "#141313";
+const BG = "#f4f1ea";
 const STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
   routeLabel: string;
 };
 
-function darken(style: StyleSpecification): StyleSpecification {
+function restyleMap(style: StyleSpecification): StyleSpecification {
   const layers: LayerSpecification[] = [];
   for (const layer of style.layers) {
     const id = layer.id.toLowerCase();
@@ -30,19 +30,19 @@ function darken(style: StyleSpecification): StyleSpecification {
       if (/park|wood|grass|landcover|forest|wetland|sand|ice|glacier/.test(id)) continue;
       const water = id.includes("water");
       const building = id.includes("building");
-      layers.push({ ...layer, paint: { "fill-color": water ? "#242322" : building ? "#1f1e1d" : "#181717", "fill-opacity": water ? 1 : 0.8, "fill-antialias": true } } as LayerSpecification);
+      layers.push({ ...layer, paint: { "fill-color": water ? "#e8e1d5" : building ? "#ead9d8" : IVORY, "fill-opacity": water ? 0.9 : building ? 0.7 : 1, "fill-antialias": true } } as LayerSpecification);
     } else if (layer.type === "line") {
       const water = id.includes("water") || id.includes("river");
       const boundary = id.includes("boundary");
       const major = /motorway|trunk|primary|rail/.test(id);
-      const paint: Record<string, unknown> = { "line-color": water ? "#2c2b2a" : boundary ? "rgba(244,241,234,0.12)" : major ? "rgba(244,241,234,0.26)" : "rgba(244,241,234,0.12)" };
+      const paint: Record<string, unknown> = { "line-color": water ? "rgba(131,11,24,0.18)" : boundary ? "rgba(131,11,24,0.22)" : major ? "rgba(131,11,24,0.46)" : "rgba(131,11,24,0.2)" };
       const width = (layer.paint as Record<string, unknown> | undefined)?.["line-width"];
       if (width !== undefined) paint["line-width"] = width;
       if (boundary) paint["line-dasharray"] = [2, 2];
       layers.push({ ...layer, paint } as LayerSpecification);
     } else if (layer.type === "symbol") {
       if (/poi|shield|housenumber|aerodrome|transit|airport/.test(id)) continue;
-      const paint = { "text-color": "rgba(244,241,234,0.42)", "text-halo-color": BG, "text-halo-width": 1.2 };
+      const paint = { "text-color": "rgba(131,11,24,0.68)", "text-halo-color": BG, "text-halo-width": 1.4 };
       layers.push({ ...layer, paint, layout: { ...(layer.layout ?? {}), "icon-image": "" } } as LayerSpecification);
     }
   }
@@ -81,7 +81,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
     (async () => {
       const [maplibregl, res] = await Promise.all([import("maplibre-gl"), fetch(STYLE_URL)]);
       maplibregl.setWorkerUrl(mapWorkerUrl);
-      const style = darken((await res.json()) as StyleSpecification);
+      const style = restyleMap((await res.json()) as StyleSpecification);
       if (cancelled || !container.current) return;
       const isTouch = window.matchMedia("(pointer: coarse)").matches;
       const map = new maplibregl.Map({
@@ -189,7 +189,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
   return (
     <div className="relative h-full w-full" style={{ background: BG }}>
       <div ref={container} role="region" aria-label={label} className="loc-map h-full w-full" />
-      <p className="eyebrow pointer-events-none absolute bottom-3 left-4 max-w-[55%] text-[0.55rem] normal-case tracking-[0.12em] text-ivory/55">
+      <p className="eyebrow pointer-events-none absolute bottom-3 left-4 max-w-[55%] text-[0.55rem] normal-case tracking-[0.12em] text-swiss-red/70">
         <span className="mr-2 inline-block h-px w-5 align-middle" style={{ background: WINE, borderTop: `1px dashed ${IVORY}00` }} />
         {routeLabel}
       </p>

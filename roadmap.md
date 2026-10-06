@@ -63,3 +63,10 @@
 - [x] Add Villars Palace highlight, Montagne block and international education composition synced with the map.
 - [x] Remove the duplicated distance block; fix comma spacing and metre units.
 - [ ] Publish so the new section reaches the live URL.
+
+## Location sequence and light map (Oct 6)
+- [ ] Move the map directly after the Villars panorama, followed by Bretaye, Golf and Glacier 3000.
+- [x] Restyle the real map with an ivory ground and Swiss-red cartography, labels, markers and route.
+- [ ] Crop the visible embedded signature from the train photo while preserving its legal credit.
+- [x] Recolour the amenities marquee text and separators in Swiss red.
+- [ ] Verify the reordered experience on desktop, 430 px and 390 px.
