@@ -36,7 +36,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         <div className="grid grid-cols-12 gap-6">
           <p data-fade className="eyebrow col-span-12 text-wood md:col-span-3">{t.locationLabel}</p>
           <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <h2 className="font-serif text-6xl font-light leading-[0.9] text-swiss-red md:text-8xl lg:text-9xl">
+            <h2 className="font-serif text-5xl font-light leading-[0.9] text-swiss-red md:text-8xl lg:text-9xl">
               <span data-lines>{t.locationTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
             </h2>
             <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.locationText}</p>
@@ -76,7 +76,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="relative min-h-[80svh] overflow-hidden bg-swiss-red text-ivory">
         <div className="relative flex min-h-[80svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
           <p className="eyebrow text-ivory/80">{t.accessLevel} · {t.golfLabel}</p>
-          <h2 className="max-w-5xl font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
+          <h2 className="max-w-5xl font-serif text-5xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
             <span data-lines>{t.golfTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
           </h2>
           <div className="flex flex-col gap-4 border-t border-ivory/30 pt-6 md:flex-row md:items-end md:justify-between">
@@ -92,8 +92,8 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
           <p className="eyebrow text-ivory/80">{t.regionalLevel}</p>
           <div>
-            <h2 className="font-serif text-7xl font-light md:text-9xl">{t.glacierTitle}</h2>
-            <p className="mt-6 max-w-3xl font-serif text-4xl font-light leading-[1.02] md:text-6xl">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
+            <h2 className="font-serif text-6xl font-light md:text-9xl">{t.glacierTitle}</h2>
+            <p className="mt-6 max-w-3xl font-serif text-3xl font-light leading-[1.02] md:text-6xl">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
           </div>
           <div className="grid grid-cols-12 gap-6 border-t border-ivory/30 pt-6">
             <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/70">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
@@ -122,13 +122,13 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           <div className="absolute inset-0 flex items-center justify-center font-serif text-[40vw] font-light text-ivory/10" aria-hidden="true">{String(activeSeason + 1).padStart(2, "0")}</div>
           <div className="absolute inset-x-12 bottom-14">
             <p className="eyebrow mb-5 text-ivory/70">{t.seasonStates[activeSeason]?.[1]}</p>
-            <h2 className="font-serif text-7xl font-light uppercase leading-[0.88] lg:text-9xl">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
+            <h2 className="font-serif text-5xl font-light uppercase leading-[0.88] lg:text-9xl">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
             <p className="mt-7 max-w-md font-serif text-2xl italic text-ivory/85">{t.seasonStates[activeSeason]?.[3]}</p>
           </div>
         </div>
         <div className="md:col-span-5">
           <div className="px-5 py-24 md:hidden">
-            <h2 className="font-serif text-6xl font-light uppercase leading-[0.88]">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
+            <h2 className="font-serif text-5xl font-light uppercase leading-[0.88]">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
             <p className="mt-8 text-ivory/80">{t.seasonsText}</p>
           </div>
           {t.seasonStates.map(([number, name, activities, copy], index) => (
@@ -170,7 +170,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
       <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
         <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.mountainLabel}</p>
-        <h2 className="mt-8 max-w-5xl font-serif text-6xl font-light leading-[0.9] text-swiss-red md:text-8xl lg:text-9xl">
+        <h2 className="mt-8 max-w-5xl font-serif text-5xl font-light leading-[0.9] text-swiss-red md:text-8xl lg:text-9xl">
           <span data-lines>{t.mountainTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
         </h2>
         <div className="mt-24 grid grid-cols-12 gap-6 md:mt-36">
@@ -182,7 +182,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <div className="flex flex-wrap gap-x-4 gap-y-1 border-b pb-6">
               {t.skiPlaces.map((place) => <span key={place} className="eyebrow text-muted-foreground">{place}</span>)}
             </div>
-            <p className="mt-8 font-serif text-8xl font-light tabular-nums md:text-9xl">{t.skiStat}</p>
+            <p className="mt-8 font-serif text-6xl font-light tabular-nums md:text-9xl">{t.skiStat}</p>
             <p className="eyebrow mt-2 text-wood">{t.skiUnit}</p>
             <p data-fade className="mt-8 max-w-xs text-lg leading-relaxed text-charcoal/80">{t.skiText}</p>
           </div>
@@ -192,7 +192,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-5">
           <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.rocLabel}</p>
-           <h2 className="mt-8 font-serif text-6xl font-light leading-[0.9] text-swiss-red md:text-7xl lg:text-8xl">
+           <h2 className="mt-8 font-serif text-5xl font-light leading-[0.9] text-swiss-red md:text-7xl lg:text-8xl">
             <span data-lines>{t.rocTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
           </h2>
           <p data-fade className="mt-10 max-w-sm text-lg leading-relaxed text-charcoal/80">{t.rocText}</p>
@@ -206,8 +206,8 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="bg-ivory px-5 py-32 md:px-12 md:py-52">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-5">
-            <h2 className="font-serif text-6xl font-light leading-[1.02] text-swiss-red md:text-8xl">{t.lakeTitle}</h2>
-            <p className="mt-12 font-serif text-7xl font-light tabular-nums md:text-9xl">{t.lakeStat}</p>
+            <h2 className="font-serif text-5xl font-light leading-[1.02] text-swiss-red md:text-8xl">{t.lakeTitle}</h2>
+            <p className="mt-12 font-serif text-6xl font-light tabular-nums md:text-9xl">{t.lakeStat}</p>
             <p className="mt-5 font-serif text-3xl italic md:text-4xl">{t.lakeText}</p>
             <p data-fade className="eyebrow mt-10 max-w-xs leading-relaxed text-muted-foreground">{t.lakeWalk}</p>
           </div>
@@ -224,7 +224,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
       <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
         <div className="grid grid-cols-12 gap-6">
-          <h2 className="col-span-12 font-serif text-6xl font-light leading-[0.9] md:col-span-6 md:text-8xl">
+          <h2 className="col-span-12 font-serif text-5xl font-light leading-[0.9] md:col-span-6 md:text-8xl">
             <span data-lines>{t.nearbyTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
           </h2>
           <div className="col-span-12 mt-12 border-t md:col-span-5 md:col-start-8 md:mt-0">

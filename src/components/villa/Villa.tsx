@@ -320,7 +320,7 @@ export function Villa() {
           </div>
           <div data-living-text className="absolute bottom-10 left-5 text-ivory md:bottom-16 md:left-12">
             <p className="eyebrow mb-4 text-ivory/80">01</p>
-            <p className="mb-6 font-serif text-4xl italic md:text-6xl">{t.livingTitle}</p>
+            <p className="mb-6 font-serif text-3xl italic md:text-6xl">{t.livingTitle}</p>
             {t.livingWords.map((w) => (
               <p key={w} className="font-serif text-2xl font-light md:text-3xl">{w}</p>
             ))}
@@ -330,13 +330,13 @@ export function Villa() {
 
       {/* FACTS */}
       <section className="bg-swiss-red px-5 py-32 text-ivory md:px-12 md:py-48">
-        <h2 className="max-w-5xl font-serif text-5xl font-light leading-[1.02] md:text-7xl">
+        <h2 className="max-w-5xl font-serif text-4xl font-light leading-[1.02] md:text-7xl">
           <Lines lines={t.factsTitle} />
         </h2>
          <div className="mt-16 grid grid-cols-2 border-t border-ivory/15 md:mt-24 md:grid-cols-4">
           {t.facts.map(([n, l], i) => (
             <div key={l} className={`border-b border-ivory/15 py-10 md:border-b-0 md:py-14 ${i % 2 ? "pl-6" : "pr-6"} md:px-8 ${i > 0 ? "md:border-l" : ""} ${i % 2 ? "border-l" : ""} border-ivory/15`}>
-               <div data-count={n} className="font-serif text-6xl font-light tabular-nums lining-nums md:text-8xl">{n}</div>
+               <div data-count={n} className="font-serif text-5xl font-light tabular-nums lining-nums md:text-8xl">{n}</div>
               <div className="eyebrow mt-4 text-ivory/55">{l}</div>
             </div>
           ))}
