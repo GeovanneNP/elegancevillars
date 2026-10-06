@@ -90,6 +90,7 @@
 ## Full responsive and published-map audit (Oct 6)
 - [x] Compare the preview and published domain across mobile, laptop and desktop widths.
 - [x] Remove viewport-dependent map startup and add timeout, error handling, resize recovery and a visible fallback.
+- [x] Serve the map style with the site instead of fetching it from the public style endpoint on every visit.
 - [x] Rebalance mobile section rhythm, headings, header, gallery viewer, school carousel and fixed-action clearance.
 - [x] Debounce animation measurements during viewport and orientation changes.
-- [ ] Re-verify all key sections and effects at mobile, laptop, desktop and reduced motion.
+- [x] Re-verify all key sections and effects at mobile, laptop, desktop and reduced motion.

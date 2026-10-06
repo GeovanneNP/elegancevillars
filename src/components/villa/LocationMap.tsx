@@ -3,12 +3,13 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import mapWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import type { Map as MlMap, Marker, StyleSpecification, LayerSpecification } from "maplibre-gl";
 import { pois, type Category, type PoiId } from "./locationPlaces";
+import mapStyleAsset from "@/assets/openfreemap-positron.json.asset.json";
 
 // Map paint cannot read CSS variables: these mirror the --swiss-red / --ivory tokens.
 const WINE = "#830b18";
 const IVORY = "#f4f1ea";
 const BG = "#ffffff";
-const STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
+const STYLE_URL = mapStyleAsset.url;
 
 type Props = {
   names: Record<PoiId, readonly string[]>;
