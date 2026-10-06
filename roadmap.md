@@ -57,3 +57,9 @@
 - [x] Pause continuous motion off-screen and strengthen reduced-motion behavior.
 - [x] Verify the complete experience at desktop, low-height laptop, 430 px and 390 px in FR, EN and DE.
 - [ ] Publish so the refinements reach the live URL.
+
+## Real location map (Oct 6)
+- [x] Replace the abstract map with real dark cartography, wine-red route and real POI positions.
+- [x] Add Villars Palace highlight, Montagne block and international education composition synced with the map.
+- [x] Remove the duplicated distance block; fix comma spacing and metre units.
+- [ ] Publish so the new section reaches the live URL.
