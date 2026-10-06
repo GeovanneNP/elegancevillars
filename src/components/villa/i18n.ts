@@ -110,7 +110,7 @@ const base = {
       pillars: ["Luxury lifestyle", "Montagne", "Éducation internationale", "Mobilité"],
       filters: ["Lifestyle", "Montagne", "Éducation"],
       tiers: ["Dans Villars", "Autour de Villars", "Dans la région"],
-      routeNote: "Ligne Villars → Roc d’Orsay : connexion graphique, pas le tracé exact de la télécabine.",
+      routeNote: "Lignes depuis l’appartement : connexions graphiques, pas des itinéraires.",
       mapNote: "Positions issues des données OpenStreetMap.",
       mapLabel: "Carte de Villars-sur-Ollon et de ses environs",
       pois: {
@@ -297,7 +297,7 @@ const base = {
       pillars: ["Luxury lifestyle", "Mountain", "International education", "Mobility"],
       filters: ["Lifestyle", "Mountain", "Education"],
       tiers: ["In Villars", "Around Villars", "In the region"],
-      routeNote: "Villars → Roc d’Orsay line: a graphic connection, not the exact gondola route.",
+      routeNote: "Lines from the apartment: graphic connections, not routes.",
       mapNote: "Positions taken from OpenStreetMap data.",
       mapLabel: "Map of Villars-sur-Ollon and its surroundings",
       pois: {
@@ -466,7 +466,7 @@ const de: Dict = {
     pillars: ["Luxury Lifestyle", "Berge", "Internationale Bildung", "Mobilität"],
     filters: ["Lifestyle", "Berge", "Bildung"],
     tiers: ["In Villars", "Rund um Villars", "In der Region"],
-    routeNote: "Linie Villars → Roc d’Orsay: grafische Verbindung, nicht der exakte Verlauf der Gondelbahn.",
+    routeNote: "Linien ab der Wohnung: grafische Verbindungen, keine Routen.",
     mapNote: "Positionen aus OpenStreetMap-Daten.",
     mapLabel: "Karte von Villars-sur-Ollon und Umgebung",
     pois: {

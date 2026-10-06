@@ -142,20 +142,49 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
     });
   }, [names, category, activeId, ready]);
 
-  // Camera: frame the category, then lean subtly towards the active place.
+  // Camera + line: travel to frame the apartment and the active place, drawing the link as it flies.
+  const lineEnd = useRef<[number, number] | null>(null);
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !ready) return;
+    const villars = pois.find((p) => p.id === "villars")!.lngLat;
+    const poi = pois.find((p) => p.id === activeId) ?? pois.find((p) => p.id === "villars")!;
+    const target = poi.lngLat;
+    const src = map.getSource("route") as { setData: (d: unknown) => void } | undefined;
+    const setLine = (end: [number, number]) => {
+      lineEnd.current = end;
+      src?.setData({ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: [villars, end] } });
+    };
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.innerWidth < 768;
-    const cam = map.cameraForBounds(boundsFor(category), { padding: small ? 56 : 110, maxZoom: 14 });
+    const pad = small ? { top: 70, bottom: 70, left: 50, right: 50 } : { top: 120, bottom: 120, left: 110, right: 190 };
+    const lngs = [villars[0], target[0]]; const lats = [villars[1], target[1]];
+    const cam = map.cameraForBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: pad, maxZoom: 14.5 });
     if (!cam?.center) return;
-    const c = cam.center as { lng: number; lat: number };
-    const poi = pois.find((p) => p.id === activeId);
-    const lean = poi && poi.tier < 2 ? 0.25 : 0;
-    const center: [number, number] = poi ? [c.lng + (poi.lngLat[0] - c.lng) * lean, c.lat + (poi.lngLat[1] - c.lat) * lean] : [c.lng, c.lat];
-    map.easeTo({ center, zoom: (cam.zoom ?? 12) + (lean ? 0.15 : 0), duration: reduce ? 0 : 1200, essential: true });
-  }, [category, activeId, ready]);
+    const zoom = Math.max(cam.zoom ?? 12, poi.tier >= 2 ? 9 : 11.5) - (poi.id === "villars" ? 1.5 : 0);
+    map.stop();
+    if (reduce) {
+      map.jumpTo({ center: cam.center, zoom });
+      setLine(target);
+      return;
+    }
+    const from = map.getCenter();
+    const dist = Math.hypot(from.lng - target[0], from.lat - target[1]);
+    const duration = Math.min(1600, Math.max(900, 900 + dist * 4000));
+    map.flyTo({ center: cam.center, zoom, duration, curve: 1.2, essential: true, easing: (t) => 1 - Math.pow(1 - t, 3) });
+    // Line grows from the apartment to the place; start from a short stub so it reads as a new link.
+    let raf = 0; const t0 = performance.now();
+    const step = (now: number) => {
+      const k = Math.min(1, (now - t0) / duration);
+      const e = 1 - Math.pow(1 - k, 3);
+      setLine([villars[0] + (target[0] - villars[0]) * e, villars[1] + (target[1] - villars[1]) * e]);
+      if (k < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    const finish = () => setLine(target);
+    map.once("moveend", finish);
+    return () => { cancelAnimationFrame(raf); map.off("moveend", finish); };
+  }, [activeId, ready]);
 
   return (
     <div className="relative h-full w-full" style={{ background: BG }}>

@@ -13,20 +13,20 @@ export function LocationExperience({ t }: Props) {
   const [activeId, setActiveId] = useState<PoiId | null>("palace");
   const blocks = useRef<(HTMLElement | null)[]>([]);
 
-  // Scroll sync: the editorial block in the reading zone drives the map category.
+  // Scroll sync: the place in the reading band becomes the active map point.
   useEffect(() => {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          const next = (entry.target as HTMLElement).dataset["category"] as Category;
-          setCategory(next);
-          setActiveId(next === "lifestyle" ? "palace" : next === "montagne" ? "roc" : "beausoleil");
+          const el = entry.target as HTMLElement;
+          setCategory(el.dataset["category"] as Category);
+          setActiveId(el.dataset["poi"] as PoiId);
         });
       },
       { rootMargin: "-45% 0px -45% 0px" },
     );
-    blocks.current.forEach((el) => el && io.observe(el));
+    document.querySelectorAll("[data-location-experience] [data-poi]").forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
@@ -81,7 +81,7 @@ export function LocationExperience({ t }: Props) {
 
         <div className="px-5 md:order-1 md:col-span-5 md:px-12">
           {/* 01 Lifestyle — Villars Palace */}
-          <article ref={(el) => { blocks.current[0] = el; }} data-category="lifestyle" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
+          <article ref={(el) => { blocks.current[0] = el; }} data-category="lifestyle" data-poi="palace" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
             <p className="eyebrow text-wood">{loc.palace.eyebrow}</p>
             <p className="eyebrow mt-10 text-muted-foreground">{loc.tiers[0]}</p>
             <h3 className="mt-4 font-serif text-6xl font-light uppercase leading-[0.9] md:text-7xl">{loc.palace.name}</h3>
@@ -97,7 +97,7 @@ export function LocationExperience({ t }: Props) {
           </article>
 
           {/* 02 Montagne */}
-          <article ref={(el) => { blocks.current[1] = el; }} data-category="montagne" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
+          <article ref={(el) => { blocks.current[1] = el; }} data-category="montagne" data-poi="roc" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
             <p className="eyebrow text-wood">{loc.mountain.eyebrow}</p>
             <p className="mt-10 font-serif text-[7rem] font-light leading-none tabular-nums md:text-[9rem]">{loc.mountain.time}</p>
             <h3 className="mt-4 font-serif text-3xl md:text-4xl">{loc.mountain.title}</h3>
@@ -108,13 +108,13 @@ export function LocationExperience({ t }: Props) {
           {/* 03 Éducation */}
           <article ref={(el) => { blocks.current[2] = el; }} data-category="education" className="flex flex-col justify-center py-24 md:min-h-svh">
             <p className="eyebrow text-wood">{loc.edu.eyebrow}</p>
-            <h3 className="mt-8 font-serif text-5xl font-light uppercase leading-[0.9] md:text-6xl">{loc.edu.title[0]}<br />{loc.edu.title[1]}</h3>
+            <h3 data-category="education" data-poi="beausoleil" className="mt-8 font-serif text-5xl font-light uppercase leading-[0.9] md:text-6xl">{loc.edu.title[0]}<br />{loc.edu.title[1]}</h3>
             <p className="mt-6 max-w-sm text-lg leading-relaxed text-charcoal/80">{loc.edu.text}</p>
             <ol className="-mx-5 mt-12 flex snap-x snap-mandatory gap-0 overflow-x-auto px-5 md:mx-0 md:block md:overflow-visible md:px-0">
               {loc.edu.schools.map((s) => {
                 const active = activeId === s.id;
                 return (
-                  <li key={s.id} className="w-[82%] shrink-0 snap-start border-t pr-6 md:w-auto md:pr-0">
+                  <li key={s.id} data-category="education" data-poi={s.id} className="w-[82%] shrink-0 snap-start border-t pr-6 md:w-auto md:pr-0">
                     <button
                       type="button"
                       onMouseEnter={() => { setCategory("education"); setActiveId(s.id as PoiId); }}
