@@ -19,7 +19,7 @@ export function LocationExperience({ t }: Props) {
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          const next = (entry.target as HTMLElement).dataset.category as Category;
+          const next = (entry.target as HTMLElement).dataset["category"] as Category;
           setCategory(next);
           setActiveId(next === "lifestyle" ? "palace" : next === "montagne" ? "roc" : "beausoleil");
         });

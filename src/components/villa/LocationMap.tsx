@@ -10,7 +10,7 @@ const BG = "#141313";
 const STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
 
 type Props = {
-  names: Record<PoiId, readonly [string, string]>;
+  names: Record<PoiId, readonly string[]>;
   category: Category;
   activeId: PoiId | null;
   onSelect: (id: PoiId) => void;
@@ -46,7 +46,7 @@ function darken(style: StyleSpecification): StyleSpecification {
     }
   }
   const sources = { ...style.sources };
-  delete (sources as Record<string, unknown>).ne2_shaded;
+  delete (sources as Record<string, unknown>)["ne2_shaded"];
   return { ...style, sources, layers };
 }
 
@@ -78,7 +78,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
     if (!visible || !container.current) return;
     let cancelled = false;
     (async () => {
-      const [{ default: maplibregl }, res] = await Promise.all([import("maplibre-gl"), fetch(STYLE_URL)]);
+      const [maplibregl, res] = await Promise.all([import("maplibre-gl"), fetch(STYLE_URL)]);
       const style = darken((await res.json()) as StyleSpecification);
       if (cancelled || !container.current) return;
       const isTouch = window.matchMedia("(pointer: coarse)").matches;
@@ -107,8 +107,8 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
         const el = document.createElement("button");
         el.type = "button";
         el.className = "loc-marker";
-        el.dataset.id = poi.id;
-        el.dataset.tier = String(poi.tier);
+        el.dataset["id"] = poi.id;
+        el.dataset["tier"] = String(poi.tier);
         el.innerHTML = `<span class="loc-dot"></span><span class="loc-label"><span class="loc-name"></span><span class="loc-sub"></span></span>`;
         el.addEventListener("click", () => onSelectRef.current(poi.id));
         const marker = new maplibregl.Marker({ element: el, anchor: "center" }).setLngLat(poi.lngLat).addTo(map);
@@ -134,8 +134,8 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
       (el.querySelector(".loc-sub") as HTMLElement).textContent = sub;
       el.setAttribute("aria-label", `${name} — ${sub}`);
       const inCategory = poi.category === category || poi.category === "origin";
-      el.dataset.state = id === activeId ? "active" : inCategory ? "on" : "off";
-      el.dataset.primary = poi.primary || poi.category === "origin" ? "true" : "false";
+      el.dataset["state"] = id === activeId ? "active" : inCategory ? "on" : "off";
+      el.dataset["primary"] = poi.primary || poi.category === "origin" ? "true" : "false";
       el.tabIndex = inCategory ? 0 : -1;
     });
   }, [names, category, activeId, ready]);
