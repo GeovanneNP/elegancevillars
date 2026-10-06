@@ -29,25 +29,9 @@ function PhotoCredit({ label, credit }: { label: string; credit: (typeof photoCr
 export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
   return (
-    <div data-lifestyle>
+    <div data-lifestyle id="location">
       <LocationExperience t={t} />
 
-      <section id="location" className="bg-ivory px-5 py-32 md:px-12 md:py-48">
-        <div className="grid grid-cols-12 gap-6">
-          <p data-fade className="eyebrow col-span-12 text-wood md:col-span-3">{t.locationLabel}</p>
-          <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <h2 className="font-serif text-5xl font-light leading-[0.9] text-swiss-red md:text-8xl lg:text-9xl">
-              <span data-lines>{t.locationTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
-            </h2>
-            <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.locationText}</p>
-          </div>
-          <figure data-clip className="col-span-12 mt-16 overflow-hidden md:col-span-10 md:col-start-3 md:mt-24">
-            <img src={img.villarsPanorama} alt={t.imageAlts.villars} width={2400} height={854} className="aspect-[16/7] w-full object-cover" />
-            <PhotoCredit label={t.photoCredit} credit={photoCredits.villars} />
-          </figure>
-        </div>
-
-      </section>
 
       <section data-bretaye className="bg-swiss-red px-5 py-28 text-ivory md:px-12 md:py-40">
         <p className="eyebrow mb-16 text-ivory/65">{t.accessLevel}</p>
