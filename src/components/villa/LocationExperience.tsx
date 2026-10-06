@@ -35,10 +35,10 @@ export function LocationExperience({ t }: Props) {
     setActiveId(c === "lifestyle" ? "palace" : c === "montagne" ? "roc" : "beausoleil");
   };
 
-  const fallback = <div className="h-full w-full bg-[var(--loc-bg)]" />;
+  const fallback = <div className="h-full w-full bg-ivory" />;
 
   return (
-    <section id="vivre-villars" data-location-experience className="bg-ivory [--loc-bg:#141313]">
+    <section id="vivre-villars" data-location-experience className="bg-ivory">
       <div className="px-5 pt-32 md:px-12 md:pt-48">
         <div className="grid grid-cols-12 gap-6">
           <p className="eyebrow col-span-12 text-wood md:col-span-3">{loc.label}</p>
@@ -70,8 +70,8 @@ export function LocationExperience({ t }: Props) {
           <nav aria-label={loc.label} className="absolute left-4 top-4 flex items-center gap-3 md:left-8 md:top-8">
             {categories.map((c, i) => (
               <span key={c} className="flex items-center gap-3">
-                {i > 0 && <span className="h-px w-4 bg-ivory/30" aria-hidden="true" />}
-                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`eyebrow py-3 transition-colors ${category === c ? "text-ivory" : "text-ivory/45 hover:text-ivory/80"}`}>
+                {i > 0 && <span className="h-px w-4 bg-swiss-red/25" aria-hidden="true" />}
+                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`eyebrow py-3 transition-colors ${category === c ? "text-swiss-red" : "text-swiss-red/45 hover:text-swiss-red/80"}`}>
                   <span className={`border-b pb-1 ${category === c ? "border-swiss-red" : "border-transparent"}`}>{loc.filters[i]}</span>
                 </button>
               </span>

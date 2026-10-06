@@ -45,6 +45,68 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           </figure>
         </div>
 
+      </section>
+
+      <LocationExperience t={t} />
+
+      <section data-bretaye className="bg-swiss-red px-5 py-28 text-ivory md:px-12 md:py-40">
+        <p className="eyebrow mb-16 text-ivory/65">{t.accessLevel}</p>
+        <div className="grid grid-cols-12 items-end gap-6">
+          <div className="col-span-12 md:col-span-8">
+            <div className="flex items-center justify-between gap-5">
+              <span className="font-serif text-4xl md:text-6xl">{t.bretayeFrom}</span>
+              <span className="font-serif text-4xl md:text-6xl">{t.bretayeTo}</span>
+            </div>
+            <div data-bretaye-track className="relative mt-8 h-px bg-ivory/30">
+              <span data-bretaye-line className="absolute inset-y-0 left-0 w-full origin-left bg-ivory" />
+              <span data-bretaye-dot className="absolute left-0 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ivory" />
+            </div>
+          </div>
+          <p className="eyebrow col-span-12 text-ivory/70 md:col-span-3 md:col-start-10">{t.bretayeTime}</p>
+          <p data-fade className="col-span-12 mt-10 max-w-md text-lg leading-relaxed text-ivory/85 md:col-span-4 md:col-start-7">{t.bretayeText}</p>
+          <figure data-clip className="col-span-12 mt-12 md:col-span-8 md:col-start-3">
+            <div className="aspect-[3/2] overflow-hidden">
+              <img src={img.bretayeTrain} alt={t.imageAlts.bretaye} loading="lazy" width={2400} height={1600} className="h-[108%] w-full object-cover object-top" />
+            </div>
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.bretaye} />
+          </figure>
+        </div>
+      </section>
+
+      <section className="relative min-h-[80svh] overflow-hidden bg-swiss-red text-ivory">
+        <div className="relative flex min-h-[80svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
+          <p className="eyebrow text-ivory/80">{t.accessLevel} · {t.golfLabel}</p>
+          <h2 className="max-w-5xl font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
+            <span data-lines>{t.golfTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
+          </h2>
+          <div className="flex flex-col gap-4 border-t border-ivory/30 pt-6 md:flex-row md:items-end md:justify-between">
+            <div>{t.golfStats.map((stat) => <p key={stat} className="eyebrow mt-2 normal-case tracking-[0.2em] text-ivory/80">{stat}</p>)}</div>
+            <p className="max-w-sm font-serif text-2xl italic md:text-3xl">{t.golfText}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative min-h-[85svh] overflow-hidden bg-swiss-red text-ivory">
+        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover opacity-75" />
+        <div className="absolute inset-0 bg-swiss-red/30" />
+        <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
+          <p className="eyebrow text-ivory/80">{t.regionalLevel}</p>
+          <div>
+            <h2 className="font-serif text-7xl font-light md:text-9xl">{t.glacierTitle}</h2>
+            <p className="mt-6 max-w-3xl font-serif text-4xl font-light leading-[1.02] md:text-6xl">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
+          </div>
+          <div className="grid grid-cols-12 gap-6 border-t border-ivory/30 pt-6">
+            <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/70">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
+            <p className="col-span-12 max-w-sm self-end font-serif text-2xl italic md:col-span-4 md:col-start-8 md:text-3xl">{t.glacierText}</p>
+          </div>
+          <figure className="mt-8 w-36 md:absolute md:bottom-40 md:right-12 md:w-64">
+            <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[4/3] w-full object-cover" />
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
+          </figure>
+        </div>
+      </section>
+
+      <section className="bg-ivory px-5 pb-32 md:px-12 md:pb-48">
         <div data-mobility className="mt-28 grid grid-cols-12 gap-6 border-t pt-16 md:mt-40 md:pt-24">
           <div className="col-span-12 md:col-span-4">
             <p className="eyebrow text-wood">{t.distancesTitle}</p>
@@ -67,8 +129,6 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           </div>
         </div>
       </section>
-
-      <LocationExperience t={t} />
 
       <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
         <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.mountainLabel}</p>
@@ -105,28 +165,6 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         </figure>
       </section>
 
-      <section data-bretaye className="bg-swiss-red px-5 py-28 text-ivory md:px-12 md:py-40">
-        <p className="eyebrow mb-16 text-ivory/65">{t.accessLevel}</p>
-        <div className="grid grid-cols-12 items-end gap-6">
-          <div className="col-span-12 md:col-span-8">
-            <div className="flex items-center justify-between gap-5">
-              <span className="font-serif text-4xl md:text-6xl">{t.bretayeFrom}</span>
-              <span className="font-serif text-4xl md:text-6xl">{t.bretayeTo}</span>
-            </div>
-            <div data-bretaye-track className="relative mt-8 h-px bg-ivory/30">
-              <span data-bretaye-line className="absolute inset-y-0 left-0 w-full origin-left bg-ivory" />
-              <span data-bretaye-dot className="absolute left-0 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ivory" />
-            </div>
-          </div>
-          <p className="eyebrow col-span-12 text-ivory/70 md:col-span-3 md:col-start-10">{t.bretayeTime}</p>
-          <p data-fade className="col-span-12 mt-10 max-w-md text-lg leading-relaxed text-ivory/85 md:col-span-4 md:col-start-7">{t.bretayeText}</p>
-          <figure data-clip className="col-span-12 mt-12 md:col-span-8 md:col-start-3">
-            <img src={img.bretayeTrain} alt={t.imageAlts.bretaye} loading="lazy" width={2400} height={1600} className="aspect-[3/2] w-full object-cover" />
-            <PhotoCredit label={t.photoCredit} credit={photoCredits.bretaye} />
-          </figure>
-        </div>
-      </section>
-
       <section className="bg-ivory px-5 py-32 md:px-12 md:py-52">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-5">
@@ -142,39 +180,6 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           <figure data-clip className="col-span-9 mt-8 overflow-hidden md:col-span-4 md:col-start-2 md:-mt-16">
             <img src={img.lacChavonnesReflection} alt={t.imageAlts.lake} loading="lazy" width={2272} height={1514} className="aspect-[3/2] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.lakeReflection} />
-          </figure>
-        </div>
-      </section>
-
-      <section className="relative min-h-[80svh] overflow-hidden bg-swiss-red text-ivory">
-        <div className="relative flex min-h-[80svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
-          <p className="eyebrow text-ivory/80">{t.accessLevel} · {t.golfLabel}</p>
-          <h2 className="max-w-5xl font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
-            <span data-lines>{t.golfTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
-          </h2>
-          <div className="flex flex-col gap-4 border-t border-ivory/30 pt-6 md:flex-row md:items-end md:justify-between">
-            <div>{t.golfStats.map((stat) => <p key={stat} className="eyebrow mt-2 normal-case tracking-[0.2em] text-ivory/80">{stat}</p>)}</div>
-            <p className="max-w-sm font-serif text-2xl italic md:text-3xl">{t.golfText}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative min-h-[85svh] overflow-hidden bg-swiss-red text-ivory">
-        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover opacity-75" />
-        <div className="absolute inset-0 bg-swiss-red/30" />
-        <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
-          <p className="eyebrow text-ivory/80">{t.regionalLevel}</p>
-          <div>
-            <h2 className="font-serif text-7xl font-light md:text-9xl">{t.glacierTitle}</h2>
-            <p className="mt-6 max-w-3xl font-serif text-4xl font-light leading-[1.02] md:text-6xl">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
-          </div>
-          <div className="grid grid-cols-12 gap-6 border-t border-ivory/30 pt-6">
-            <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/70">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
-            <p className="col-span-12 max-w-sm self-end font-serif text-2xl italic md:col-span-4 md:col-start-8 md:text-3xl">{t.glacierText}</p>
-          </div>
-          <figure className="mt-8 w-36 md:absolute md:bottom-40 md:right-12 md:w-64">
-            <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[4/3] w-full object-cover" />
-            <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
           </figure>
         </div>
       </section>

@@ -117,22 +117,22 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 /* Location map markers */
-.loc-map .maplibregl-ctrl-attrib, .loc-map .maplibregl-ctrl-attrib.maplibregl-compact { background: oklch(0.15 0 0 / 70%) !important; color: oklch(0.959 0.011 88 / 60%); font-size: 10px; }
-.loc-map .maplibregl-ctrl-attrib-button { filter: invert(1); background-color: transparent !important; }
+.loc-map .maplibregl-ctrl-attrib, .loc-map .maplibregl-ctrl-attrib.maplibregl-compact { background: oklch(0.959 0.011 88 / 88%) !important; color: oklch(0.39 0.15 24 / 72%); font-size: 10px; }
+.loc-map .maplibregl-ctrl-attrib-button { background-color: transparent !important; }
 .loc-map .maplibregl-ctrl-attrib a { color: inherit; }
 .loc-marker { position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: none; border: 0; padding: 0; cursor: pointer; transition: opacity .5s ease; }
-.loc-marker:focus-visible { outline: 1px solid var(--ivory); outline-offset: -6px; }
-.loc-dot { display: block; width: 7px; height: 7px; border-radius: 9999px; background: var(--ivory); box-shadow: 0 0 0 4px oklch(0.15 0 0 / 55%); transition: transform .5s ease, background-color .5s ease; }
-.loc-marker[data-primary="true"] .loc-dot { width: 10px; height: 10px; background: var(--swiss-red); box-shadow: 0 0 0 1px var(--ivory), 0 0 0 7px oklch(0.39 0.15 24 / 25%); }
-.loc-marker[data-tier="2"] .loc-dot { background: transparent; border: 1px solid oklch(0.959 0.011 88 / 70%); }
+.loc-marker:focus-visible { outline: 1px solid var(--swiss-red); outline-offset: -6px; }
+.loc-dot { display: block; width: 7px; height: 7px; border-radius: 9999px; background: var(--swiss-red); box-shadow: 0 0 0 4px oklch(0.959 0.011 88 / 75%); transition: transform .5s ease, background-color .5s ease; }
+.loc-marker[data-primary="true"] .loc-dot { width: 10px; height: 10px; background: var(--swiss-red); box-shadow: 0 0 0 1px var(--ivory), 0 0 0 7px oklch(0.39 0.15 24 / 22%); }
+.loc-marker[data-tier="2"] .loc-dot { background: var(--ivory); border: 1px solid oklch(0.39 0.15 24 / 72%); }
 .loc-label { position: absolute; left: 34px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 2px; white-space: nowrap; text-align: left; pointer-events: none; opacity: 0; transition: opacity .4s ease; }
-.loc-name { font-family: var(--font-serif); font-size: 17px; line-height: 1; color: var(--ivory); text-shadow: 0 0 6px oklch(0.13 0 0); }
-.loc-sub { font-family: var(--font-sans); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: oklch(0.959 0.011 88 / 62%); text-shadow: 0 0 6px oklch(0.13 0 0); }
+.loc-name { font-family: var(--font-serif); font-size: 17px; line-height: 1; color: var(--swiss-red); text-shadow: 0 0 6px var(--ivory); }
+.loc-sub { font-family: var(--font-sans); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: oklch(0.39 0.15 24 / 68%); text-shadow: 0 0 6px var(--ivory); }
 .loc-marker[data-primary="true"] .loc-label, .loc-marker[data-state="active"] .loc-label { opacity: 1; }
 .loc-marker[data-state="on"] .loc-label .loc-sub { display: none; }
 @media (min-width: 768px) { .loc-marker[data-state="on"] .loc-label { opacity: .85; } }
 .loc-marker[data-state="off"] { opacity: .28; }
 .loc-marker[data-state="active"] { z-index: 5; }
-.loc-marker[data-state="active"] .loc-dot { background: var(--swiss-red); transform: scale(1.5); box-shadow: 0 0 0 1px var(--ivory), 0 0 0 10px oklch(0.39 0.15 24 / 30%); }
+.loc-marker[data-state="active"] .loc-dot { background: var(--swiss-red); transform: scale(1.5); box-shadow: 0 0 0 1px var(--ivory), 0 0 0 10px oklch(0.39 0.15 24 / 24%); }
 .loc-marker[data-state="active"] .loc-sub { display: block; }
 .loc-marker[data-id="villars"] .loc-label { left: auto; right: 34px; align-items: flex-end; }
