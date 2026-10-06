@@ -362,7 +362,7 @@ export function Villa() {
        <section data-bedroom className="relative bg-ivory text-charcoal md:h-[170svh]">
         <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bed-title className="flex flex-col justify-center px-5 py-32 md:absolute md:inset-0 md:px-12 md:py-0">
-             <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-8xl lg:text-9xl">
+             <h2 className="font-serif text-5xl font-light leading-[0.96] sm:text-6xl md:text-8xl md:leading-[0.92] lg:text-9xl">
                <span>{t.bedroomTitle.map((l, i) => (
                  <span key={i} className={`line-mask ${i === 1 ? "md:pl-[12vw] italic" : ""}`}><span>{l}</span></span>
               ))}</span>
@@ -388,7 +388,7 @@ export function Villa() {
               <div className="absolute inset-0 bg-swiss-red/30" />
           </div>
           <div data-bal-text className="absolute inset-x-5 bottom-14 text-ivory md:inset-x-12 md:bottom-20">
-             <h2 className="font-serif text-6xl font-light leading-[0.9] md:text-8xl lg:text-9xl">{t.balconyTitle}</h2>
+             <h2 className="font-serif text-5xl font-light leading-[0.94] sm:text-6xl md:text-8xl md:leading-[0.9] lg:text-9xl">{t.balconyTitle}</h2>
             <p className="mt-6 font-serif text-2xl italic md:ml-[40vw] md:text-3xl">{t.balconySub[0]}<br />{t.balconySub[1]}</p>
           </div>
         </div>
@@ -399,15 +399,15 @@ export function Villa() {
       {/* DETAILS */}
       <section id="details" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-4">
-          <h2 className="font-serif text-6xl font-light leading-[1.02] md:sticky md:top-24 md:text-7xl">
+          <h2 className="font-serif text-5xl font-light leading-[1.04] sm:text-6xl md:sticky md:top-24 md:text-7xl md:leading-[1.02]">
             <Lines lines={[t.detailsTitle]} />
           </h2>
         </div>
         <dl className="col-span-12 border-t md:col-span-7 md:col-start-6">
           {t.details.map(([k, v]) => (
-            <div data-fade key={k} className="grid grid-cols-2 border-b py-5">
-              <dt className="eyebrow self-center text-muted-foreground">{k}</dt>
-              <dd className="font-serif text-2xl">{v}</dd>
+            <div data-fade key={k} className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-4 border-b py-5">
+              <dt className="eyebrow min-w-0 self-center break-words text-[0.6rem] text-muted-foreground sm:text-[0.6875rem]">{k}</dt>
+              <dd className="min-w-0 break-words font-serif text-xl sm:text-2xl">{v}</dd>
             </div>
           ))}
         </dl>
@@ -438,7 +438,7 @@ export function Villa() {
       {/* OWNERSHIP */}
       <section className="relative grid grid-cols-12 gap-6 overflow-hidden bg-stone px-5 py-32 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-7">
-           <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-7xl lg:text-8xl">
+           <h2 className="font-serif text-5xl font-light leading-[0.96] sm:text-6xl md:text-7xl md:leading-[0.92] lg:text-8xl">
             <Lines lines={t.ownTitle} />
           </h2>
           <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.ownText}</p>
@@ -446,7 +446,7 @@ export function Villa() {
         <div className="col-span-12 self-end md:col-span-4 md:col-start-9">
           <div data-fade className="border-t py-6">
             <div className="eyebrow text-muted-foreground">{t.price}</div>
-            <div className="mt-3 font-serif text-5xl">CHF 590'000.-</div>
+            <div className="mt-3 font-serif text-4xl sm:text-5xl">CHF 590'000.-</div>
           </div>
           <div data-fade className="border-y py-6">
             <div className="eyebrow text-muted-foreground">{t.availability}</div>
@@ -469,14 +469,14 @@ export function Villa() {
         </div>
         <div className="grid grid-cols-12 gap-6 px-5 py-28 md:px-12 md:py-40">
           <div className="col-span-12 md:col-span-5">
-             <h2 className="font-serif text-6xl font-light leading-[0.92] md:text-7xl lg:text-8xl">
+             <h2 className="font-serif text-5xl font-light leading-[0.96] sm:text-6xl md:text-7xl md:leading-[0.92] lg:text-8xl">
               <Lines lines={t.contactTitle} />
             </h2>
             <p data-fade className="eyebrow mt-12 text-ivory/50">{t.contactText}</p>
              <div data-fade className="mt-10 h-px w-16 bg-ivory/40" />
           </div>
            <div data-fade className="col-span-12 mt-10 flex flex-col justify-end border-t border-ivory/20 pt-8 md:col-span-5 md:col-start-8 md:mt-0">
-              <a href={`mailto:Marketing@uptechswiss.ch?subject=${encodeURIComponent(t.mailSubject)}`} className="break-all font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactEmail}: Marketing@uptechswiss.ch`}>Marketing@uptechswiss.ch</a>
+              <a href={`mailto:Marketing@uptechswiss.ch?subject=${encodeURIComponent(t.mailSubject)}`} className="break-all font-serif text-2xl leading-snug text-ivory transition-colors hover:text-gold sm:text-3xl md:text-4xl" aria-label={`${t.contactEmail}: Marketing@uptechswiss.ch`}>Marketing@uptechswiss.ch</a>
               <a href="tel:+41765426230" className="mt-6 self-start font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactPhone}: +41 76 542 62 30`}>+41 76 542 62 30</a>
               <a href={`https://wa.me/41765426230?text=${encodeURIComponent(t.whatsappMessage)}`} target="_blank" rel="noreferrer" className="eyebrow mt-8 self-start border-b border-ivory/40 pb-1 text-ivory/80 transition-colors hover:text-ivory">{t.whatsapp} →</a>
            </div>

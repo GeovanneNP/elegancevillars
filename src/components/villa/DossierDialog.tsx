@@ -76,12 +76,12 @@ export function DossierDialog({ open, onOpenChange, lang }: { open: boolean; onO
     <Dialog.Root open={open} onOpenChange={(next) => { onOpenChange(next); if (!next) setStatus("idle"); }}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[70] bg-charcoal/65 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in-0" />
-        <Dialog.Content className="fixed inset-x-4 top-1/2 z-[71] mx-auto w-auto max-w-xl -translate-y-1/2 bg-ivory px-7 py-9 text-charcoal shadow-xl outline-none sm:px-12 sm:py-12" aria-describedby="dossier-intro">
+        <Dialog.Content className="fixed inset-x-4 top-1/2 z-[71] mx-auto max-h-[calc(100svh-2rem)] w-auto max-w-xl -translate-y-1/2 overflow-y-auto bg-ivory px-6 py-8 text-charcoal shadow-xl outline-none sm:px-12 sm:py-12" aria-describedby="dossier-intro">
           <Dialog.Close asChild>
             <Button variant="ghost" size="icon" className="absolute right-4 top-4 text-charcoal hover:bg-stone" aria-label={t.close}><X className="size-5" /></Button>
           </Dialog.Close>
           <p className="eyebrow mb-6 text-wood">Villars-sur-Ollon · 044598</p>
-          <Dialog.Title className="max-w-md font-serif text-5xl font-light leading-[1.02] sm:text-6xl">{t.title}</Dialog.Title>
+          <Dialog.Title className="max-w-md pr-8 font-serif text-4xl font-light leading-[1.06] sm:text-6xl sm:leading-[1.02]">{t.title}</Dialog.Title>
           {status === "success" ? (
             <div role="status" className="mt-10 border-t pt-8">
               <p className="font-serif text-3xl">{t.success}</p>
