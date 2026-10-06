@@ -277,7 +277,7 @@ export function Villa() {
       {/* HERO */}
         <section id="top" data-hero className="relative h-[calc(90svh-5rem)] min-h-[560px] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)]">
         <div data-hero-wrap className="absolute inset-0">
-            <img data-hero-img src={img.living} alt={t.imageAlts.hero} fetchPriority="high" className="h-full w-full object-cover object-[48%_center]" />
+            <img data-hero-img src={img.exterior} alt={t.galleryAlts[6]} fetchPriority="high" className="h-full w-full object-cover object-center" />
         </div>
           <div className="absolute inset-0 bg-swiss-red/20" />
          <div className="relative flex h-full flex-col justify-end px-5 pb-20 md:px-12 md:pb-20">
@@ -311,19 +311,8 @@ export function Villa() {
         </div>
       </section>
 
-      {/* MANIFESTO */}
-       <section id="residence" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-28 md:px-12 md:py-48">
-        <p data-fade className="eyebrow col-span-12 text-wood md:col-span-3">46°18'N — Villars-sur-Ollon</p>
-         <h2 className="col-span-12 font-serif text-6xl font-light leading-[0.9] md:col-span-9 md:text-8xl lg:text-9xl">
-          <Lines lines={t.manifesto} />
-        </h2>
-        <div className="col-span-12 mt-10 grid grid-cols-12 md:mt-20">
-          <p data-fade className="col-span-12 max-w-md text-lg leading-relaxed text-charcoal/80 md:col-span-4 md:col-start-8">{t.manifestoText}</p>
-        </div>
-      </section>
-
       {/* LIVING STORY */}
-       <section data-living className="relative bg-ivory md:h-[150svh]">
+        <section id="residence" data-living className="relative bg-ivory md:h-[150svh]">
          <div className="relative h-[78svh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-living-frame className="absolute inset-0 overflow-hidden">
              <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="h-full w-full object-cover" />
@@ -403,16 +392,6 @@ export function Villa() {
             <p className="mt-6 font-serif text-2xl italic md:ml-[40vw] md:text-3xl">{t.balconySub[0]}<br />{t.balconySub[1]}</p>
           </div>
         </div>
-      </section>
-
-      {/* EXTERIOR — direct transition into the location map */}
-      <section data-exterior-transition className="h-[72svh] overflow-hidden bg-ivory md:h-svh">
-        <img
-          src={img.exterior}
-          alt={t.galleryAlts[6]}
-          loading="lazy"
-          className="h-full w-full object-cover"
-        />
       </section>
 
       <VillarsLifestyle t={t} activeSeason={activeSeason} onSeasonChange={setActiveSeason} />

@@ -16,6 +16,8 @@ import glacier3000Asset from "@/assets/glacier-3000-real.webp.asset.json";
 import peakWalkAsset from "@/assets/peak-walk-real.webp.asset.json";
 import chateauAigleAsset from "@/assets/chateau-aigle.webp.asset.json";
 import chillonLemanAsset from "@/assets/chillon-leman.webp.asset.json";
+import villarsSkiAsset from "@/assets/villars-ski.jpg.asset.json";
+import villarsPalaceAsset from "@/assets/villars-palace-winter.jpg.asset.json";
 
 export const img = {
   living,
@@ -36,6 +38,8 @@ export const img = {
   peakWalk: peakWalkAsset.url,
   chateauAigle: chateauAigleAsset.url,
   chillonLeman: chillonLemanAsset.url,
+  villarsSki: villarsSkiAsset.url,
+  villarsPalace: villarsPalaceAsset.url,
 };
 
 export const galleryImages = [

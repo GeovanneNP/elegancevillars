@@ -75,3 +75,9 @@
 - [x] Place the real chalet exterior photograph directly before the map.
 - [x] Move the location introductions below the cartographic experience without removing content.
 - [x] Verify the facade-to-map transition on desktop, 430 px and 390 px.
+
+## Chalet entrance and lifestyle continuity (Oct 6)
+- [x] Restore the chalet exterior as the opening image and remove the repeated facade transition and manifesto.
+- [x] Add the supplied ski and Villars Palace photography with trilingual factual narratives.
+- [x] Move Four Seasons directly after Glacier 3000 and recolour key light-section titles in Swiss red.
+- [x] Verify the new sequence on desktop and mobile without overflow or browser errors.

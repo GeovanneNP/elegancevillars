@@ -36,7 +36,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         <div className="grid grid-cols-12 gap-6">
           <p data-fade className="eyebrow col-span-12 text-wood md:col-span-3">{t.locationLabel}</p>
           <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <h2 className="font-serif text-6xl font-light leading-[0.9] md:text-8xl lg:text-9xl">
+            <h2 className="font-serif text-6xl font-light leading-[0.9] text-swiss-red md:text-8xl lg:text-9xl">
               <span data-lines>{t.locationTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
             </h2>
             <p data-fade className="mt-10 max-w-md text-lg leading-relaxed text-charcoal/80">{t.locationText}</p>
@@ -106,84 +106,6 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         </div>
       </section>
 
-      <section className="bg-ivory px-5 pb-32 md:px-12 md:pb-48">
-        <div data-mobility className="mt-28 grid grid-cols-12 gap-6 border-t pt-16 md:mt-40 md:pt-24">
-          <div className="col-span-12 md:col-span-4">
-            <p className="eyebrow text-wood">{t.distancesTitle}</p>
-            <p className="mt-6 font-serif text-4xl italic md:text-5xl">{t.timelineOrigin}</p>
-          </div>
-          <div className="relative col-span-12 mt-10 md:col-span-6 md:col-start-7 md:mt-0">
-            <svg aria-hidden="true" className="absolute left-[5px] top-3 h-[calc(100%-1.5rem)] w-px overflow-visible" viewBox="0 0 1 600" preserveAspectRatio="none">
-              <path d="M.5 0 V600" stroke="currentColor" strokeWidth="1" className="text-border" />
-              <path data-timeline-path d="M.5 0 V600" stroke="currentColor" strokeWidth="1.5" className="text-wood" />
-            </svg>
-            <ol className="space-y-0">
-              {t.distances.map(([place, distance]) => (
-                <li key={place} data-timeline-point className="relative flex min-h-24 items-center justify-between gap-4 border-b pl-10">
-                  <span className="absolute left-0 top-1/2 h-[11px] w-[11px] -translate-y-1/2 rounded-full border border-wood bg-ivory transition-transform duration-500" />
-                  <span className="font-serif text-2xl md:text-3xl">{place}</span>
-                  <span className="eyebrow shrink-0 normal-case tracking-[0.18em] text-wood">{distance}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
-        <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.mountainLabel}</p>
-        <h2 className="mt-8 max-w-5xl font-serif text-6xl font-light leading-[0.9] md:text-8xl lg:text-9xl">
-          <span data-lines>{t.mountainTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
-        </h2>
-        <div className="mt-24 grid grid-cols-12 gap-6 md:mt-36">
-          <figure data-clip className="col-span-12 overflow-hidden md:col-span-8">
-            <img src={img.villarsPanorama} alt={t.imageAlts.villars} loading="lazy" width={2400} height={854} className="aspect-[3/2] w-full object-cover" />
-            <PhotoCredit label={t.photoCredit} credit={photoCredits.villars} />
-          </figure>
-          <div className="col-span-12 self-end md:col-span-3 md:col-start-10">
-            <div className="flex flex-wrap gap-x-4 gap-y-1 border-b pb-6">
-              {t.skiPlaces.map((place) => <span key={place} className="eyebrow text-muted-foreground">{place}</span>)}
-            </div>
-            <p className="mt-8 font-serif text-8xl font-light tabular-nums md:text-9xl">{t.skiStat}</p>
-            <p className="eyebrow mt-2 text-wood">{t.skiUnit}</p>
-            <p data-fade className="mt-8 max-w-xs text-lg leading-relaxed text-charcoal/80">{t.skiText}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
-        <div className="col-span-12 md:col-span-5">
-          <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.rocLabel}</p>
-          <h2 className="mt-8 font-serif text-6xl font-light leading-[0.9] md:text-7xl lg:text-8xl">
-            <span data-lines>{t.rocTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
-          </h2>
-          <p data-fade className="mt-10 max-w-sm text-lg leading-relaxed text-charcoal/80">{t.rocText}</p>
-        </div>
-        <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-6 md:col-start-7 md:mt-0">
-          <img src={img.rocOrsay} alt={t.imageAlts.roc} loading="lazy" width={1600} height={1200} className="aspect-[4/5] w-full object-cover" />
-          <PhotoCredit label={t.photoCredit} credit={photoCredits.roc} />
-        </figure>
-      </section>
-
-      <section className="bg-ivory px-5 py-32 md:px-12 md:py-52">
-        <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-12 md:col-span-5">
-            <h2 className="font-serif text-6xl font-light leading-[1.02] md:text-8xl">{t.lakeTitle}</h2>
-            <p className="mt-12 font-serif text-7xl font-light tabular-nums md:text-9xl">{t.lakeStat}</p>
-            <p className="mt-5 font-serif text-3xl italic md:text-4xl">{t.lakeText}</p>
-            <p data-fade className="eyebrow mt-10 max-w-xs leading-relaxed text-muted-foreground">{t.lakeWalk}</p>
-          </div>
-          <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-7 md:mt-20">
-            <img src={img.lacChavonnes} alt={t.imageAlts.lake} loading="lazy" width={1600} height={1072} className="aspect-[3/2] w-full object-cover" />
-            <PhotoCredit label={t.photoCredit} credit={photoCredits.lake} />
-          </figure>
-          <figure data-clip className="col-span-9 mt-8 overflow-hidden md:col-span-4 md:col-start-2 md:-mt-16">
-            <img src={img.lacChavonnesReflection} alt={t.imageAlts.lake} loading="lazy" width={2272} height={1514} className="aspect-[3/2] w-full object-cover" />
-            <PhotoCredit label={t.photoCredit} credit={photoCredits.lakeReflection} />
-          </figure>
-        </div>
-      </section>
-
       <section data-seasons className="bg-swiss-red text-ivory md:grid md:grid-cols-12">
         <div className="relative hidden min-h-svh overflow-hidden md:sticky md:top-0 md:col-span-7 md:block md:h-svh">
           {seasonImages.map((source, index) => (
@@ -219,6 +141,84 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
               <p className="mt-5 max-w-sm font-serif text-2xl italic text-ivory/90">{copy}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-ivory px-5 pb-32 md:px-12 md:pb-48">
+        <div data-mobility className="mt-28 grid grid-cols-12 gap-6 border-t pt-16 md:mt-40 md:pt-24">
+          <div className="col-span-12 md:col-span-4">
+            <p className="eyebrow text-wood">{t.distancesTitle}</p>
+            <p className="mt-6 font-serif text-4xl italic md:text-5xl">{t.timelineOrigin}</p>
+          </div>
+          <div className="relative col-span-12 mt-10 md:col-span-6 md:col-start-7 md:mt-0">
+            <svg aria-hidden="true" className="absolute left-[5px] top-3 h-[calc(100%-1.5rem)] w-px overflow-visible" viewBox="0 0 1 600" preserveAspectRatio="none">
+              <path d="M.5 0 V600" stroke="currentColor" strokeWidth="1" className="text-border" />
+              <path data-timeline-path d="M.5 0 V600" stroke="currentColor" strokeWidth="1.5" className="text-wood" />
+            </svg>
+            <ol className="space-y-0">
+              {t.distances.map(([place, distance]) => (
+                <li key={place} data-timeline-point className="relative flex min-h-24 items-center justify-between gap-4 border-b pl-10">
+                  <span className="absolute left-0 top-1/2 h-[11px] w-[11px] -translate-y-1/2 rounded-full border border-wood bg-ivory transition-transform duration-500" />
+                  <span className="font-serif text-2xl md:text-3xl">{place}</span>
+                  <span className="eyebrow shrink-0 normal-case tracking-[0.18em] text-wood">{distance}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-stone px-5 py-32 md:px-12 md:py-48">
+        <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.mountainLabel}</p>
+        <h2 className="mt-8 max-w-5xl font-serif text-6xl font-light leading-[0.9] text-swiss-red md:text-8xl lg:text-9xl">
+          <span data-lines>{t.mountainTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
+        </h2>
+        <div className="mt-24 grid grid-cols-12 gap-6 md:mt-36">
+          <figure data-clip className="col-span-12 overflow-hidden md:col-span-8">
+            <img src={img.villarsSki} alt={t.skiImageAlt} loading="lazy" width={1400} height={750} className="aspect-[3/2] w-full object-cover" />
+            <figcaption className="eyebrow mt-3 text-[0.6rem] text-muted-foreground">{t.suppliedImage}</figcaption>
+          </figure>
+          <div className="col-span-12 self-end md:col-span-3 md:col-start-10">
+            <div className="flex flex-wrap gap-x-4 gap-y-1 border-b pb-6">
+              {t.skiPlaces.map((place) => <span key={place} className="eyebrow text-muted-foreground">{place}</span>)}
+            </div>
+            <p className="mt-8 font-serif text-8xl font-light tabular-nums md:text-9xl">{t.skiStat}</p>
+            <p className="eyebrow mt-2 text-wood">{t.skiUnit}</p>
+            <p data-fade className="mt-8 max-w-xs text-lg leading-relaxed text-charcoal/80">{t.skiText}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
+        <div className="col-span-12 md:col-span-5">
+          <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.rocLabel}</p>
+           <h2 className="mt-8 font-serif text-6xl font-light leading-[0.9] text-swiss-red md:text-7xl lg:text-8xl">
+            <span data-lines>{t.rocTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
+          </h2>
+          <p data-fade className="mt-10 max-w-sm text-lg leading-relaxed text-charcoal/80">{t.rocText}</p>
+        </div>
+        <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-6 md:col-start-7 md:mt-0">
+          <img src={img.rocOrsay} alt={t.imageAlts.roc} loading="lazy" width={1600} height={1200} className="aspect-[4/5] w-full object-cover" />
+          <PhotoCredit label={t.photoCredit} credit={photoCredits.roc} />
+        </figure>
+      </section>
+
+      <section className="bg-ivory px-5 py-32 md:px-12 md:py-52">
+        <div className="grid grid-cols-12 gap-6">
+          <div className="col-span-12 md:col-span-5">
+            <h2 className="font-serif text-6xl font-light leading-[1.02] text-swiss-red md:text-8xl">{t.lakeTitle}</h2>
+            <p className="mt-12 font-serif text-7xl font-light tabular-nums md:text-9xl">{t.lakeStat}</p>
+            <p className="mt-5 font-serif text-3xl italic md:text-4xl">{t.lakeText}</p>
+            <p data-fade className="eyebrow mt-10 max-w-xs leading-relaxed text-muted-foreground">{t.lakeWalk}</p>
+          </div>
+          <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-7 md:mt-20">
+            <img src={img.lacChavonnes} alt={t.imageAlts.lake} loading="lazy" width={1600} height={1072} className="aspect-[3/2] w-full object-cover" />
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.lake} />
+          </figure>
+          <figure data-clip className="col-span-9 mt-8 overflow-hidden md:col-span-4 md:col-start-2 md:-mt-16">
+            <img src={img.lacChavonnesReflection} alt={t.imageAlts.lake} loading="lazy" width={2272} height={1514} className="aspect-[3/2] w-full object-cover" />
+            <PhotoCredit label={t.photoCredit} credit={photoCredits.lakeReflection} />
+          </figure>
         </div>
       </section>
 

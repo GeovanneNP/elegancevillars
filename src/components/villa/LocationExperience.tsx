@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { ClientOnly } from "@tanstack/react-router";
 import type { Dict } from "./i18n";
 import { categories, type Category, type PoiId } from "./locationPlaces";
+import { img } from "./images";
 
 const LocationMap = lazy(() => import("./LocationMap").then((m) => ({ default: m.LocationMap })));
 
@@ -64,8 +65,12 @@ export function LocationExperience({ t }: Props) {
           <article ref={(el) => { blocks.current[0] = el; }} data-category="lifestyle" data-poi="palace" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
             <p className="eyebrow text-wood">{loc.palace.eyebrow}</p>
             <p className="eyebrow mt-10 text-muted-foreground">{loc.tiers[0]}</p>
-            <h3 className="mt-4 font-serif text-6xl font-light uppercase leading-[0.9] md:text-7xl">{loc.palace.name}</h3>
+            <h3 className="mt-4 font-serif text-6xl font-light uppercase leading-[0.9] text-swiss-red md:text-7xl">{loc.palace.name}</h3>
             <p className="mt-4 font-serif text-3xl italic text-swiss-red">{loc.palace.stars}</p>
+            <figure className="mt-10 overflow-hidden">
+              <img src={img.villarsPalace} alt={t.palaceImageAlt} loading="lazy" width={1093} height={768} className="aspect-[4/3] w-full object-cover" />
+              <figcaption className="eyebrow mt-3 text-[0.6rem] text-muted-foreground">{t.suppliedImage}</figcaption>
+            </figure>
             <ul className="mt-10 space-y-1">
               {loc.palace.lines.map((l) => <li key={l} className="font-serif text-2xl text-charcoal/85">{l}</li>)}
             </ul>
