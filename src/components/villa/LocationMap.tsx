@@ -7,7 +7,7 @@ import { pois, type Category, type PoiId } from "./locationPlaces";
 // Map paint cannot read CSS variables: these mirror the --swiss-red / --ivory tokens.
 const WINE = "#830b18";
 const IVORY = "#f4f1ea";
-const BG = "#f4f1ea";
+const BG = "#ffffff";
 const STYLE_URL = "https://tiles.openfreemap.org/styles/positron";
 
 type Props = {
@@ -30,7 +30,7 @@ function restyleMap(style: StyleSpecification): StyleSpecification {
       if (/park|wood|grass|landcover|forest|wetland|sand|ice|glacier/.test(id)) continue;
       const water = id.includes("water");
       const building = id.includes("building");
-      layers.push({ ...layer, paint: { "fill-color": water ? "#e8e1d5" : building ? "#ead9d8" : IVORY, "fill-opacity": water ? 0.9 : building ? 0.7 : 1, "fill-antialias": true } } as LayerSpecification);
+      layers.push({ ...layer, paint: { "fill-color": water ? "#f4f1ea" : building ? "#f3e5e4" : BG, "fill-opacity": water ? 0.9 : building ? 0.7 : 1, "fill-antialias": true } } as LayerSpecification);
     } else if (layer.type === "line") {
       const water = id.includes("water") || id.includes("river");
       const boundary = id.includes("boundary");
