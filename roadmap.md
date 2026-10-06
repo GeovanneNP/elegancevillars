@@ -70,3 +70,8 @@
 - [x] Crop the visible embedded signature from the train photo while preserving its legal credit.
 - [x] Recolour the amenities marquee text and separators in Swiss red.
 - [x] Verify the reordered experience on desktop, 430 px and 390 px.
+
+## Facade-to-map transition (Oct 6)
+- [x] Place the real chalet exterior photograph directly before the map.
+- [x] Move the location introductions below the cartographic experience without removing content.
+- [ ] Verify the facade-to-map transition on desktop, 430 px and 390 px.

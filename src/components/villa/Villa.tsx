@@ -405,6 +405,16 @@ export function Villa() {
         </div>
       </section>
 
+      {/* EXTERIOR — direct transition into the location map */}
+      <section data-exterior-transition className="h-[72svh] overflow-hidden bg-ivory md:h-svh">
+        <img
+          src={img.exterior}
+          alt={t.galleryAlts[6]}
+          loading="lazy"
+          className="h-full w-full object-cover"
+        />
+      </section>
+
       <VillarsLifestyle t={t} activeSeason={activeSeason} onSeasonChange={setActiveSeason} />
 
       {/* DETAILS */}

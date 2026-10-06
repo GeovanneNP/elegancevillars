@@ -39,27 +39,7 @@ export function LocationExperience({ t }: Props) {
 
   return (
     <section id="vivre-villars" data-location-experience className="bg-ivory">
-      <div className="px-5 pt-32 md:px-12 md:pt-48">
-        <div className="grid grid-cols-12 gap-6">
-          <p className="eyebrow col-span-12 text-wood md:col-span-3">{loc.label}</p>
-          <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <h2 className="font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
-              <span data-lines>{loc.title.map((line, i) => <span key={i} className="line-mask"><span>{line} </span></span>)}</span>
-            </h2>
-            <p data-fade className="mt-10 max-w-md font-serif text-2xl italic text-charcoal/80 md:text-3xl">{loc.text}</p>
-            <ol className="mt-14 grid grid-cols-2 border-t md:grid-cols-4">
-              {loc.pillars.map((p, i) => (
-                <li key={p} className="border-b py-5 pr-4">
-                  <span className="eyebrow text-swiss-red">0{i + 1}</span>
-                  <p className="eyebrow mt-2 text-charcoal">{p}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-20 md:mt-32 md:grid md:grid-cols-12">
+      <div className="md:grid md:grid-cols-12">
         {/* Map: sticky on desktop, simple block on mobile */}
         <div className="relative h-[72svh] md:sticky md:top-0 md:order-2 md:col-span-7 md:h-svh">
           <ClientOnly fallback={fallback}>
@@ -144,6 +124,26 @@ export function LocationExperience({ t }: Props) {
             <p className="eyebrow mt-6 border-t pt-5 text-muted-foreground">{loc.edu.others}</p>
             <p className="mt-4 text-xs text-charcoal/55">{loc.edu.disclaimer}</p>
           </article>
+        </div>
+      </div>
+
+      <div className="px-5 py-32 md:px-12 md:py-48">
+        <div className="grid grid-cols-12 gap-6">
+          <p className="eyebrow col-span-12 text-wood md:col-span-3">{loc.label}</p>
+          <div className="col-span-12 md:col-span-8 md:col-start-5">
+            <h2 className="font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
+              <span data-lines>{loc.title.map((line, i) => <span key={i} className="line-mask"><span>{line} </span></span>)}</span>
+            </h2>
+            <p data-fade className="mt-10 max-w-md font-serif text-2xl italic text-charcoal/80 md:text-3xl">{loc.text}</p>
+            <ol className="mt-14 grid grid-cols-2 border-t md:grid-cols-4">
+              {loc.pillars.map((p, i) => (
+                <li key={p} className="border-b py-5 pr-4">
+                  <span className="eyebrow text-swiss-red">0{i + 1}</span>
+                  <p className="eyebrow mt-2 text-charcoal">{p}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
       </div>
     </section>
