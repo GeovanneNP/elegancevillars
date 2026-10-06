@@ -74,4 +74,4 @@
 ## Facade-to-map transition (Oct 6)
 - [x] Place the real chalet exterior photograph directly before the map.
 - [x] Move the location introductions below the cartographic experience without removing content.
-- [ ] Verify the facade-to-map transition on desktop, 430 px and 390 px.
+- [x] Verify the facade-to-map transition on desktop, 430 px and 390 px.
