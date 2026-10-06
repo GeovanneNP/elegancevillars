@@ -13,5 +13,5 @@ export default defineConfig({
     server: { entry: "server" },
   },
   // MapLibre v6 resolves its worker relative to its own module; pre-bundling breaks that URL.
-  vite: { optimizeDeps: { exclude: ["maplibre-gl"] } },
+  vite: { optimizeDeps: { exclude: ["maplibre-gl"] }, worker: { format: "es" } },
 });

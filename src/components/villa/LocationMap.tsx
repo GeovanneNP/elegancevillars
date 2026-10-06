@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "maplibre-gl/dist/maplibre-gl.css";
+import mapWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import type { Map as MlMap, Marker, StyleSpecification, LayerSpecification } from "maplibre-gl";
 import { pois, type Category, type PoiId } from "./locationPlaces";
 
@@ -79,6 +80,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
     let cancelled = false;
     (async () => {
       const [maplibregl, res] = await Promise.all([import("maplibre-gl"), fetch(STYLE_URL)]);
+      maplibregl.setWorkerUrl(mapWorkerUrl);
       const style = darken((await res.json()) as StyleSpecification);
       if (cancelled || !container.current) return;
       const isTouch = window.matchMedia("(pointer: coarse)").matches;
