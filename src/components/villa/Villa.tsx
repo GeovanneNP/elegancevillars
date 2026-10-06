@@ -350,7 +350,7 @@ export function Villa() {
         </div>
         <div className="col-span-12 md:col-span-4 md:col-start-9">
           <p data-fade className="eyebrow mb-8 text-wood">{t.interiorKicker}</p>
-          <h3 className="font-serif text-5xl font-light leading-[1.02] md:text-6xl">
+          <h3 className="font-serif text-4xl font-light leading-[1.06] sm:text-5xl md:text-6xl md:leading-[1.02]">
             <Lines lines={t.interiorTitle} />
           </h3>
           <p data-fade className="mt-10 leading-relaxed text-charcoal/80">{t.interiorText}</p>
