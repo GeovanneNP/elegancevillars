@@ -65,7 +65,7 @@ export function LocationExperience({ t }: Props) {
           <article ref={(el) => { blocks.current[0] = el; }} data-category="lifestyle" data-poi="palace" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
             <p className="eyebrow text-wood">{loc.palace.eyebrow}</p>
             <p className="eyebrow mt-10 text-muted-foreground">{loc.tiers[0]}</p>
-            <h3 className="mt-4 font-serif text-6xl font-light uppercase leading-[0.9] text-swiss-red md:text-7xl">{loc.palace.name}</h3>
+            <h3 className="mt-4 font-serif text-5xl font-light uppercase leading-[0.9] text-swiss-red md:text-7xl">{loc.palace.name}</h3>
             <p className="mt-4 font-serif text-3xl italic text-swiss-red">{loc.palace.stars}</p>
             <figure className="mt-10 overflow-hidden">
               <img src={img.villarsPalace} alt={t.palaceImageAlt} loading="lazy" width={1093} height={768} className="aspect-[4/3] w-full object-cover" />
@@ -84,7 +84,7 @@ export function LocationExperience({ t }: Props) {
           {/* 02 Montagne */}
           <article ref={(el) => { blocks.current[1] = el; }} data-category="montagne" data-poi="roc" className="flex flex-col justify-center border-b py-24 md:min-h-svh">
             <p className="eyebrow text-wood">{loc.mountain.eyebrow}</p>
-            <p className="mt-10 font-serif text-[7rem] font-light leading-none tabular-nums md:text-[9rem]">{loc.mountain.time}</p>
+            <p className="mt-10 font-serif text-[5rem] font-light leading-none tabular-nums md:text-[9rem]">{loc.mountain.time}</p>
             <h3 className="mt-4 font-serif text-3xl md:text-4xl">{loc.mountain.title}</h3>
             <p className="mt-6 max-w-sm text-lg leading-relaxed text-charcoal/80">{loc.mountain.text}</p>
             <p className="eyebrow mt-10 border-t pt-5 leading-loose text-muted-foreground">{loc.tiers[1]} · {loc.mountain.more}</p>
@@ -93,7 +93,7 @@ export function LocationExperience({ t }: Props) {
           {/* 03 Éducation */}
           <article ref={(el) => { blocks.current[2] = el; }} data-category="education" className="flex flex-col justify-center py-24 md:min-h-svh">
             <p className="eyebrow text-wood">{loc.edu.eyebrow}</p>
-            <h3 data-category="education" data-poi="beausoleil" className="mt-8 font-serif text-5xl font-light uppercase leading-[0.9] md:text-6xl">{loc.edu.title[0]}<br />{loc.edu.title[1]}</h3>
+            <h3 data-category="education" data-poi="beausoleil" className="mt-8 font-serif text-4xl font-light uppercase leading-[0.9] md:text-6xl">{loc.edu.title[0]}<br />{loc.edu.title[1]}</h3>
             <p className="mt-6 max-w-sm text-lg leading-relaxed text-charcoal/80">{loc.edu.text}</p>
             <ol className="-mx-5 mt-12 flex snap-x snap-mandatory gap-0 overflow-x-auto px-5 md:mx-0 md:block md:overflow-visible md:px-0">
               {loc.edu.schools.map((s) => {
@@ -136,7 +136,7 @@ export function LocationExperience({ t }: Props) {
         <div className="grid grid-cols-12 gap-6">
           <p className="eyebrow col-span-12 text-wood md:col-span-3">{loc.label}</p>
           <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <h2 className="font-serif text-6xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
+            <h2 className="font-serif text-5xl font-light uppercase leading-[0.88] md:text-8xl lg:text-9xl">
               <span data-lines>{loc.title.map((line, i) => <span key={i} className="line-mask"><span>{line} </span></span>)}</span>
             </h2>
             <p data-fade className="mt-10 max-w-md font-serif text-2xl italic text-charcoal/80 md:text-3xl">{loc.text}</p>
