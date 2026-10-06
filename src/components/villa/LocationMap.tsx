@@ -129,7 +129,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
   useEffect(() => {
     markers.current.forEach(({ el }, id) => {
       const poi = pois.find((p) => p.id === id)!;
-      const [name, sub] = names[id];
+      const name = names[id][0] ?? ""; const sub = names[id][1] ?? "";
       (el.querySelector(".loc-name") as HTMLElement).textContent = name;
       (el.querySelector(".loc-sub") as HTMLElement).textContent = sub;
       el.setAttribute("aria-label", `${name} — ${sub}`);
