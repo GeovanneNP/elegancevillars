@@ -3,13 +3,12 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import mapWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import type { Map as MlMap, Marker, StyleSpecification, LayerSpecification } from "maplibre-gl";
 import { pois, type Category, type PoiId } from "./locationPlaces";
-import mapStyleAsset from "@/assets/openfreemap-positron.json.asset.json";
+import mapStyle from "./openfreemap-style.json";
 
 // Map paint cannot read CSS variables: these mirror the --swiss-red / --ivory tokens.
 const WINE = "#830b18";
 const IVORY = "#f4f1ea";
 const BG = "#ffffff";
-const STYLE_URL = mapStyleAsset.url;
 
 type Props = {
   names: Record<PoiId, readonly string[]>;
@@ -71,13 +70,10 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
   useEffect(() => {
     if (!container.current) return;
     let cancelled = false;
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 12000);
     (async () => {
-      const [maplibregl, res] = await Promise.all([import("maplibre-gl"), fetch(STYLE_URL, { signal: controller.signal, cache: "force-cache" })]);
-      if (!res.ok) throw new Error(`Map style request failed (${res.status})`);
+      const maplibregl = await import("maplibre-gl");
       maplibregl.setWorkerUrl(mapWorkerUrl);
-      const style = restyleMap((await res.json()) as StyleSpecification);
+      const style = restyleMap(mapStyle as StyleSpecification);
       if (cancelled || !container.current) return;
       const isTouch = window.matchMedia("(pointer: coarse)").matches;
       const map = new maplibregl.Map({
@@ -95,8 +91,11 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
       });
       mapRef.current = map;
       map.on("load", () => {
-        const villars = pois.find((p) => p.id === "villars")!.lngLat;
-        const roc = pois.find((p) => p.id === "roc")!.lngLat;
+        const villarsPoi = pois.find((p) => p.id === "villars");
+        const rocPoi = pois.find((p) => p.id === "roc");
+        if (!villarsPoi || !rocPoi) return;
+        const villars = villarsPoi.lngLat;
+        const roc = rocPoi.lngLat;
         map.addSource("route", { type: "geojson", data: { type: "Feature", properties: {}, geometry: { type: "LineString", coordinates: [villars, roc] } } });
         map.addLayer({ id: "route", type: "line", source: "route", paint: { "line-color": WINE, "line-width": 2, "line-dasharray": [2, 1.5] } });
         map.resize();
@@ -124,8 +123,6 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
     window.addEventListener("resize", resize);
     return () => {
       cancelled = true;
-      window.clearTimeout(timeout);
-      controller.abort();
       window.removeEventListener("resize", resize);
       markers.current.forEach(({ marker }) => marker.remove());
       markers.current.clear();
@@ -137,7 +134,8 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
   // Labels and highlighted state
   useEffect(() => {
     markers.current.forEach(({ el }, id) => {
-      const poi = pois.find((p) => p.id === id)!;
+      const poi = pois.find((p) => p.id === id);
+      if (!poi) return;
       const name = names[id][0] ?? ""; const sub = names[id][1] ?? "";
       (el.querySelector(".loc-name") as HTMLElement).textContent = name;
       (el.querySelector(".loc-sub") as HTMLElement).textContent = sub;
@@ -154,8 +152,10 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !ready) return;
-    const villars = pois.find((p) => p.id === "villars")!.lngLat;
-    const poi = pois.find((p) => p.id === activeId) ?? pois.find((p) => p.id === "villars")!;
+    const villarsPoi = pois.find((p) => p.id === "villars");
+    const poi = pois.find((p) => p.id === activeId) ?? villarsPoi;
+    if (!villarsPoi || !poi) return;
+    const villars = villarsPoi.lngLat;
     const target = poi.lngLat;
     const src = map.getSource("route") as { setData: (d: unknown) => void } | undefined;
     const setLine = (end: [number, number]) => {
