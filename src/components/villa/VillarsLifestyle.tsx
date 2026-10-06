@@ -130,7 +130,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       <section className="bg-ivory px-5 py-32 md:px-12 md:py-52">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 md:col-span-5">
-            <h2 className="font-serif text-6xl font-light leading-none md:text-8xl">{t.lakeTitle}</h2>
+            <h2 className="font-serif text-6xl font-light leading-[1.02] md:text-8xl">{t.lakeTitle}</h2>
             <p className="mt-12 font-serif text-7xl font-light tabular-nums md:text-9xl">{t.lakeStat}</p>
             <p className="mt-5 font-serif text-3xl italic md:text-4xl">{t.lakeText}</p>
             <p data-fade className="eyebrow mt-10 max-w-xs leading-relaxed text-muted-foreground">{t.lakeWalk}</p>
@@ -166,7 +166,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           <p className="eyebrow text-ivory/80">{t.regionalLevel}</p>
           <div>
             <h2 className="font-serif text-7xl font-light md:text-9xl">{t.glacierTitle}</h2>
-            <p className="mt-6 max-w-3xl font-serif text-4xl font-light leading-none md:text-6xl">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
+            <p className="mt-6 max-w-3xl font-serif text-4xl font-light leading-[1.02] md:text-6xl">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
           </div>
           <div className="grid grid-cols-12 gap-6 border-t border-ivory/30 pt-6">
             <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/70">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>

@@ -81,7 +81,7 @@ export function DossierDialog({ open, onOpenChange, lang }: { open: boolean; onO
             <Button variant="ghost" size="icon" className="absolute right-4 top-4 text-charcoal hover:bg-stone" aria-label={t.close}><X className="size-5" /></Button>
           </Dialog.Close>
           <p className="eyebrow mb-6 text-wood">Villars-sur-Ollon · 044598</p>
-          <Dialog.Title className="max-w-md font-serif text-5xl font-light leading-none sm:text-6xl">{t.title}</Dialog.Title>
+          <Dialog.Title className="max-w-md font-serif text-5xl font-light leading-[1.02] sm:text-6xl">{t.title}</Dialog.Title>
           {status === "success" ? (
             <div role="status" className="mt-10 border-t pt-8">
               <p className="font-serif text-3xl">{t.success}</p>

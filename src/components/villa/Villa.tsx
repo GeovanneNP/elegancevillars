@@ -410,7 +410,7 @@ export function Villa() {
       {/* DETAILS */}
       <section id="details" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-4">
-          <h2 className="font-serif text-6xl font-light leading-none md:sticky md:top-24 md:text-7xl">
+          <h2 className="font-serif text-6xl font-light leading-[1.02] md:sticky md:top-24 md:text-7xl">
             <Lines lines={[t.detailsTitle]} />
           </h2>
         </div>
