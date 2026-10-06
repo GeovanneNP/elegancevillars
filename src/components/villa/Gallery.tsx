@@ -51,7 +51,7 @@ export function Gallery({ t }: { t: Dict }) {
   }, [open, go]);
 
   return (
-    <section id="gallery" className="bg-ivory px-5 py-32 md:px-12 md:py-48" onMouseMove={move}>
+    <section id="gallery" className="bg-ivory px-5 py-24 md:px-12 md:py-48" onMouseMove={move}>
       <div className="mb-16 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-b pb-6 md:mb-20">
         <h2 className="min-w-0 break-words font-serif text-5xl font-light sm:text-6xl md:text-9xl">{t.galleryTitle}</h2>
          <span className="eyebrow shrink-0 text-right text-[0.58rem] text-muted-foreground sm:text-[0.6875rem]">0{n} — {t.galleryCount}</span>
@@ -86,10 +86,10 @@ export function Gallery({ t }: { t: Dict }) {
             <span className="eyebrow text-ivory/60">{String(open + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span>
              <Button variant="ghost" onClick={() => setOpen(null)} className="eyebrow text-ivory hover:text-gold">ESC — {t.galleryClose}</Button>
           </div>
-          <div className="relative flex flex-1 items-center justify-center px-4 md:px-24">
+          <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 md:px-24">
              <img key={open} src={galleryImages[open]?.src} alt={t.galleryAlts[open]} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
-             <Button variant="ghost" onClick={() => go(-1)} aria-label={t.galleryPrevious} className="absolute left-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8">←</Button>
-             <Button variant="ghost" onClick={() => go(1)} aria-label={t.galleryNext} className="absolute right-2 p-4 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8">→</Button>
+             <Button variant="ghost" onClick={() => go(-1)} aria-label={t.galleryPrevious} className="absolute left-0 p-3 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8 md:p-4">←</Button>
+             <Button variant="ghost" onClick={() => go(1)} aria-label={t.galleryNext} className="absolute right-0 p-3 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8 md:p-4">→</Button>
           </div>
            <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{t.galleryAlts[open]}</p>
         </div>

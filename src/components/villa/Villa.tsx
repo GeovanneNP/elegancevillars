@@ -210,8 +210,11 @@ export function Villa() {
            .from("[data-bal-text] > *", { opacity: 0, y: 12, stagger: 0.08, duration: 0.22 }, 0.5);
       });
     }, root);
-    const refresh = () => ScrollTrigger.refresh();
-    const refreshTimer = window.setTimeout(refresh, 80);
+    let refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 80);
+    const refresh = () => {
+      window.clearTimeout(refreshTimer);
+      refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 180);
+    };
     const images = Array.from(root.current?.querySelectorAll("img") ?? []);
     images.forEach((image) => {
       if (!image.complete) image.addEventListener("load", refresh, { once: true });
@@ -245,12 +248,12 @@ export function Villa() {
   };
 
   return (
-    <div ref={root} className="overflow-x-clip pb-20 md:pb-0">
+    <div ref={root} className="overflow-x-clip pb-24 md:pb-0">
       <Preloader onDone={onDone} />
 
       {/* NAV */}
-       <header className="relative z-40 flex min-h-20 items-center justify-between gap-4 bg-swiss-red px-5 py-3 text-ivory md:min-h-24 md:px-12">
-         <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block w-40 shrink-0 md:w-56">
+       <header className="relative z-40 grid min-h-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 bg-swiss-red px-5 py-3 text-ivory md:flex md:min-h-24 md:justify-between md:px-12">
+         <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block min-w-0 w-36 md:w-56">
            <img src={logo.url} alt="Brodard Property" className="w-full object-contain" />
          </a>
         <nav className="flex items-center gap-6 md:gap-10">
@@ -263,7 +266,7 @@ export function Villa() {
               </li>
             ))}
           </ul>
-           <div className="eyebrow flex gap-2">
+           <div className="eyebrow flex shrink-0 gap-1.5 sm:gap-2">
             {langs.map((l, i) => (
               <span key={l} className="flex gap-2">
                 {i > 0 && <span className="text-ivory/40">|</span>}
@@ -275,15 +278,15 @@ export function Villa() {
       </header>
 
       {/* HERO */}
-        <section id="top" data-hero className="relative h-[calc(90svh-5rem)] min-h-[560px] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)]">
+        <section id="top" data-hero className="relative h-[calc(100svh-5rem)] min-h-[620px] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)] md:min-h-[560px]">
         <div data-hero-wrap className="absolute inset-0">
             <img data-hero-img src={img.exterior} alt={t.galleryAlts[6]} fetchPriority="high" className="h-full w-full object-cover object-center" />
         </div>
           <div className="absolute inset-0 bg-swiss-red/20" />
-         <div className="relative flex h-full flex-col justify-end px-5 pb-20 md:px-12 md:pb-20">
+         <div className="relative flex h-full flex-col justify-end px-5 pb-16 md:px-12 md:pb-20">
           <div data-hero-title>
             <p data-hero-fade className="eyebrow mb-6 text-ivory/80">{t.heroKicker}</p>
-             <h1 className="font-serif text-6xl font-light leading-[0.92] sm:text-7xl md:text-8xl lg:text-9xl">
+             <h1 className="font-serif text-[3.45rem] font-light leading-[0.94] sm:text-7xl md:text-8xl md:leading-[0.92] lg:text-9xl">
               <Lines lines={t.heroTitle} />
             </h1>
           </div>
@@ -329,7 +332,7 @@ export function Villa() {
       </section>
 
       {/* FACTS */}
-      <section className="bg-swiss-red px-5 py-32 text-ivory md:px-12 md:py-48">
+       <section className="bg-swiss-red px-5 py-24 text-ivory md:px-12 md:py-48">
         <h2 className="max-w-5xl font-serif text-4xl font-light leading-[1.02] md:text-7xl">
           <Lines lines={t.factsTitle} />
         </h2>
@@ -344,7 +347,7 @@ export function Villa() {
       </section>
 
       {/* INTERIOR */}
-      <section className="grid grid-cols-12 items-center gap-6 bg-stone px-5 py-32 md:px-12 md:py-48">
+       <section className="grid grid-cols-12 items-center gap-6 bg-stone px-5 py-24 md:px-12 md:py-48">
         <div className="relative col-span-12 aspect-[4/5] overflow-hidden md:col-span-7 md:aspect-[5/6]">
            <img data-speed="6" src={img.kitchen} alt={t.imageAlts.kitchen} loading="lazy" className="absolute inset-0 h-[115%] w-full -translate-y-[7%] object-cover" />
         </div>
@@ -361,7 +364,7 @@ export function Villa() {
       {/* BEDROOM */}
        <section data-bedroom className="relative bg-ivory text-charcoal md:h-[170svh]">
         <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
-          <div data-bed-title className="flex flex-col justify-center px-5 py-32 md:absolute md:inset-0 md:px-12 md:py-0">
+           <div data-bed-title className="flex flex-col justify-center px-5 py-24 md:absolute md:inset-0 md:px-12 md:py-0">
              <h2 className="font-serif text-5xl font-light leading-[0.96] sm:text-6xl md:text-8xl md:leading-[0.92] lg:text-9xl">
                <span>{t.bedroomTitle.map((l, i) => (
                  <span key={i} className={`line-mask ${i === 1 ? "md:pl-[12vw] italic" : ""}`}><span>{l}</span></span>
@@ -372,7 +375,7 @@ export function Villa() {
              <img src={img.bedroom} alt={t.imageAlts.bedroom} loading="lazy" className="h-full w-full object-cover" />
              <div className="absolute inset-0 bg-swiss-red/10" />
           </div>
-          <figure data-bed-img2 className="relative mx-5 -mt-24 w-[60%] md:absolute md:bottom-12 md:right-12 md:mx-0 md:mt-0 md:w-[24vw]">
+          <figure data-bed-img2 className="relative mx-5 -mt-16 w-[68%] md:absolute md:bottom-12 md:right-12 md:mx-0 md:mt-0 md:w-[24vw]">
              <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" className="aspect-[4/5] w-full object-cover" />
              <figcaption className="mt-3 text-xs leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
           </figure>
@@ -397,7 +400,7 @@ export function Villa() {
       <VillarsLifestyle t={t} activeSeason={activeSeason} onSeasonChange={setActiveSeason} />
 
       {/* DETAILS */}
-      <section id="details" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
+       <section id="details" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-24 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-4">
           <h2 className="font-serif text-5xl font-light leading-[1.04] sm:text-6xl md:sticky md:top-24 md:text-7xl md:leading-[1.02]">
             <Lines lines={[t.detailsTitle]} />
@@ -436,7 +439,7 @@ export function Villa() {
       <Gallery t={t} />
 
       {/* OWNERSHIP */}
-      <section className="relative grid grid-cols-12 gap-6 overflow-hidden bg-stone px-5 py-32 md:px-12 md:py-48">
+       <section className="relative grid grid-cols-12 gap-6 overflow-hidden bg-stone px-5 py-24 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-7">
            <h2 className="font-serif text-5xl font-light leading-[0.96] sm:text-6xl md:text-7xl md:leading-[0.92] lg:text-8xl">
             <Lines lines={t.ownTitle} />
