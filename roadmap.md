@@ -109,3 +109,10 @@
 - [x] Keep an “Arrange a viewing” action available throughout the experience on mobile and desktop.
 - [x] Replace small supporting photographs with full-width or dominant editorial treatments.
 - [x] Verify all enlarged imagery, contact access and motion at 390 px, 430 px, laptop and desktop.
+
+## Sales-first journey and readable typography (Oct 10)
+- [x] Move property details, amenities, gallery, price and dossier before all location and entertainment content.
+- [x] Route every viewing action directly to Gregory's WhatsApp with the active-language message.
+- [x] Keep the viewing action visible from the first screen on mobile and desktop.
+- [x] Raise the global auxiliary-text size and remove undersized local labels.
+- [ ] Verify section order, WhatsApp links and legibility across all target widths and languages.

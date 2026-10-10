@@ -14,7 +14,7 @@
 - Property photos use faithful restored WebP versions of the brochure originals; direct-sale contact uses the owner's supplied email and phone via mailto/tel links, without a backend form — this avoids invented property views or routing leads to the former agency.
 - The entrance uses the supplied logo as a transparent CDN asset, and Swiss red/light surfaces replace black backgrounds — this preserves the client's brand while avoiding black page panels.
 - Dossier enquiries are validated in a public server function and stored in a locked Cloud table for manual owner follow-up; no dossier file is available to send automatically.
-- The Villars location and lifestyle narrative is isolated in VillarsLifestyle and mounted in the original location slot — this preserves every approved property and conversion section unchanged.
+- The Villars location and lifestyle narrative stays isolated in VillarsLifestyle and follows property details, gallery, price and conversion sections — this keeps the sales journey focused on the apartment before regional lifestyle content.
 - The location map uses MapLibre with a locally served OpenFreeMap style, remote OpenFreeMap tiles recoloured as white and Swiss red, and OSM-geocoded coordinates; maplibre-gl stays outside Vite pre-bundling — this removes intermittent style startup while retaining free tiles and a deploy-safe worker.
 - Location photography must be a verified licensed view or an exact user-supplied image of the named place, with visible source or provenance — this prevents synthetic or unrelated tourism imagery from being presented as factual.
 - The page is trilingual (FR default, EN, DE); every dictionary language is typed against the French Dict so missing keys fail the typecheck.
