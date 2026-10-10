@@ -25,7 +25,7 @@ const photoCredits = {
 } as const;
 
 function PhotoCredit({ label, credit }: { label: string; credit: (typeof photoCredits)[keyof typeof photoCredits] }) {
-  return <figcaption className="eyebrow mt-3 text-muted-foreground">{label}: <a href={credit.href} target="_blank" rel="noreferrer" className="underline decoration-current/40 underline-offset-4">{credit.author} · {credit.license}</a></figcaption>;
+  return <figcaption className="eyebrow mt-3 text-current opacity-80">{label}: <a href={credit.href} target="_blank" rel="noreferrer" className="underline decoration-current/40 underline-offset-4">{credit.author} · {credit.license}</a></figcaption>;
 }
 
 export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
@@ -36,7 +36,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
 
       <section data-bretaye className="bg-swiss-red px-5 py-28 text-ivory md:px-12 md:py-40">
-        <p className="eyebrow mb-16 text-ivory/65">{t.accessLevel}</p>
+        <p className="eyebrow mb-16 text-ivory/90 md:text-ivory/75">{t.accessLevel}</p>
         <div className="grid grid-cols-12 items-end gap-6">
           <div className="col-span-12 md:col-span-8">
             <div className="flex items-center justify-between gap-5">
@@ -48,7 +48,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
               <span data-bretaye-dot className="absolute left-0 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ivory" />
             </div>
           </div>
-          <p className="eyebrow col-span-12 text-ivory/70 md:col-span-3 md:col-start-10">{t.bretayeTime}</p>
+          <p className="eyebrow col-span-12 text-ivory/90 md:col-span-3 md:col-start-10 md:text-ivory/75">{t.bretayeTime}</p>
           <p data-fade className="col-span-12 mt-10 max-w-md text-lg leading-relaxed text-ivory/85 md:col-span-4 md:col-start-7">{t.bretayeText}</p>
           <figure data-clip className="col-span-12 mt-12 md:col-span-8 md:col-start-3">
             <div className="aspect-[3/2] overflow-hidden">
@@ -61,35 +61,35 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
 
       <section className="relative min-h-[80svh] overflow-hidden bg-swiss-red text-ivory">
         <div className="relative flex min-h-[80svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
-          <p className="eyebrow text-ivory/80">{t.accessLevel} · {t.golfLabel}</p>
+          <p className="eyebrow text-ivory/95 md:text-ivory/80">{t.accessLevel} · {t.golfLabel}</p>
           <h2 className="max-w-5xl font-serif text-5xl font-light uppercase leading-[0.92] md:text-8xl md:leading-[0.88] lg:text-9xl">
             <span data-lines>{t.golfTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
           </h2>
           <div className="flex flex-col gap-4 border-t border-ivory/30 pt-6 md:flex-row md:items-end md:justify-between">
-            <div>{t.golfStats.map((stat) => <p key={stat} className="eyebrow mt-2 normal-case tracking-[0.2em] text-ivory/80">{stat}</p>)}</div>
+            <div>{t.golfStats.map((stat) => <p key={stat} className="eyebrow mt-2 normal-case tracking-[0.12em] text-ivory/95 md:tracking-[0.2em] md:text-ivory/80">{stat}</p>)}</div>
             <p className="max-w-sm font-serif text-2xl italic md:text-3xl">{t.golfText}</p>
           </div>
         </div>
       </section>
 
       <section className="relative min-h-[85svh] overflow-hidden bg-swiss-red text-ivory">
-        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover opacity-75" />
-        <div className="absolute inset-0 bg-swiss-red/30" />
+        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover opacity-90 md:opacity-80" />
+        <div className="absolute inset-0 bg-swiss-red/15 md:bg-swiss-red/25" />
         <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
-          <p className="eyebrow text-ivory/80">{t.regionalLevel}</p>
+          <p className="eyebrow text-ivory/95 md:text-ivory/80">{t.regionalLevel}</p>
           <div>
             <h2 className="font-serif text-6xl font-light md:text-9xl">{t.glacierTitle}</h2>
             <p className="mt-6 max-w-3xl font-serif text-3xl font-light leading-[1.08] md:text-6xl md:leading-[1.02]">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
           </div>
           <div className="grid grid-cols-12 gap-6 border-t border-ivory/30 pt-6">
-            <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/70">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
+            <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/95 md:text-ivory/75">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
             <p className="col-span-12 max-w-sm self-end font-serif text-2xl italic md:col-span-4 md:col-start-8 md:text-3xl">{t.glacierText}</p>
           </div>
-          <figure className="mt-10 w-full md:mt-12 md:w-[58vw]">
+          <figure className="mt-10 w-full text-ivory md:mt-12 md:w-[58vw]">
             <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[16/9] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
           </figure>
-          <div className="absolute bottom-3 left-5 text-ivory md:left-12"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
+          <div className="mt-6 border-t border-ivory/30 pt-4 text-ivory"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
         </div>
       </section>
 
@@ -122,9 +122,9 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <article key={name} data-season-step className="flex min-h-0 flex-col justify-center border-t border-ivory/20 px-5 py-16 md:min-h-[68svh] md:px-12">
                <img src={seasonImages[index]} alt={t.imageAlts.seasons[index]} loading="lazy" className="mb-10 aspect-[16/9] w-full object-cover opacity-70 md:hidden" />
               <Button variant="ghost" onClick={() => onSeasonChange(index)} className="h-auto justify-start p-0 text-left text-ivory hover:bg-transparent hover:text-ivory">
-                <span className="eyebrow mr-4 shrink-0 text-ivory/50 sm:mr-6">{number}</span><span className="min-w-0 break-words font-serif text-4xl font-light sm:text-5xl md:text-6xl">{name}</span>
+                <span className="eyebrow mr-4 shrink-0 text-ivory/85 sm:mr-6 md:text-ivory/60">{number}</span><span className="min-w-0 break-words font-serif text-4xl font-light sm:text-5xl md:text-6xl">{name}</span>
               </Button>
-              <p className="eyebrow mt-8 leading-relaxed text-ivory/65">{activities}</p>
+              <p className="eyebrow mt-8 leading-relaxed text-ivory/90 md:text-ivory/75">{activities}</p>
               <p className="mt-5 max-w-sm font-serif text-2xl italic text-ivory/90">{copy}</p>
             </article>
           ))}

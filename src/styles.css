@@ -112,13 +112,19 @@ html.lenis, html.lenis body { height: auto; }
     line-height: 1.55;
   }
   .villa-page .loc-sub { font-size: 16px; letter-spacing: 0; }
-  .villa-page .loc-label { width: 160px; max-width: 160px; white-space: normal; }
+  .villa-page .loc-label { width: min(145px, 42vw); max-width: min(145px, 42vw); white-space: normal; }
   .villa-page .loc-marker[data-id="villars"] .loc-label { width: 100px; }
   .villa-page .loc-map .maplibregl-ctrl-attrib,
   .villa-page .loc-map .maplibregl-ctrl-attrib.maplibregl-compact {
     font-size: 16px;
     max-width: 100%;
     line-height: 1.5;
+  }
+  .villa-page [data-lines] .line-mask > span,
+  .villa-page [data-fade],
+  .villa-page [data-clip],
+  .villa-page [data-gal] {
+    will-change: auto;
   }
 }
 

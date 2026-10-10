@@ -164,7 +164,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
     };
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.innerWidth < 768;
-    const pad = small ? { top: 70, bottom: 70, left: 50, right: 50 } : { top: 120, bottom: 120, left: 110, right: 190 };
+    const pad = small ? { top: 88, bottom: 96, left: 34, right: 34 } : { top: 120, bottom: 120, left: 110, right: 190 };
     const lngs = [villars[0], target[0]]; const lats = [villars[1], target[1]];
     const cam = map.cameraForBounds([[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]], { padding: pad, maxZoom: 14.5 });
     if (!cam?.center) return;
@@ -204,7 +204,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
           </a>
         </div>
       )}
-      <p className="pointer-events-none absolute bottom-24 inset-x-4 font-sans text-sm md:bottom-3 md:right-auto md:max-w-[65%] md:text-base leading-relaxed tracking-normal text-swiss-red/80">
+      <p className="pointer-events-none absolute bottom-4 inset-x-4 max-w-[calc(100%-2rem)] bg-paper/90 px-2 py-1 font-sans text-sm leading-relaxed tracking-normal text-swiss-red md:bottom-3 md:right-auto md:max-w-[65%] md:bg-transparent md:p-0 md:text-base md:text-swiss-red/80">
         <span className="mr-2 inline-block h-px w-5 align-middle" style={{ background: WINE, borderTop: `1px dashed ${IVORY}00` }} />
         {routeLabel}
       </p>

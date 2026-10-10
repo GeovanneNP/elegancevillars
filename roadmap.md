@@ -1,5 +1,11 @@
 # Roadmap
 
+## Complete mobile visual audit and correction (Oct 10)
+- [x] Rebuild the 320–430 px hero composition, wrapping and persistent viewing clearance.
+- [x] Correct mobile image framing, overlay contrast, map density and horizontal content cues.
+- [x] Simplify mobile scroll effects while preserving the complete desktop choreography.
+- [x] Verify FR/EN/DE across phone, tablet and desktop sizes with real scrolling and overlays.
+
 ## Larger mobile text and WhatsApp access (Oct 10)
 - [x] Enlarge both smallest mobile text tiers without changing desktop typography.
 - [x] Keep WhatsApp accessible across screen sizes, gallery and dossier views without covering their controls.
