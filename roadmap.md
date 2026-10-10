@@ -108,4 +108,4 @@
 ## Persistent viewing action and large photography (Oct 10)
 - [x] Keep an “Arrange a viewing” action available throughout the experience on mobile and desktop.
 - [x] Replace small supporting photographs with full-width or dominant editorial treatments.
-- [ ] Verify all enlarged imagery, contact access and motion at 390 px, 430 px, laptop and desktop.
+- [x] Verify all enlarged imagery, contact access and motion at 390 px, 430 px, laptop and desktop.

@@ -502,7 +502,7 @@ export function Villa() {
               <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right text-[0.58rem] leading-relaxed text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></Button>
            </div>
          </div>
-          {pastHero && <Button onClick={() => scrollTo("contact")} className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-56 items-center justify-between rounded-none border border-ivory/25 bg-swiss-red px-6 py-5 text-ivory shadow-lg hover:bg-swiss-red/90 md:flex">{t.visitCta}<span aria-hidden="true">→</span></Button>}
+          {pastHero && <Button onClick={() => scrollTo("contact")} className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-56 items-center justify-between rounded-none border border-ivory/25 bg-swiss-red px-6 py-5 text-ivory hover:bg-swiss-red/90 md:flex">{t.visitCta}<span aria-hidden="true">→</span></Button>}
           </>
        )}
     </div>
