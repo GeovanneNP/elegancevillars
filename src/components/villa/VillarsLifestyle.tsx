@@ -85,8 +85,8 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/70">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
             <p className="col-span-12 max-w-sm self-end font-serif text-2xl italic md:col-span-4 md:col-start-8 md:text-3xl">{t.glacierText}</p>
           </div>
-          <figure className="mt-8 w-36 md:absolute md:bottom-40 md:right-12 md:w-64">
-            <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[4/3] w-full object-cover" />
+          <figure className="mt-10 w-full md:mt-12 md:w-[58vw]">
+            <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[16/9] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
           </figure>
           <div className="absolute bottom-3 left-5 text-ivory md:left-12"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
@@ -184,12 +184,12 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <p className="mt-5 font-serif text-3xl italic md:text-4xl">{t.lakeText}</p>
             <p data-fade className="eyebrow mt-10 max-w-xs leading-relaxed text-muted-foreground">{t.lakeWalk}</p>
           </div>
-          <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-7 md:mt-20">
+          <figure data-clip className="col-span-12 mt-12 overflow-hidden md:mt-20">
             <img src={img.lacChavonnes} alt={t.imageAlts.lake} loading="lazy" width={1600} height={1072} className="aspect-[3/2] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.lake} />
           </figure>
-          <figure data-clip className="col-span-9 mt-8 overflow-hidden md:col-span-4 md:col-start-2 md:-mt-16">
-             <img src={img.lacChavonnesReflection} alt={t.imageAlts.lakeReflection} loading="lazy" width={2272} height={1514} className="aspect-[3/2] w-full object-cover" />
+          <figure data-clip className="col-span-12 mt-8 overflow-hidden md:mt-16">
+             <img src={img.lacChavonnesReflection} alt={t.imageAlts.lakeReflection} loading="lazy" width={2272} height={1514} className="aspect-[16/9] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.lakeReflection} />
           </figure>
         </div>
@@ -200,12 +200,12 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           <h2 className="col-span-12 font-serif text-5xl font-light leading-[0.94] md:col-span-6 md:text-8xl md:leading-[0.9]">
             <span data-lines>{t.nearbyTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
           </h2>
-          <div className="col-span-12 mt-12 border-t md:col-span-5 md:col-start-8 md:mt-0">
+           <div className="col-span-12 mt-12 border-t md:col-span-8 md:col-start-5 md:mt-0">
              {t.nearby.map(([place, items], index) => {
                const source = index === 0 ? img.chateauAigle : index === 1 ? img.bexVillage : img.chillonLeman;
                const alt = index === 0 ? t.imageAlts.aigle : index === 1 ? t.imageAlts.bex : t.imageAlts.chillon;
                const credit = index === 0 ? photoCredits.aigle : index === 1 ? photoCredits.bex : photoCredits.chillon;
-               return <div data-fade key={place} className="border-b py-7"><p className="eyebrow mb-4 text-wood">{index < 2 ? t.regionalLevel : t.beyondLevel}</p><h3 className="font-serif text-3xl">{place}</h3><p className="eyebrow mt-3 leading-relaxed text-muted-foreground">{items}</p><figure className="mt-8"><img src={source} alt={alt} loading="lazy" width={2400} height={index === 2 ? 1800 : 1600} className="aspect-[3/2] w-full object-cover" /><PhotoCredit label={t.photoCredit} credit={credit} /></figure></div>;
+                return <div data-fade key={place} className="border-b py-12"><p className="eyebrow mb-4 text-wood">{index < 2 ? t.regionalLevel : t.beyondLevel}</p><h3 className="font-serif text-4xl">{place}</h3><p className="eyebrow mt-3 leading-relaxed text-muted-foreground">{items}</p><figure className="mt-8"><img src={source} alt={alt} loading="lazy" width={2400} height={index === 2 ? 1800 : 1600} className="aspect-[16/9] w-full object-cover" /><PhotoCredit label={t.photoCredit} credit={credit} /></figure></div>;
              })}
           </div>
         </div>

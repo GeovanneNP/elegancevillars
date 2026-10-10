@@ -6,11 +6,11 @@ import { Button } from "@/components/ui/button";
 
 const layout = [
   "col-span-12 aspect-[16/9]",
-  "col-span-12 md:col-span-5 aspect-[4/5]",
-  "col-span-12 md:col-span-6 md:col-start-7 md:mt-40 aspect-[4/3]",
-  "col-span-6 md:col-span-4 md:col-start-2 aspect-[3/4]",
-  "col-span-6 md:col-span-6 md:col-start-6 aspect-[3/4] md:aspect-[4/3]",
-  "col-span-12 md:col-span-8 md:col-start-5 aspect-[16/10]",
+  "col-span-12 aspect-[4/3] md:col-span-10 md:col-start-1 md:aspect-[16/9]",
+  "col-span-12 aspect-[4/3] md:col-span-10 md:col-start-3 md:aspect-[16/9]",
+  "col-span-12 aspect-[4/3] md:col-span-10 md:col-start-1 md:aspect-[16/9]",
+  "col-span-12 aspect-[4/3] md:col-span-10 md:col-start-3 md:aspect-[16/9]",
+  "col-span-12 aspect-[16/10]",
   "col-span-12 aspect-[21/9]",
 ];
 
@@ -56,7 +56,7 @@ export function Gallery({ t }: { t: Dict }) {
         <h2 className="min-w-0 break-words font-serif text-5xl font-light sm:text-6xl md:text-9xl">{t.galleryTitle}</h2>
          <span className="eyebrow shrink-0 text-right text-[0.58rem] text-muted-foreground sm:text-[0.6875rem]">0{n} — {t.galleryCount}</span>
       </div>
-      <div className="grid grid-cols-12 gap-4 md:gap-8">
+      <div className="grid grid-cols-12 gap-y-8 md:gap-y-20">
         {galleryImages.map((g, i) => (
           <Button
             variant="ghost"
