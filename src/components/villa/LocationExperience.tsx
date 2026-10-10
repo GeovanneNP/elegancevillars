@@ -74,9 +74,9 @@ export function LocationExperience({ t }: Props) {
             <ul className="mt-10 space-y-1">
               {loc.palace.lines.map((l) => <li key={l} className="font-serif text-2xl text-charcoal/85">{l}</li>)}
             </ul>
-            <div className="mt-10 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-t pt-5">
+            <div className="mt-10 grid grid-cols-1 gap-3 border-t pt-5 min-[520px]:grid-cols-[minmax(0,1fr)_auto] min-[520px]:items-end min-[520px]:gap-4">
               <p className="eyebrow text-charcoal">{loc.palace.distance}</p>
-              <p className="eyebrow text-right text-muted-foreground normal-case tracking-[0.14em]">{loc.palace.address}</p>
+              <p className="min-w-0 break-words text-base leading-relaxed text-muted-foreground min-[520px]:text-right">{loc.palace.address}</p>
             </div>
             <p className="mt-8 max-w-sm text-sm leading-relaxed text-charcoal/70">{loc.lifestyleNote}</p>
           </article>
