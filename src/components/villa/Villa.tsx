@@ -294,7 +294,7 @@ export function Villa() {
           </div>
         </div>
          <div className="absolute bottom-4 right-5 hidden flex-col items-center gap-2 md:bottom-6 md:right-12 md:flex">
-          <span className="eyebrow text-[0.55rem] text-ivory/70">{t.scroll}</span>
+          <span className="eyebrow text-ivory/80">{t.scroll}</span>
           <span className="relative h-10 w-px overflow-hidden bg-ivory/20">
             <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_2.2s_ease-in-out_infinite] bg-ivory" />
           </span>
@@ -365,7 +365,7 @@ export function Villa() {
         </div>
          <figure data-bed-img2 className="relative w-full bg-ivory px-5 py-8 md:absolute md:bottom-0 md:left-0 md:z-10 md:w-[58vw] md:px-12 md:py-10">
             <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" width={1600} height={2000} className="aspect-[4/3] w-full object-cover object-center" />
-            <figcaption className="mt-3 text-xs leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
+            <figcaption className="mt-3 text-sm leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
          </figure>
       </section>
 
@@ -469,7 +469,7 @@ export function Villa() {
                <a href={visitUrl} target="_blank" rel="noreferrer" className="eyebrow mt-8 self-start border-b border-ivory/40 pb-1 text-ivory/80 transition-colors hover:text-ivory">{t.whatsapp} →</a>
            </div>
         </div>
-         <footer className="grid gap-4 border-t border-ivory/10 px-5 py-8 text-xs text-ivory/40 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-12">
+         <footer className="grid gap-4 border-t border-ivory/10 px-5 py-8 text-sm leading-relaxed text-ivory/60 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-12">
            <span>{t.reference} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
            <span className="flex flex-wrap gap-x-5 gap-y-2 md:justify-end"><span>{t.rights}</span><Link to="/legal" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.legal}</Link><Link to="/privacy" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.privacy}</Link></span>
         </footer>
