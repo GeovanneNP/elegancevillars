@@ -17,6 +17,7 @@ const photoCredits = {
   bretaye: { author: "flybyeigenheer", license: "CC BY-SA 2.0", href: "https://commons.wikimedia.org/wiki/File:BVB_BDeh_2-4_25_zwischen_B%C3%A9vieux-Villars_(29360738720).jpg" },
   lake: { author: "Calimo", license: "CC BY-SA 3.0", href: "https://commons.wikimedia.org/wiki/File:Lac_des_Chavonnes.jpg" },
   lakeReflection: { author: "André Mouraux", license: "CC BY 2.0", href: "https://commons.wikimedia.org/wiki/File:Lac_des_Chavonnes_(23730784).jpg" },
+  glacier: { author: "Deralpinbergsteiger", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:Glacier_300_walk.jpg" },
   peakWalk: { author: "Zacharie Grossen", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:Easy_Summit.jpg" },
   aigle: { author: "Falk2", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:L03_498_Schloss_Aigle.jpg" },
   chillon: { author: "Christian David", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:Chillon_viewed_from_south_2021.jpg" },
@@ -88,6 +89,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[4/3] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
           </figure>
+          <div className="absolute bottom-3 left-5 text-ivory md:left-12"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
         </div>
       </section>
 
@@ -108,6 +110,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <p className="eyebrow mb-5 text-ivory/70">{t.seasonStates[activeSeason]?.[1]}</p>
             <h2 className="font-serif text-5xl font-light uppercase leading-[0.88] lg:text-9xl">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
             <p className="mt-7 max-w-md font-serif text-2xl italic text-ivory/85">{t.seasonStates[activeSeason]?.[3]}</p>
+             <p className="eyebrow mt-5 text-[0.55rem] text-ivory/65">{t.photoCredit}: {activeSeason === 0 ? "Alexey Filatov · CC BY-SA 4.0" : activeSeason === 1 ? "André Mouraux · CC BY 2.0" : activeSeason === 2 ? "Calimo · CC BY-SA 3.0" : "Wouter Hagens · CC BY-SA 3.0"}</p>
           </div>
         </div>
         <div className="md:col-span-5">
@@ -171,20 +174,6 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <p data-fade className="mt-8 max-w-xs text-lg leading-relaxed text-charcoal/80">{t.skiText}</p>
           </div>
         </div>
-      </section>
-
-      <section className="grid grid-cols-12 gap-6 bg-ivory px-5 py-32 md:px-12 md:py-48">
-        <div className="col-span-12 md:col-span-5">
-          <p data-fade className="eyebrow text-wood">{t.locationLevel} · {t.rocLabel}</p>
-           <h2 className="mt-8 font-serif text-5xl font-light leading-[0.94] text-swiss-red md:text-7xl md:leading-[0.9] lg:text-8xl">
-            <span data-lines>{t.rocTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
-          </h2>
-          <p data-fade className="mt-10 max-w-sm text-lg leading-relaxed text-charcoal/80">{t.rocText}</p>
-        </div>
-        <figure data-clip className="col-span-12 mt-12 overflow-hidden md:col-span-6 md:col-start-7 md:mt-0">
-          <img src={img.rocOrsay} alt={t.imageAlts.roc} loading="lazy" width={1600} height={1200} className="aspect-[4/5] w-full object-cover" />
-          <PhotoCredit label={t.photoCredit} credit={photoCredits.roc} />
-        </figure>
       </section>
 
       <section className="bg-ivory px-5 py-32 md:px-12 md:py-52">
