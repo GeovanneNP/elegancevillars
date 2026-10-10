@@ -1,5 +1,10 @@
 # Roadmap
 
+## Larger mobile text and WhatsApp access (Oct 10)
+- [ ] Enlarge both smallest mobile text tiers without changing desktop typography.
+- [ ] Keep WhatsApp accessible across screen sizes, gallery and dossier views without covering their controls.
+- [ ] Verify responsive layouts and translated WhatsApp destinations.
+
 ## Mobile-first readability and usability (Oct 10)
 - [ ] Enlarge mobile supporting text and map labels while preserving desktop sizes.
 - [ ] Adjust wrapping, language controls and persistent viewing action for comfortable touch use.

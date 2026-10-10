@@ -97,11 +97,27 @@ html.lenis, html.lenis body { height: auto; }
 
 @utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.55;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   @media (min-width: 768px) { font-size: 0.9375rem; }
+}
+
+/* The two smallest mobile tiers share a comfortable reading size. */
+@media (max-width: 767px) {
+  .villa-page .text-sm, .villa-dossier .text-sm,
+  .villa-dossier input, .villa-dossier button[type="submit"] {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  .loc-sub { font-size: 16px; letter-spacing: 0; }
+  .loc-map .maplibregl-ctrl-attrib,
+  .loc-map .maplibregl-ctrl-attrib.maplibregl-compact {
+    font-size: 16px;
+    max-width: 100%;
+    line-height: 1.5;
+  }
 }
 
 @utility line-mask {
