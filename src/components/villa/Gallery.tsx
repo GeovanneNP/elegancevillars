@@ -12,7 +12,7 @@ const layout = [
   "col-span-12 aspect-[4/3] md:col-span-10 md:col-start-1 md:aspect-[16/9]",
   "col-span-12 aspect-[4/3] md:col-span-10 md:col-start-3 md:aspect-[16/9]",
   "col-span-12 aspect-[16/10]",
-  "col-span-12 aspect-[21/9]",
+  "col-span-12 aspect-[4/3] md:aspect-[21/9]",
 ];
 
 export function Gallery({ t, visitUrl, onOpenChange }: { t: Dict; visitUrl: string; onOpenChange: (open: boolean) => void }) {

@@ -44,6 +44,7 @@ export function Villa() {
   const [activeSeason, setActiveSeason] = useState(0);
   const t = dict[lang];
   const root = useRef<HTMLDivElement>(null);
+  const mobileVisitBar = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const marquee = useRef<gsap.core.Tween | null>(null);
   const onDone = useCallback(() => setReady(true), []);
@@ -75,6 +76,20 @@ export function Villa() {
     };
   }, []);
 
+  useEffect(() => {
+    const bar = mobileVisitBar.current;
+    const page = root.current;
+    if (!bar || !page) return;
+    const update = () => page.style.setProperty("--mobile-visit-height", `${bar.getBoundingClientRect().height}px`);
+    const observer = new ResizeObserver(update);
+    observer.observe(bar);
+    update();
+    return () => {
+      observer.disconnect();
+      page.style.removeProperty("--mobile-visit-height");
+    };
+  }, [dossierOpen, galleryOpen, lang]);
+
   // Scroll choreography
   useEffect(() => {
     if (!ready) return;
@@ -83,17 +98,12 @@ export function Villa() {
     let mm: gsap.MatchMedia | undefined;
     const ctx = gsap.context(() => {
       const finishOnLeave = (self: ScrollTrigger) => self.animation?.progress(1);
+      mm = gsap.matchMedia();
 
       // Hero intro
       gsap.fromTo("[data-hero-img]", { scale: 1.045 }, { scale: 1, duration: 1.8, ease: "power2.out" });
       gsap.from("[data-hero] .line-mask > span", { yPercent: 105, duration: 1.05, stagger: 0.08, ease: "expo.out", delay: 0.05 });
       gsap.from("[data-hero-fade]", { opacity: 0, duration: 0.8, stagger: 0.06, delay: 0.4, ease: motion.ease });
-
-      // Hero camera on scroll
-      const heroTl = gsap.timeline({ scrollTrigger: { trigger: "[data-hero]", start: "top top", end: "bottom 12%", scrub: motion.scrub, invalidateOnRefresh: true } });
-      heroTl.to("[data-hero-wrap]", { scale: 1.075, ease: "none" }, 0)
-        .to("[data-hero-title]", { yPercent: -24, ease: "none" }, 0)
-        .to("[data-hero-meta]", { opacity: 0, y: -20, ease: "none" }, 0);
 
       // Line reveals (except hero)
       gsap.utils.toArray<HTMLElement>("[data-lines]").forEach((el) => {
@@ -108,13 +118,6 @@ export function Villa() {
        gsap.utils.toArray<HTMLElement>("[data-fade]").forEach((el) => {
          gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.75, ease: motion.ease, scrollTrigger: { trigger: el, start: "top 90%", onLeave: finishOnLeave } });
        });
-
-      // Parallax speeds
-      gsap.utils.toArray<HTMLElement>("[data-speed]").forEach((el) => {
-        const s = parseFloat(el.dataset["speed"] || "0");
-        const distance = Math.min(Math.abs(s), 7) * Math.sign(s || 1);
-        gsap.fromTo(el, { yPercent: -distance }, { yPercent: distance, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: motion.scrub, invalidateOnRefresh: true } });
-      });
 
       // Counters
       gsap.utils.toArray<HTMLElement>("[data-count]").forEach((el) => {
@@ -168,8 +171,18 @@ export function Villa() {
       });
 
       // Desktop-only pinned sequences
-      mm = gsap.matchMedia();
       mm.add("(min-width: 768px)", () => {
+        const heroTl = gsap.timeline({ scrollTrigger: { trigger: "[data-hero]", start: "top top", end: "bottom 12%", scrub: motion.scrub, invalidateOnRefresh: true } });
+        heroTl.to("[data-hero-wrap]", { scale: 1.075, ease: "none" }, 0)
+          .to("[data-hero-title]", { yPercent: -24, ease: "none" }, 0)
+          .to("[data-hero-meta]", { opacity: 0, y: -20, ease: "none" }, 0);
+
+        gsap.utils.toArray<HTMLElement>("[data-speed]").forEach((el) => {
+          const s = parseFloat(el.dataset["speed"] || "0");
+          const distance = Math.min(Math.abs(s), 7) * Math.sign(s || 1);
+          gsap.fromTo(el, { yPercent: -distance }, { yPercent: distance, ease: "none", scrollTrigger: { trigger: el.parentElement, start: "top bottom", end: "bottom top", scrub: motion.scrub, invalidateOnRefresh: true } });
+        });
+
         gsap.utils.toArray<HTMLElement>("[data-season-step]").forEach((el, index) => {
           ScrollTrigger.create({
             trigger: el,
@@ -238,7 +251,7 @@ export function Villa() {
   };
 
   return (
-    <div ref={root} className="villa-page overflow-x-clip pb-32 md:pb-0">
+    <div ref={root} className="villa-page overflow-x-clip pb-[calc(var(--mobile-visit-height,5rem)+1.5rem)] md:pb-0">
       <Preloader onDone={onDone} />
 
       {/* NAV */}
@@ -268,29 +281,29 @@ export function Villa() {
       </header>
 
       {/* HERO */}
-        <section id="top" data-hero className="relative h-[calc(100svh-5rem)] min-h-[620px] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)] md:min-h-[560px]">
+        <section id="top" data-hero className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)] md:min-h-[560px]">
         <div data-hero-wrap className="absolute inset-0">
-            <img data-hero-img src={img.exterior} alt={t.galleryAlts[6]} fetchPriority="high" className="h-full w-full object-cover object-center" />
+            <img data-hero-img src={img.exterior} alt={t.galleryAlts[6]} fetchPriority="high" className="h-full w-full object-cover object-[center_42%] md:object-center" />
         </div>
-          <div className="absolute inset-0 bg-swiss-red/20" />
-         <div className="relative flex h-full flex-col justify-end px-5 pb-28 md:px-12 md:pb-20">
+          <div className="absolute inset-0 bg-swiss-red/30 md:bg-swiss-red/20" />
+         <div className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-end px-5 pb-28 pt-[52svh] md:h-full md:min-h-0 md:px-12 md:pb-20 md:pt-0">
           <div data-hero-title>
-            <p data-hero-fade className="eyebrow mb-6 text-ivory/80">{t.heroKicker}</p>
-             <h1 className="font-serif text-[3.45rem] font-light leading-[0.94] sm:text-7xl md:text-8xl md:leading-[0.92] lg:text-9xl">
+            <p data-hero-fade className="eyebrow mb-5 text-ivory/95 md:mb-6 md:text-ivory/80">{t.heroKicker}</p>
+             <h1 className="max-w-full font-serif text-5xl font-light leading-[0.98] min-[360px]:text-[3.45rem] min-[420px]:text-6xl sm:text-7xl md:text-8xl md:leading-[0.92] lg:text-9xl">
               <Lines lines={t.heroTitle} />
             </h1>
           </div>
-          <div data-hero-meta className="mt-10 flex flex-col gap-6 border-t border-ivory/25 pt-6 md:flex-row md:items-center md:justify-between">
-            <ul className="flex flex-wrap gap-x-8 gap-y-2">
+          <div data-hero-meta className="mt-8 flex flex-col gap-5 border-t border-ivory/35 pt-5 md:mt-10 md:flex-row md:items-center md:justify-between md:border-ivory/25 md:pt-6">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 min-[390px]:flex min-[390px]:flex-wrap min-[390px]:gap-x-7">
               {t.heroMeta.map((m) => (
                 <li data-hero-fade key={m} className="eyebrow text-ivory/90">{m}</li>
               ))}
             </ul>
-             <div data-hero-fade className="flex flex-wrap items-center gap-x-8 gap-y-4">
-               <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto items-center gap-4 p-0 text-ivory hover:bg-transparent hover:text-ivory">
-                 {t.heroCta}<span className="h-px w-8 bg-ivory transition-all duration-700 group-hover:w-12" />
+             <div data-hero-fade className="grid gap-4 md:flex md:flex-wrap md:items-center md:gap-x-8">
+                <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto min-w-0 w-full items-center justify-between gap-3 whitespace-normal p-0 text-left text-ivory hover:bg-transparent hover:text-ivory md:w-auto md:justify-start md:gap-4">
+                 <span className="min-w-0 break-words">{t.heroCta}</span><span className="h-px w-8 shrink-0 bg-ivory transition-all duration-700 group-hover:w-12" />
                </Button>
-               <Button asChild variant="ghost" className="eyebrow group flex h-auto items-center gap-2 p-0 text-ivory/85 hover:bg-transparent hover:text-ivory">
+               <Button asChild variant="ghost" className="eyebrow group flex h-auto min-w-0 w-full items-center justify-between gap-2 whitespace-normal p-0 text-left text-ivory hover:bg-transparent md:w-auto md:justify-start md:text-ivory/85">
                  <a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></a>
                </Button>
              </div>
@@ -308,11 +321,11 @@ export function Villa() {
         <section id="residence" data-living className="relative bg-ivory md:h-[150svh]">
          <div className="relative h-[78svh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-living-frame className="absolute inset-0 overflow-hidden">
-             <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-swiss-red/20" />
+             <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="absolute inset-x-0 -top-[6%] h-[112%] w-full object-cover object-[center_62%] md:inset-0 md:h-full md:object-center" />
+              <div className="absolute inset-0 bg-swiss-red/30 md:bg-swiss-red/20" />
           </div>
           <div data-living-text className="absolute bottom-10 inset-x-5 text-ivory md:bottom-16 md:left-12 md:right-auto">
-            <p className="eyebrow mb-4 text-ivory/80">01</p>
+            <p className="eyebrow mb-4 text-ivory/95 md:text-ivory/80">01</p>
             <p className="mb-6 font-serif text-3xl italic md:text-6xl">{t.livingTitle}</p>
             {t.livingWords.map((w) => (
               <p key={w} className="font-serif text-2xl font-light md:text-3xl">{w}</p>
@@ -376,7 +389,7 @@ export function Villa() {
        <section data-balcony className="relative bg-ivory md:h-[160svh]">
         <div className="relative h-[90vh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bal-frame className="absolute inset-0 overflow-hidden">
-             <img src={img.balcony} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover" />
+             <img src={img.balcony} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover object-[58%_center] md:object-center" />
               <div className="absolute inset-0 bg-swiss-red/30" />
           </div>
           <div data-bal-text className="absolute inset-x-5 bottom-14 text-ivory md:inset-x-12 md:bottom-20">
@@ -463,7 +476,7 @@ export function Villa() {
              <h2 className="font-serif text-5xl font-light leading-[0.96] sm:text-6xl md:text-7xl md:leading-[0.92] lg:text-8xl">
               <Lines lines={t.contactTitle} />
             </h2>
-            <p data-fade className="eyebrow mt-12 text-ivory/50">{t.contactText}</p>
+            <p data-fade className="eyebrow mt-12 text-ivory/85 md:text-ivory/70">{t.contactText}</p>
              <div data-fade className="mt-10 h-px w-16 bg-ivory/40" />
           </div>
            <div data-fade className="col-span-12 mt-10 flex flex-col justify-end border-t border-ivory/20 pt-8 md:col-span-5 md:col-start-8 md:mt-0">
@@ -480,10 +493,10 @@ export function Villa() {
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
         {!dossierOpen && !galleryOpen && (
           <>
-           <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
-            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
-               <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 610'000.-</span>
-              <Button asChild variant="ghost" className="eyebrow h-auto min-h-12 min-w-0 justify-end gap-2 whitespace-normal p-0 text-right leading-relaxed tracking-normal text-ivory hover:bg-transparent hover:text-ivory"><a href={visitUrl} target="_blank" rel="noopener noreferrer"><MessageCircle aria-hidden="true" className="size-5 shrink-0" /><span className="min-w-0 break-words">{t.visitCta}</span></a></Button>
+           <div ref={mobileVisitBar} className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/25 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
+            <div className="grid grid-cols-1 items-center gap-2 min-[380px]:grid-cols-[auto_minmax(0,1fr)] min-[380px]:gap-3">
+               <span className="hidden whitespace-nowrap font-serif text-xl tabular-nums min-[380px]:inline">CHF 610'000.-</span>
+              <Button asChild variant="ghost" className="eyebrow h-auto min-h-12 min-w-0 w-full justify-center gap-3 whitespace-normal p-0 text-center leading-snug tracking-[0.08em] text-ivory hover:bg-transparent hover:text-ivory min-[380px]:justify-end min-[380px]:text-right min-[380px]:tracking-normal"><a href={visitUrl} target="_blank" rel="noopener noreferrer"><MessageCircle aria-hidden="true" className="size-5 shrink-0" /><span className="min-w-0 break-words">{t.visitCta}</span></a></Button>
            </div>
          </div>
           <Button asChild className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-64 max-w-[calc(100vw-4rem)] items-center justify-between gap-4 whitespace-normal rounded-none border border-ivory/25 bg-swiss-red px-7 py-6 text-ivory hover:bg-swiss-red/90 md:flex"><a href={visitUrl} target="_blank" rel="noopener noreferrer">{t.visitCta}<MessageCircle aria-hidden="true" className="size-5 shrink-0" /></a></Button>
