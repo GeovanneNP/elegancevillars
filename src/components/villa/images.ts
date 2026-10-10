@@ -18,6 +18,7 @@ import chateauAigleAsset from "@/assets/chateau-aigle.webp.asset.json";
 import chillonLemanAsset from "@/assets/chillon-leman.webp.asset.json";
 import villarsSkiAsset from "@/assets/villars-ski.jpg.asset.json";
 import villarsPalaceAsset from "@/assets/villars-palace-winter.jpg.asset.json";
+import bexVillageAsset from "@/assets/bex-village.jpg.asset.json";
 
 export const img = {
   living,
@@ -40,6 +41,7 @@ export const img = {
   chillonLeman: chillonLemanAsset.url,
   villarsSki: villarsSkiAsset.url,
   villarsPalace: villarsPalaceAsset.url,
+  bexVillage: bexVillageAsset.url,
 };
 
 export const galleryImages = [

@@ -20,6 +20,7 @@ const photoCredits = {
   peakWalk: { author: "Zacharie Grossen", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:Easy_Summit.jpg" },
   aigle: { author: "Falk2", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:L03_498_Schloss_Aigle.jpg" },
   chillon: { author: "Christian David", license: "CC BY-SA 4.0", href: "https://commons.wikimedia.org/wiki/File:Chillon_viewed_from_south_2021.jpg" },
+  bex: { author: "Sandro Senn", license: "CC BY 3.0", href: "https://commons.wikimedia.org/wiki/File:Bex.jpg" },
 } as const;
 
 function PhotoCredit({ label, credit }: { label: string; credit: (typeof photoCredits)[keyof typeof photoCredits] }) {
@@ -96,8 +97,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <img
               key={source}
               src={source}
-              alt=""
-              aria-hidden="true"
+              alt={t.imageAlts.seasons[index]}
               loading="lazy"
               className={`absolute inset-0 h-full w-full object-cover transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none ${activeSeason === index ? "scale-100 opacity-55" : "scale-[1.025] opacity-0"}`}
             />
@@ -117,7 +117,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
           </div>
           {t.seasonStates.map(([number, name, activities, copy], index) => (
             <article key={name} data-season-step className="flex min-h-0 flex-col justify-center border-t border-ivory/20 px-5 py-16 md:min-h-[68svh] md:px-12">
-              <img src={seasonImages[index]} alt="" aria-hidden="true" loading="lazy" className="mb-10 aspect-[16/9] w-full object-cover opacity-70 md:hidden" />
+               <img src={seasonImages[index]} alt={t.imageAlts.seasons[index]} loading="lazy" className="mb-10 aspect-[16/9] w-full object-cover opacity-70 md:hidden" />
               <Button variant="ghost" onClick={() => onSeasonChange(index)} className="h-auto justify-start p-0 text-left text-ivory hover:bg-transparent hover:text-ivory">
                 <span className="eyebrow mr-4 shrink-0 text-ivory/50 sm:mr-6">{number}</span><span className="min-w-0 break-words font-serif text-4xl font-light sm:text-5xl md:text-6xl">{name}</span>
               </Button>
@@ -200,7 +200,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <PhotoCredit label={t.photoCredit} credit={photoCredits.lake} />
           </figure>
           <figure data-clip className="col-span-9 mt-8 overflow-hidden md:col-span-4 md:col-start-2 md:-mt-16">
-            <img src={img.lacChavonnesReflection} alt={t.imageAlts.lake} loading="lazy" width={2272} height={1514} className="aspect-[3/2] w-full object-cover" />
+             <img src={img.lacChavonnesReflection} alt={t.imageAlts.lakeReflection} loading="lazy" width={2272} height={1514} className="aspect-[3/2] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.lakeReflection} />
           </figure>
         </div>
@@ -212,7 +212,12 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <span data-lines>{t.nearbyTitle.map((line, index) => <span key={index} className="line-mask"><span>{line} </span></span>)}</span>
           </h2>
           <div className="col-span-12 mt-12 border-t md:col-span-5 md:col-start-8 md:mt-0">
-            {t.nearby.map(([place, items], index) => <div data-fade key={place} className="border-b py-7"><p className="eyebrow mb-4 text-wood">{index < 2 ? t.regionalLevel : t.beyondLevel}</p><h3 className="font-serif text-3xl">{place}</h3><p className="eyebrow mt-3 leading-relaxed text-muted-foreground">{items}</p>{index !== 1 && <figure className="mt-8"><img src={index === 0 ? img.chateauAigle : img.chillonLeman} alt={index === 0 ? t.imageAlts.aigle : t.imageAlts.chillon} loading="lazy" width={2400} height={index === 0 ? 1600 : 1800} className="aspect-[3/2] w-full object-cover" /><PhotoCredit label={t.photoCredit} credit={index === 0 ? photoCredits.aigle : photoCredits.chillon} /></figure>}</div>)}
+             {t.nearby.map(([place, items], index) => {
+               const source = index === 0 ? img.chateauAigle : index === 1 ? img.bexVillage : img.chillonLeman;
+               const alt = index === 0 ? t.imageAlts.aigle : index === 1 ? t.imageAlts.bex : t.imageAlts.chillon;
+               const credit = index === 0 ? photoCredits.aigle : index === 1 ? photoCredits.bex : photoCredits.chillon;
+               return <div data-fade key={place} className="border-b py-7"><p className="eyebrow mb-4 text-wood">{index < 2 ? t.regionalLevel : t.beyondLevel}</p><h3 className="font-serif text-3xl">{place}</h3><p className="eyebrow mt-3 leading-relaxed text-muted-foreground">{items}</p><figure className="mt-8"><img src={source} alt={alt} loading="lazy" width={2400} height={index === 2 ? 1800 : 1600} className="aspect-[3/2] w-full object-cover" /><PhotoCredit label={t.photoCredit} credit={credit} /></figure></div>;
+             })}
           </div>
         </div>
       </section>
