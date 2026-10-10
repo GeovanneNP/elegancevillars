@@ -204,7 +204,7 @@ export function LocationMap({ names, category, activeId, onSelect, label, routeL
           </a>
         </div>
       )}
-      <p className="pointer-events-none absolute bottom-8 left-4 max-w-[65%] font-sans text-sm md:bottom-3 md:text-base leading-relaxed tracking-[0.08em] text-swiss-red/80">
+      <p className="pointer-events-none absolute bottom-24 inset-x-4 font-sans text-sm md:bottom-3 md:right-auto md:max-w-[65%] md:text-base leading-relaxed tracking-normal text-swiss-red/80">
         <span className="mr-2 inline-block h-px w-5 align-middle" style={{ background: WINE, borderTop: `1px dashed ${IVORY}00` }} />
         {routeLabel}
       </p>

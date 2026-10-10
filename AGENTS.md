@@ -18,4 +18,5 @@
 - The location map uses MapLibre with a locally served OpenFreeMap style, remote OpenFreeMap tiles recoloured as white and Swiss red, and OSM-geocoded coordinates; maplibre-gl stays outside Vite pre-bundling — this removes intermittent style startup while retaining free tiles and a deploy-safe worker.
 - Location photography must be a verified licensed view or an exact user-supplied image of the named place, with visible source or provenance — this prevents synthetic or unrelated tourism imagery from being presented as factual.
 - The page is trilingual (FR default, EN, DE); every dictionary language is typed against the French Dict so missing keys fail the typecheck.
+- Viewing links use the shared visit URL helper; overlays expose their own viewing link while suppressing the floating action — this keeps the destination consistent and prevents covered controls.
 - Public URLs and listing metadata use brodardproperty.ch as canonical while legacy domains redirect to it — this keeps search and sharing signals on the Brodard Property identity.

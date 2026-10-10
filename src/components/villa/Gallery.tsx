@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { galleryImages } from "./images";
 import type { Dict } from "./i18n";
 import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
 
 const layout = [
   "col-span-12 aspect-[16/9]",
@@ -14,10 +15,12 @@ const layout = [
   "col-span-12 aspect-[21/9]",
 ];
 
-export function Gallery({ t }: { t: Dict }) {
+export function Gallery({ t, visitUrl, onOpenChange }: { t: Dict; visitUrl: string; onOpenChange: (open: boolean) => void }) {
   const [open, setOpen] = useState<number | null>(null);
   const cursor = useRef<HTMLDivElement>(null);
   const reduceMotion = useRef(false);
+
+  useEffect(() => { onOpenChange(open !== null); }, [open, onOpenChange]);
 
   const move = (e: React.MouseEvent) => {
     if (reduceMotion.current || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
@@ -91,7 +94,8 @@ export function Gallery({ t }: { t: Dict }) {
              <Button variant="ghost" onClick={() => go(-1)} aria-label={t.galleryPrevious} className="absolute left-0 p-3 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8 md:p-4">←</Button>
              <Button variant="ghost" onClick={() => go(1)} aria-label={t.galleryNext} className="absolute right-0 p-3 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8 md:p-4">→</Button>
           </div>
-           <p className="px-6 pb-8 text-center font-serif text-lg italic text-ivory/70">{t.galleryAlts[open]}</p>
+           <p className="px-6 pb-4 text-center font-serif text-lg italic text-ivory/70">{t.galleryAlts[open]}</p>
+           <Button asChild variant="ghost" className="eyebrow mx-6 mb-[calc(1rem+env(safe-area-inset-bottom))] h-auto min-h-12 gap-3 whitespace-normal text-ivory hover:bg-transparent hover:text-gold"><a href={visitUrl} target="_blank" rel="noopener noreferrer"><MessageCircle aria-hidden="true" className="size-5 shrink-0" />{t.visitCta}</a></Button>
         </div>
       )}
     </section>

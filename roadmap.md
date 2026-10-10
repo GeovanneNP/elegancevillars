@@ -1,9 +1,14 @@
 # Roadmap
 
+## Larger mobile text and WhatsApp access (Oct 10)
+- [x] Enlarge both smallest mobile text tiers without changing desktop typography.
+- [x] Keep WhatsApp accessible across screen sizes, gallery and dossier views without covering their controls.
+- [x] Verify responsive layouts and translated WhatsApp destinations.
+
 ## Mobile-first readability and usability (Oct 10)
-- [ ] Enlarge mobile supporting text and map labels while preserving desktop sizes.
-- [ ] Adjust wrapping, language controls and persistent viewing action for comfortable touch use.
-- [ ] Verify mobile layouts, languages, gallery and dossier without horizontal overflow.
+- [x] Enlarge mobile supporting text and map labels while preserving desktop sizes.
+- [x] Adjust wrapping, language controls and persistent viewing action for comfortable touch use.
+- [x] Verify mobile layouts, languages, gallery and dossier without horizontal overflow.
 
 - [x] Remove brokerage branding, broker contact, portrait and email pathways.
 - [x] Restore brochure photography faithfully and optimize it for the page.
