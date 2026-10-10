@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/villa/LegalPage";
+import { useEffect, useState } from "react";
+import type { Lang } from "@/components/villa/i18n";
 
 const url = "https://www.brodardproperty.ch/privacy";
 const title = "Politique de confidentialité | Brodard Property";
@@ -11,12 +13,27 @@ export const Route = createFileRoute("/privacy")({
 });
 
 function Privacy() {
-  return <LegalPage eyebrow="nLPD · Suisse" title="Politique de confidentialité" intro="Cette politique explique comment les données transmises au sujet du bien sont traitées." back="Retour au bien" sections={[
-    { title: "Responsable", paragraphs: ["Brodard Property Sàrl", "Contact pour toute question ou demande : gregory.brodard@pfgbrodard.ch · +41 79 727 31 88."] },
-    { title: "Données traitées", paragraphs: ["Lorsque vous demandez le dossier privé, nous recueillons votre nom, votre adresse e-mail, votre téléphone si vous choisissez de le transmettre, la langue de votre demande et la référence du bien."] },
-    { title: "Finalités", paragraphs: ["Ces données servent uniquement à répondre à votre demande, organiser un échange ou une visite, et assurer le suivi de votre intérêt pour le bien. Elles ne sont pas vendues."] },
-    { title: "Conservation et sécurité", paragraphs: ["Les demandes sont conservées pendant la durée nécessaire au suivi commercial et aux obligations légales applicables, puis supprimées ou anonymisées. Des mesures adaptées protègent leur accès."] },
-    { title: "Vos droits", paragraphs: ["Conformément à la nLPD, vous pouvez demander l’accès, la rectification ou la suppression de vos données, sous réserve des obligations légales de conservation, en écrivant à l’adresse de contact ci-dessus."] },
-    { title: "Services techniques", paragraphs: ["Le site utilise des services d’hébergement, de stockage sécurisé, de cartographie et de polices nécessaires à son fonctionnement. Ces prestataires peuvent traiter des données techniques telles que l’adresse IP et les informations du navigateur selon leurs propres conditions."] },
-  ]} />;
+  const [lang, setLang] = useState<Lang>("fr");
+  useEffect(() => { const saved = localStorage.getItem("villars-lang"); if (saved === "en" || saved === "de") setLang(saved); }, []);
+  const copy = {
+    fr: { title: "Politique de confidentialité", intro: "Cette politique explique comment les données transmises au sujet du bien sont traitées.", back: "Retour au bien", sections: [
+      { title: "Responsable", paragraphs: ["Brodard Property Sàrl · gregory.brodard@pfgbrodard.ch · +41 79 727 31 88."] },
+      { title: "Données et finalités", paragraphs: ["Pour une demande de dossier, nous recueillons votre nom, e-mail, téléphone facultatif, langue et référence du bien afin de répondre, organiser un échange ou une visite et suivre votre intérêt. Ces données ne sont pas vendues."] },
+      { title: "Conservation et droits", paragraphs: ["Les demandes sont conservées pendant la durée nécessaire au suivi et aux obligations légales, puis supprimées ou anonymisées. Selon la nLPD, vous pouvez demander accès, rectification ou suppression par e-mail."] },
+      { title: "Services techniques", paragraphs: ["L’hébergement, le stockage sécurisé, la cartographie et les polices peuvent traiter des données techniques nécessaires au fonctionnement du site."] },
+    ] },
+    en: { title: "Privacy policy", intro: "This policy explains how information submitted about the property is handled.", back: "Back to the property", sections: [
+      { title: "Controller", paragraphs: ["Brodard Property Sàrl · gregory.brodard@pfgbrodard.ch · +41 79 727 31 88."] },
+      { title: "Data and purposes", paragraphs: ["For dossier requests, we collect your name, email, optional telephone, language and property reference to answer you, arrange contact or a viewing, and follow up your interest. This information is not sold."] },
+      { title: "Retention and rights", paragraphs: ["Requests are retained as needed for follow-up and legal obligations, then deleted or anonymised. Under Swiss data-protection law, you may request access, correction or deletion by email."] },
+      { title: "Technical services", paragraphs: ["Hosting, secure storage, mapping and font services may process technical information required for the site to operate."] },
+    ] },
+    de: { title: "Datenschutzerklärung", intro: "Diese Erklärung erläutert die Bearbeitung von Angaben, die Sie zur Immobilie übermitteln.", back: "Zurück zur Immobilie", sections: [
+      { title: "Verantwortliche", paragraphs: ["Brodard Property Sàrl · gregory.brodard@pfgbrodard.ch · +41 79 727 31 88."] },
+      { title: "Daten und Zwecke", paragraphs: ["Bei einer Dossieranfrage erfassen wir Name, E-Mail, freiwillige Telefonnummer, Sprache und Objektreferenz, um zu antworten, Kontakt oder eine Besichtigung zu organisieren und Ihr Interesse nachzuverfolgen. Die Daten werden nicht verkauft."] },
+      { title: "Aufbewahrung und Rechte", paragraphs: ["Anfragen werden nur so lange wie für Betreuung und gesetzliche Pflichten nötig aufbewahrt und danach gelöscht oder anonymisiert. Nach Schweizer Datenschutzrecht können Sie per E-Mail Auskunft, Berichtigung oder Löschung verlangen."] },
+      { title: "Technische Dienste", paragraphs: ["Hosting, sicherer Speicher, Karten- und Schriftdienste können für den Betrieb erforderliche technische Daten bearbeiten."] },
+    ] },
+  }[lang];
+  return <LegalPage eyebrow="nLPD · Schweiz" {...copy} />;
 }

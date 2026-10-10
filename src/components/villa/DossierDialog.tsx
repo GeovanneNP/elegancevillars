@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { requestDossier } from "@/lib/dossier.functions";
 import type { Lang } from "./i18n";
+import { Link } from "@tanstack/react-router";
 
 const copy = {
   fr: {
@@ -95,7 +96,7 @@ export function DossierDialog({ open, onOpenChange, lang }: { open: boolean; onO
                 <label className="block text-xs uppercase"><span>{t.email}</span><Input name="email" type="email" autoComplete="email" required maxLength={254} className="mt-2 h-11 rounded-none border-x-0 border-t-0 border-b bg-transparent px-0 shadow-none focus-visible:ring-0 focus-visible:border-wood" /></label>
                 <label className="block text-xs uppercase"><span>{t.phone}</span><Input name="phone" type="tel" autoComplete="tel" maxLength={40} className="mt-2 h-11 rounded-none border-x-0 border-t-0 border-b bg-transparent px-0 shadow-none focus-visible:ring-0 focus-visible:border-wood" /></label>
                 <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px]" />
-                 <p className="text-xs leading-relaxed text-muted-foreground">{lang === "fr" ? "En envoyant cette demande, vous acceptez que vos coordonnées soient utilisées pour vous répondre. Consultez notre politique de confidentialité." : lang === "de" ? "Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Beantwortung Ihrer Anfrage verwendet werden. Lesen Sie unsere Datenschutzerklärung." : "By submitting, you agree that your details may be used to answer your request. See our privacy policy."}</p>
+                 <p className="text-xs leading-relaxed text-muted-foreground">{lang === "fr" ? "En envoyant cette demande, vous acceptez que vos coordonnées soient utilisées pour vous répondre." : lang === "de" ? "Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Beantwortung Ihrer Anfrage verwendet werden." : "By submitting, you agree that your details may be used to answer your request."} <Link to="/privacy" className="underline underline-offset-4">{lang === "fr" ? "Politique de confidentialité" : lang === "de" ? "Datenschutz" : "Privacy policy"}</Link>.</p>
                 {status === "error" && <p role="alert" className="text-sm text-swiss-red">{t.error}</p>}
                 <Button type="submit" disabled={status === "sending"} className="mt-4 flex h-14 w-full justify-between rounded-none bg-swiss-red px-6 text-ivory hover:bg-swiss-red/90">
                   {status === "sending" ? t.sending : t.send}<ArrowRight className="size-4" />
