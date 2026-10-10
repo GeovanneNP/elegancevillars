@@ -3,6 +3,7 @@ import { ClientOnly } from "@tanstack/react-router";
 import type { Dict } from "./i18n";
 import { categories, type Category, type PoiId } from "./locationPlaces";
 import { img } from "./images";
+import { Button } from "@/components/ui/button";
 
 const LocationMap = lazy(() => import("./LocationMap").then((m) => ({ default: m.LocationMap })));
 
@@ -52,9 +53,9 @@ export function LocationExperience({ t }: Props) {
             {categories.map((c, i) => (
               <span key={c} className="flex min-w-0 items-center gap-3">
                 {i > 0 && <span className="hidden h-px w-4 bg-swiss-red/25 md:block" aria-hidden="true" />}
-                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`min-h-11 min-w-0 w-full py-3 text-center font-sans text-sm uppercase tracking-[0.04em] transition-colors md:w-auto md:text-left md:text-base md:tracking-[0.16em] ${category === c ? "text-swiss-red" : "text-swiss-red/55 hover:text-swiss-red/80"}`}>
+                <Button variant="ghost" onClick={() => choose(c)} aria-pressed={category === c} className={`h-auto min-h-14 min-w-0 w-full whitespace-normal px-0 py-3 text-center font-sans text-sm uppercase tracking-[0.04em] transition-colors hover:bg-transparent md:min-h-11 md:w-auto md:text-left md:text-base md:tracking-[0.16em] ${category === c ? "text-swiss-red" : "text-swiss-red/55 hover:text-swiss-red/80"}`}>
                   <span className={`border-b pb-1 ${category === c ? "border-swiss-red" : "border-transparent"}`}>{loc.filters[i]}</span>
-                </button>
+                </Button>
               </span>
             ))}
           </nav>
@@ -74,9 +75,9 @@ export function LocationExperience({ t }: Props) {
             <ul className="mt-10 space-y-1">
               {loc.palace.lines.map((l) => <li key={l} className="font-serif text-2xl text-charcoal/85">{l}</li>)}
             </ul>
-            <div className="mt-10 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 border-t pt-5">
+            <div className="mt-10 grid grid-cols-1 items-end gap-3 border-t pt-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-4">
               <p className="eyebrow text-charcoal">{loc.palace.distance}</p>
-              <p className="eyebrow text-right text-muted-foreground normal-case tracking-[0.14em]">{loc.palace.address}</p>
+              <p className="eyebrow text-muted-foreground normal-case tracking-[0.14em] sm:text-right">{loc.palace.address}</p>
             </div>
             <p className="mt-8 max-w-sm text-sm leading-relaxed text-charcoal/70">{loc.lifestyleNote}</p>
           </article>

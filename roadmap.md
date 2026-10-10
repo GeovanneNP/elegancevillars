@@ -3,6 +3,7 @@
 ## Mobile-first readability and usability (Oct 10)
 - [ ] Enlarge mobile supporting text and map labels while preserving desktop sizes.
 - [ ] Adjust wrapping, language controls and persistent viewing action for comfortable touch use.
+- [ ] Confirm the mobile viewing action is always visible and opens WhatsApp, matching the desktop experience.
 - [ ] Verify mobile layouts, languages, gallery and dossier without horizontal overflow.
 
 - [x] Remove brokerage branding, broker contact, portrait and email pathways.
