@@ -273,7 +273,7 @@ export function Villa() {
             <img data-hero-img src={img.exterior} alt={t.galleryAlts[6]} fetchPriority="high" className="h-full w-full object-cover object-center" />
         </div>
           <div className="absolute inset-0 bg-swiss-red/20" />
-         <div className="relative flex h-full flex-col justify-end px-5 pb-16 md:px-12 md:pb-20">
+         <div className="relative flex h-full flex-col justify-end px-5 pb-28 md:px-12 md:pb-20">
           <div data-hero-title>
             <p data-hero-fade className="eyebrow mb-6 text-ivory/80">{t.heroKicker}</p>
              <h1 className="font-serif text-[3.45rem] font-light leading-[0.94] sm:text-7xl md:text-8xl md:leading-[0.92] lg:text-9xl">
