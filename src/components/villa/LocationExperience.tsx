@@ -110,13 +110,13 @@ export function LocationExperience({ t }: Props) {
                       onFocus={() => { setCategory("education"); setActiveId(s.id as PoiId); }}
                       onClick={() => { setCategory("education"); setActiveId(s.id as PoiId); }}
                       aria-pressed={active}
-                      className={`grid w-full grid-cols-[minmax(0,1fr)_auto] gap-x-3 py-7 text-left transition-opacity duration-500 sm:gap-x-6 ${active ? "opacity-100" : "md:opacity-55 hover:opacity-100"}`}
+                      className={`grid w-full grid-cols-1 gap-y-5 py-7 text-left transition-opacity duration-500 md:grid-cols-[minmax(0,1fr)_auto] md:gap-x-6 md:gap-y-0 ${active ? "opacity-100" : "md:opacity-55 hover:opacity-100"}`}
                     >
                       <span className="min-w-0 break-words font-serif text-xl leading-tight sm:text-2xl md:text-3xl">
                         <span className={`mr-3 inline-block h-2 w-2 rounded-full align-middle transition-colors ${active ? "bg-swiss-red" : "bg-charcoal/25"}`} />
                         {s.name}
                       </span>
-                      <span className="row-span-2 flex flex-col items-end gap-4 text-right">
+                      <span className="flex flex-wrap items-end gap-x-8 gap-y-4 text-left md:row-span-2 md:flex-col md:items-end md:gap-4 md:text-right">
                         {s.stats.map(([v, l], i) => (
                           <span key={l}>
                             <span className={`block font-serif font-light leading-none tabular-nums ${i === 0 ? "text-5xl md:text-6xl" : "text-3xl md:text-4xl"}`}>{v}</span>

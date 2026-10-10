@@ -73,8 +73,8 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       </section>
 
       <section className="relative min-h-[85svh] overflow-hidden bg-swiss-red text-ivory">
-        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover opacity-75" />
-        <div className="absolute inset-0 bg-swiss-red/30" />
+        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover opacity-90 md:opacity-80" />
+        <div className="absolute inset-0 bg-swiss-red/15 md:bg-swiss-red/25" />
         <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
           <p className="eyebrow text-ivory/95 md:text-ivory/80">{t.regionalLevel}</p>
           <div>
@@ -89,7 +89,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[16/9] w-full object-cover" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
           </figure>
-          <div className="absolute bottom-3 left-5 text-ivory md:left-12"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
+          <div className="mt-6 text-ivory/90"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
         </div>
       </section>
 

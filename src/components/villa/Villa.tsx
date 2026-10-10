@@ -299,7 +299,7 @@ export function Villa() {
                 <li data-hero-fade key={m} className="eyebrow text-ivory/90">{m}</li>
               ))}
             </ul>
-             <div data-hero-fade className="grid gap-4 md:flex md:flex-wrap md:items-center md:gap-x-8">
+             <div data-hero-fade className="grid gap-4 md:mr-64 md:flex md:flex-wrap md:items-center md:gap-x-8 lg:mr-72">
                 <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto min-w-0 w-full items-center justify-between gap-3 whitespace-normal p-0 text-left text-ivory hover:bg-transparent hover:text-ivory md:w-auto md:justify-start md:gap-4">
                  <span className="min-w-0 break-words">{t.heroCta}</span><span className="h-px w-8 shrink-0 bg-ivory transition-all duration-700 group-hover:w-12" />
                </Button>
@@ -408,8 +408,8 @@ export function Villa() {
         </div>
         <dl className="col-span-12 border-t md:col-span-7 md:col-start-6">
           {t.details.map(([k, v]) => (
-            <div data-fade key={k} className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-4 border-b py-5">
-              <dt className="eyebrow min-w-0 self-center break-words text-muted-foreground">{k}</dt>
+            <div data-fade key={k} className="grid grid-cols-1 gap-2 border-b py-5 min-[520px]:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] min-[520px]:gap-4">
+              <dt className="eyebrow min-w-0 self-center text-muted-foreground">{k}</dt>
               <dd className="min-w-0 break-words font-serif text-2xl sm:text-3xl">{v}</dd>
             </div>
           ))}
