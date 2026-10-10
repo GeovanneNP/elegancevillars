@@ -1,5 +1,10 @@
 # Roadmap
 
+## Mobile-first readability and usability (Oct 10)
+- [ ] Enlarge mobile supporting text and map labels while preserving desktop sizes.
+- [ ] Adjust wrapping, language controls and persistent viewing action for comfortable touch use.
+- [ ] Verify mobile layouts, languages, gallery and dossier without horizontal overflow.
+
 - [x] Remove brokerage branding, broker contact, portrait and email pathways.
 - [x] Restore brochure photography faithfully and optimize it for the page.
 - [x] Refine the scroll-led presentation on desktop and mobile.

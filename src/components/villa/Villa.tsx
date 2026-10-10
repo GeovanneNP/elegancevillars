@@ -240,7 +240,7 @@ export function Villa() {
 
       {/* NAV */}
        <header className="relative z-40 grid min-h-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 bg-swiss-red px-5 py-3 text-ivory md:flex md:min-h-24 md:justify-between md:px-12">
-         <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block min-w-0 w-36 md:w-56">
+         <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block min-w-0 w-28 sm:w-36 md:w-56">
            <img src={logo.url} alt="Brodard Property" className="w-full object-contain" />
          </a>
         <nav className="flex items-center gap-6 md:gap-10">
@@ -253,11 +253,11 @@ export function Villa() {
               </li>
             ))}
           </ul>
-           <div className="eyebrow flex shrink-0 gap-1.5 sm:gap-2">
+           <div className="eyebrow flex shrink-0 gap-0 sm:gap-2">
             {langs.map((l, i) => (
-              <span key={l} className="flex gap-2">
-                {i > 0 && <span className="text-ivory/40">|</span>}
-                 <Button variant="ghost" onClick={() => chooseLang(l)} aria-pressed={lang === l} aria-label={l.toUpperCase()} className={`eyebrow h-auto p-0 hover:bg-transparent ${lang === l ? "text-ivory" : "text-ivory/50 hover:text-ivory"}`}>{l.toUpperCase()}</Button>
+              <span key={l} className="flex items-center gap-2">
+                {i > 0 && <span className="hidden text-ivory/40 sm:inline">|</span>}
+                 <Button variant="ghost" onClick={() => chooseLang(l)} aria-pressed={lang === l} aria-label={l.toUpperCase()} className={`eyebrow h-11 w-11 p-0 sm:h-auto sm:w-auto hover:bg-transparent ${lang === l ? "text-ivory" : "text-ivory/50 hover:text-ivory"}`}>{l.toUpperCase()}</Button>
               </span>
             ))}
           </div>
@@ -308,7 +308,7 @@ export function Villa() {
              <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-swiss-red/20" />
           </div>
-          <div data-living-text className="absolute bottom-10 left-5 text-ivory md:bottom-16 md:left-12">
+          <div data-living-text className="absolute bottom-10 inset-x-5 text-ivory md:bottom-16 md:left-12 md:right-auto">
             <p className="eyebrow mb-4 text-ivory/80">01</p>
             <p className="mb-6 font-serif text-3xl italic md:text-6xl">{t.livingTitle}</p>
             {t.livingWords.map((w) => (
@@ -480,7 +480,7 @@ export function Villa() {
            <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
                <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 610'000.-</span>
-              <Button asChild variant="ghost" className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right leading-relaxed text-ivory hover:bg-transparent hover:text-ivory"><a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></a></Button>
+              <Button asChild variant="ghost" className="eyebrow h-auto min-h-11 min-w-0 justify-end gap-2 whitespace-normal p-0 text-right leading-relaxed text-ivory hover:bg-transparent hover:text-ivory"><a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></a></Button>
            </div>
          </div>
           <Button asChild className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-64 items-center justify-between rounded-none border border-ivory/25 bg-swiss-red px-7 py-6 text-ivory hover:bg-swiss-red/90 md:flex"><a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true">→</span></a></Button>

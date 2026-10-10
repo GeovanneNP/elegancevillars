@@ -52,7 +52,7 @@ export function LocationExperience({ t }: Props) {
             {categories.map((c, i) => (
               <span key={c} className="flex min-w-0 items-center gap-3">
                 {i > 0 && <span className="hidden h-px w-4 bg-swiss-red/25 md:block" aria-hidden="true" />}
-                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`min-w-0 py-3 text-center font-sans text-xs uppercase tracking-[0.12em] transition-colors md:text-left md:text-base md:tracking-[0.16em] ${category === c ? "text-swiss-red" : "text-swiss-red/55 hover:text-swiss-red/80"}`}>
+                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`min-h-11 min-w-0 w-full py-3 text-center font-sans text-sm uppercase tracking-[0.04em] transition-colors md:w-auto md:text-left md:text-base md:tracking-[0.16em] ${category === c ? "text-swiss-red" : "text-swiss-red/55 hover:text-swiss-red/80"}`}>
                   <span className={`border-b pb-1 ${category === c ? "border-swiss-red" : "border-transparent"}`}>{loc.filters[i]}</span>
                 </button>
               </span>
