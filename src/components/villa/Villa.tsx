@@ -367,8 +367,8 @@ export function Villa() {
       </section>
 
       {/* BEDROOM */}
-       <section data-bedroom className="relative bg-ivory text-charcoal md:h-[170svh]">
-        <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
+       <section data-bedroom className="relative bg-ivory text-charcoal md:h-[185svh]">
+         <div className="relative overflow-hidden md:sticky md:top-0 md:h-svh">
            <div data-bed-title className="flex flex-col justify-center px-5 py-24 md:absolute md:inset-0 md:px-12 md:py-0">
              <h2 className="font-serif text-5xl font-light leading-[0.96] sm:text-6xl md:text-8xl md:leading-[0.92] lg:text-9xl">
                <span>{t.bedroomTitle.map((l, i) => (
@@ -380,12 +380,11 @@ export function Villa() {
              <img src={img.bedroom} alt={t.imageAlts.bedroom} loading="lazy" className="h-full w-full object-cover" />
              <div className="absolute inset-0 bg-swiss-red/10" />
           </div>
-          <figure data-bed-img2 className="relative mx-5 -mt-16 w-[68%] md:absolute md:bottom-12 md:right-12 md:mx-0 md:mt-0 md:w-[24vw]">
-             <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" className="aspect-[4/5] w-full object-cover" />
-             <figcaption className="mt-3 text-xs leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
-          </figure>
-          <div className="h-16 md:hidden" />
         </div>
+         <figure data-bed-img2 className="relative w-full bg-ivory px-5 py-8 md:absolute md:bottom-0 md:left-0 md:z-10 md:w-[58vw] md:px-12 md:py-10">
+            <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" width={1600} height={2000} className="aspect-[4/3] w-full object-cover object-center" />
+            <figcaption className="mt-3 text-xs leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
+         </figure>
       </section>
 
       {/* BALCONY */}
@@ -495,13 +494,16 @@ export function Villa() {
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
-       {pastHero && !contactVisible && !dossierOpen && (
-          <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
+        {!contactVisible && !dossierOpen && (
+          <>
+           <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
                <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 610'000.-</span>
               <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right text-[0.58rem] leading-relaxed text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></Button>
            </div>
          </div>
+          {pastHero && <Button onClick={() => scrollTo("contact")} className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-56 items-center justify-between rounded-none border border-ivory/25 bg-swiss-red px-6 py-5 text-ivory hover:bg-swiss-red/90 md:flex">{t.visitCta}<span aria-hidden="true">→</span></Button>}
+          </>
        )}
     </div>
   );
