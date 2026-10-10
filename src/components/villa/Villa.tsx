@@ -11,6 +11,8 @@ import { VillarsLifestyle } from "./VillarsLifestyle";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/brodard-logo.png.asset.json";
 import { Link } from "@tanstack/react-router";
+import { getVisitUrl } from "./visit";
+import { MessageCircle } from "lucide-react";
 
 const CONTACT_EMAIL = "gregory.brodard@pfgbrodard.ch";
 const CONTACT_PHONE = "+41 79 727 31 88";
@@ -38,13 +40,14 @@ export function Villa() {
   const [lang, setLang] = useState<Lang>("fr");
   const [ready, setReady] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
   const [activeSeason, setActiveSeason] = useState(0);
   const t = dict[lang];
   const root = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const marquee = useRef<gsap.core.Tween | null>(null);
   const onDone = useCallback(() => setReady(true), []);
-  const visitUrl = `https://wa.me/${CONTACT_PHONE_LINK.replace("+", "")}?text=${encodeURIComponent(t.whatsappMessage)}`;
+  const visitUrl = getVisitUrl(lang);
 
   useEffect(() => {
     const saved = window.localStorage.getItem("villars-lang") as Lang | null;
@@ -235,7 +238,7 @@ export function Villa() {
   };
 
   return (
-    <div ref={root} className="overflow-x-clip pb-24 md:pb-0">
+    <div ref={root} className="villa-page overflow-x-clip pb-32 md:pb-0">
       <Preloader onDone={onDone} />
 
       {/* NAV */}
@@ -420,7 +423,7 @@ export function Villa() {
         </div>
       </section>
 
-      <Gallery t={t} />
+      <Gallery t={t} visitUrl={visitUrl} onOpenChange={setGalleryOpen} />
 
       {/* OWNERSHIP */}
        <section className="relative grid grid-cols-12 gap-6 overflow-hidden bg-stone px-5 py-24 md:px-12 md:py-48">
@@ -475,15 +478,15 @@ export function Villa() {
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
-        {!dossierOpen && (
+        {!dossierOpen && !galleryOpen && (
           <>
            <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
-            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3">
                <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 610'000.-</span>
-              <Button asChild variant="ghost" className="eyebrow h-auto min-h-11 min-w-0 justify-end gap-2 whitespace-normal p-0 text-right leading-relaxed text-ivory hover:bg-transparent hover:text-ivory"><a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></a></Button>
+              <Button asChild variant="ghost" className="eyebrow h-auto min-h-12 min-w-0 justify-end gap-2 whitespace-normal p-0 text-right leading-relaxed tracking-normal text-ivory hover:bg-transparent hover:text-ivory"><a href={visitUrl} target="_blank" rel="noopener noreferrer"><MessageCircle aria-hidden="true" className="size-5 shrink-0" /><span className="min-w-0 break-words">{t.visitCta}</span></a></Button>
            </div>
          </div>
-          <Button asChild className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-64 items-center justify-between rounded-none border border-ivory/25 bg-swiss-red px-7 py-6 text-ivory hover:bg-swiss-red/90 md:flex"><a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true">→</span></a></Button>
+          <Button asChild className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-64 max-w-[calc(100vw-4rem)] items-center justify-between gap-4 whitespace-normal rounded-none border border-ivory/25 bg-swiss-red px-7 py-6 text-ivory hover:bg-swiss-red/90 md:flex"><a href={visitUrl} target="_blank" rel="noopener noreferrer">{t.visitCta}<MessageCircle aria-hidden="true" className="size-5 shrink-0" /></a></Button>
           </>
        )}
     </div>
