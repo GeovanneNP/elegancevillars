@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://www.elegancevillars.ch/sitemap.xml
+Sitemap: https://www.brodardproperty.ch/sitemap.xml

@@ -13,3 +13,4 @@ Optimized derivatives are cropped/resized/compressed only. Each derivative remai
 | peak-walk-real.webp | Peak Walk, Scex Rouge | Zacharie Grossen | https://commons.wikimedia.org/wiki/File:Easy_Summit.jpg | CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0 |
 | chateau-aigle.webp | Château d’Aigle and vineyards | Falk2 | https://commons.wikimedia.org/wiki/File:L03_498_Schloss_Aigle.jpg | CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0 |
 | chillon-leman.webp | Château de Chillon seen from the south | Christian David | https://commons.wikimedia.org/wiki/File:Chillon_viewed_from_south_2021.jpg | CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0 |
+| bex-village.jpg | Bex village at the foot of the Vaud Alps | Sandro Senn | https://commons.wikimedia.org/wiki/File:Bex.jpg | CC BY 3.0 — https://creativecommons.org/licenses/by/3.0 |

@@ -10,6 +10,11 @@ import { DossierDialog } from "./DossierDialog";
 import { VillarsLifestyle } from "./VillarsLifestyle";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/brodard-logo.png.asset.json";
+import { Link } from "@tanstack/react-router";
+
+const CONTACT_EMAIL = "gregory.brodard@pfgbrodard.ch";
+const CONTACT_PHONE = "+41 79 727 31 88";
+const CONTACT_PHONE_LINK = "+41797273188";
 
 const ids = ["residence", "location", "gallery", "details", "contact"];
 const motion = {
@@ -449,7 +454,7 @@ export function Villa() {
         <div className="col-span-12 self-end md:col-span-4 md:col-start-9">
           <div data-fade className="border-t py-6">
             <div className="eyebrow text-muted-foreground">{t.price}</div>
-            <div className="mt-3 font-serif text-4xl sm:text-5xl">CHF 590'000.-</div>
+             <div className="mt-3 font-serif text-4xl sm:text-5xl">CHF 610'000.-</div>
           </div>
           <div data-fade className="border-y py-6">
             <div className="eyebrow text-muted-foreground">{t.availability}</div>
@@ -479,22 +484,21 @@ export function Villa() {
              <div data-fade className="mt-10 h-px w-16 bg-ivory/40" />
           </div>
            <div data-fade className="col-span-12 mt-10 flex flex-col justify-end border-t border-ivory/20 pt-8 md:col-span-5 md:col-start-8 md:mt-0">
-              <a href={`mailto:Marketing@uptechswiss.ch?subject=${encodeURIComponent(t.mailSubject)}`} className="break-all font-serif text-2xl leading-snug text-ivory transition-colors hover:text-gold sm:text-3xl md:text-4xl" aria-label={`${t.contactEmail}: Marketing@uptechswiss.ch`}>Marketing@uptechswiss.ch</a>
-              <a href="tel:+41765426230" className="mt-6 self-start font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactPhone}: +41 76 542 62 30`}>+41 76 542 62 30</a>
-              <a href={`https://wa.me/41765426230?text=${encodeURIComponent(t.whatsappMessage)}`} target="_blank" rel="noreferrer" className="eyebrow mt-8 self-start border-b border-ivory/40 pb-1 text-ivory/80 transition-colors hover:text-ivory">{t.whatsapp} →</a>
+               <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(t.mailSubject)}`} className="break-all font-serif text-2xl leading-snug text-ivory transition-colors hover:text-gold sm:text-3xl md:text-4xl" aria-label={`${t.contactEmail}: ${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+               <a href={`tel:${CONTACT_PHONE_LINK}`} className="mt-6 self-start font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactPhone}: ${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
+               <a href={`https://wa.me/${CONTACT_PHONE_LINK.replace("+", "")}?text=${encodeURIComponent(t.whatsappMessage)}`} target="_blank" rel="noreferrer" className="eyebrow mt-8 self-start border-b border-ivory/40 pb-1 text-ivory/80 transition-colors hover:text-ivory">{t.whatsapp} →</a>
            </div>
         </div>
-        <footer className="flex flex-col gap-4 border-t border-ivory/10 px-5 py-8 text-xs text-ivory/40 md:flex-row md:justify-between md:px-12">
+         <footer className="grid gap-4 border-t border-ivory/10 px-5 py-8 text-xs text-ivory/40 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-12">
            <span>{t.reference} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
-          <span>{t.rights}</span>
-           <span>Villars-sur-Ollon · Vaud</span>
+           <span className="flex flex-wrap gap-x-5 gap-y-2 md:justify-end"><span>{t.rights}</span><Link to="/legal" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.legal}</Link><Link to="/privacy" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.privacy}</Link></span>
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
        {pastHero && !contactVisible && !dossierOpen && (
           <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
-              <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 590'000</span>
+               <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 610'000.-</span>
               <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right text-[0.58rem] leading-relaxed text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></Button>
            </div>
          </div>

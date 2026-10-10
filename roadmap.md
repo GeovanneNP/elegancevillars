@@ -94,3 +94,13 @@
 - [x] Rebalance mobile section rhythm, headings, header, gallery viewer, school carousel and fixed-action clearance.
 - [x] Debounce animation measurements during viewport and orientation changes.
 - [x] Re-verify all key sections and effects at mobile, laptop, desktop and reduced motion.
+
+## Client launch corrections and Brodard Property domain (Oct 10)
+- [x] Update price, contact, surface, LFAIE wording and travel times in FR, EN and DE.
+- [x] Update metadata, structured data, social image, sitemap and robots for brodardproperty.ch.
+- [x] Add legal and privacy pages, footer links and dossier privacy notice.
+- [x] Add licensed Bex photography, complete visible credits and season image alternatives.
+- [ ] Add the confirmed legal address and IDE number.
+- [ ] Confirm the right to publish the supplied Villars Palace photograph.
+- [ ] Add floor plan and precise parking location/cost when supplied.
+- [ ] Connect root and www domains, define the new primary domain, publish and verify redirects/social previews.
