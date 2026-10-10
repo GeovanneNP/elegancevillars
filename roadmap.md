@@ -1,10 +1,9 @@
 # Roadmap
 
 ## Mobile-first readability and usability (Oct 10)
-- [x] Enlarge mobile supporting text and map labels while preserving desktop sizes.
-- [x] Adjust wrapping, language controls and persistent viewing action for comfortable touch use.
-- [x] Confirm the mobile viewing action is always visible and opens WhatsApp, matching the desktop experience.
-- [x] Verify mobile layouts, languages, gallery and dossier without horizontal overflow.
+- [ ] Enlarge mobile supporting text and map labels while preserving desktop sizes.
+- [ ] Adjust wrapping, language controls and persistent viewing action for comfortable touch use.
+- [ ] Verify mobile layouts, languages, gallery and dossier without horizontal overflow.
 
 - [x] Remove brokerage branding, broker contact, portrait and email pathways.
 - [x] Restore brochure photography faithfully and optimize it for the page.

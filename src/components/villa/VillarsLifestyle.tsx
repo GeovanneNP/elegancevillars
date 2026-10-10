@@ -144,7 +144,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             </svg>
             <ol className="space-y-0">
               {t.distances.map(([place, distance]) => (
-                <li key={place} data-timeline-point className="relative grid min-h-24 grid-cols-1 content-center gap-2 border-b py-5 pl-10 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-4">
+                <li key={place} data-timeline-point className="relative flex min-h-24 items-center justify-between gap-4 border-b pl-10">
                   <span className="absolute left-0 top-1/2 h-[11px] w-[11px] -translate-y-1/2 rounded-full border border-wood bg-ivory transition-transform duration-500" />
                   <span className="font-serif text-2xl md:text-3xl">{place}</span>
                   <span className="eyebrow shrink-0 normal-case tracking-[0.18em] text-wood">{distance}</span>
