@@ -52,7 +52,7 @@ export function LocationExperience({ t }: Props) {
             {categories.map((c, i) => (
               <span key={c} className="flex min-w-0 items-center gap-3">
                 {i > 0 && <span className="hidden h-px w-4 bg-swiss-red/25 md:block" aria-hidden="true" />}
-                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`min-w-0 py-3 text-center font-sans text-[0.56rem] uppercase tracking-[0.16em] transition-colors md:text-left md:text-[0.6875rem] md:tracking-[0.32em] ${category === c ? "text-swiss-red" : "text-swiss-red/45 hover:text-swiss-red/80"}`}>
+                <button type="button" onClick={() => choose(c)} aria-pressed={category === c} className={`min-w-0 py-3 text-center font-sans text-xs uppercase tracking-[0.12em] transition-colors md:text-left md:text-sm md:tracking-[0.18em] ${category === c ? "text-swiss-red" : "text-swiss-red/55 hover:text-swiss-red/80"}`}>
                   <span className={`border-b pb-1 ${category === c ? "border-swiss-red" : "border-transparent"}`}>{loc.filters[i]}</span>
                 </button>
               </span>
@@ -69,7 +69,7 @@ export function LocationExperience({ t }: Props) {
             <p className="mt-4 font-serif text-3xl italic text-swiss-red">{loc.palace.stars}</p>
             <figure className="mt-10 overflow-hidden">
               <img src={img.villarsPalace} alt={t.palaceImageAlt} loading="lazy" width={1093} height={768} className="aspect-[4/3] w-full object-cover" />
-              <figcaption className="eyebrow mt-3 text-[0.6rem] text-muted-foreground">{t.suppliedImage}</figcaption>
+              <figcaption className="eyebrow mt-3 text-muted-foreground">{t.suppliedImage}</figcaption>
             </figure>
             <ul className="mt-10 space-y-1">
               {loc.palace.lines.map((l) => <li key={l} className="font-serif text-2xl text-charcoal/85">{l}</li>)}
@@ -116,18 +116,18 @@ export function LocationExperience({ t }: Props) {
                         {s.stats.map(([v, l], i) => (
                           <span key={l}>
                             <span className={`block font-serif font-light leading-none tabular-nums ${i === 0 ? "text-5xl md:text-6xl" : "text-3xl md:text-4xl"}`}>{v}</span>
-                            <span className="eyebrow mt-1 block text-[0.6rem] text-muted-foreground">{l}</span>
+                            <span className="eyebrow mt-1 block text-muted-foreground">{l}</span>
                           </span>
                         ))}
                       </span>
-                      <span className="mt-3 max-w-[16rem] text-xs leading-relaxed text-charcoal/65">{s.note}</span>
+                      <span className="mt-3 max-w-[20rem] text-sm leading-relaxed text-charcoal/70">{s.note}</span>
                     </button>
                   </li>
                 );
               })}
             </ol>
             <p className="eyebrow mt-6 border-t pt-5 text-muted-foreground">{loc.edu.others}</p>
-            <p className="mt-4 text-xs text-charcoal/55">{loc.edu.disclaimer}</p>
+            <p className="mt-4 text-sm leading-relaxed text-charcoal/65">{loc.edu.disclaimer}</p>
           </article>
         </div>
       </div>

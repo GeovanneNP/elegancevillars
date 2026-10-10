@@ -25,7 +25,7 @@ const photoCredits = {
 } as const;
 
 function PhotoCredit({ label, credit }: { label: string; credit: (typeof photoCredits)[keyof typeof photoCredits] }) {
-  return <figcaption className="eyebrow mt-3 text-[0.6rem] text-muted-foreground">{label}: <a href={credit.href} target="_blank" rel="noreferrer" className="underline decoration-current/40 underline-offset-4">{credit.author} · {credit.license}</a></figcaption>;
+  return <figcaption className="eyebrow mt-3 text-muted-foreground">{label}: <a href={credit.href} target="_blank" rel="noreferrer" className="underline decoration-current/40 underline-offset-4">{credit.author} · {credit.license}</a></figcaption>;
 }
 
 export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
@@ -110,7 +110,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
             <p className="eyebrow mb-5 text-ivory/70">{t.seasonStates[activeSeason]?.[1]}</p>
             <h2 className="font-serif text-5xl font-light uppercase leading-[0.88] lg:text-9xl">{t.seasonsTitle[0]}<br />{t.seasonsTitle[1]}</h2>
             <p className="mt-7 max-w-md font-serif text-2xl italic text-ivory/85">{t.seasonStates[activeSeason]?.[3]}</p>
-             <p className="eyebrow mt-5 text-[0.55rem] text-ivory/65">{t.photoCredit}: {activeSeason === 0 ? "Alexey Filatov · CC BY-SA 4.0" : activeSeason === 1 ? "André Mouraux · CC BY 2.0" : activeSeason === 2 ? "Calimo · CC BY-SA 3.0" : "Wouter Hagens · CC BY-SA 3.0"}</p>
+             <p className="eyebrow mt-5 text-ivory/75">{t.photoCredit}: {activeSeason === 0 ? "Alexey Filatov · CC BY-SA 4.0" : activeSeason === 1 ? "André Mouraux · CC BY 2.0" : activeSeason === 2 ? "Calimo · CC BY-SA 3.0" : "Wouter Hagens · CC BY-SA 3.0"}</p>
           </div>
         </div>
         <div className="md:col-span-5">
@@ -163,7 +163,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         <div className="mt-24 grid grid-cols-12 gap-6 md:mt-36">
           <figure data-clip className="col-span-12 overflow-hidden md:col-span-8">
             <img src={img.villarsSki} alt={t.skiImageAlt} loading="lazy" width={1400} height={750} className="aspect-[3/2] w-full object-cover" />
-            <figcaption className="eyebrow mt-3 text-[0.6rem] text-muted-foreground">{t.suppliedImage}</figcaption>
+            <figcaption className="eyebrow mt-3 text-muted-foreground">{t.suppliedImage}</figcaption>
           </figure>
           <div className="col-span-12 self-end md:col-span-3 md:col-start-10">
             <div className="flex flex-wrap gap-x-4 gap-y-1 border-b pb-6">

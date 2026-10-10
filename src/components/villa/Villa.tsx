@@ -37,8 +37,6 @@ function Lines({ lines, className = "" }: { lines: string[]; className?: string 
 export function Villa() {
   const [lang, setLang] = useState<Lang>("fr");
   const [ready, setReady] = useState(false);
-  const [pastHero, setPastHero] = useState(false);
-  const [contactVisible, setContactVisible] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
   const [activeSeason, setActiveSeason] = useState(0);
   const t = dict[lang];
@@ -46,6 +44,7 @@ export function Villa() {
   const lenisRef = useRef<Lenis | null>(null);
   const marquee = useRef<gsap.core.Tween | null>(null);
   const onDone = useCallback(() => setReady(true), []);
+  const visitUrl = `https://wa.me/${CONTACT_PHONE_LINK.replace("+", "")}?text=${encodeURIComponent(t.whatsappMessage)}`;
 
   useEffect(() => {
     const saved = window.localStorage.getItem("villars-lang") as Lang | null;
@@ -54,25 +53,8 @@ export function Villa() {
     if (initial !== "fr") setLang(initial);
   }, []);
 
-  useEffect(() => {
-    const contact = document.getElementById("contact");
-    if (!contact) return;
-    const observer = new IntersectionObserver(([entry]) => setContactVisible(Boolean(entry?.isIntersecting)), { threshold: 0.05 });
-    observer.observe(contact);
-    return () => observer.disconnect();
-  }, []);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
   const chooseLang = (l: Lang) => { setLang(l); window.localStorage.setItem("villars-lang", l); };
-
-  useEffect(() => {
-    const hero = document.querySelector("[data-hero]");
-    if (!hero) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry) setPastHero(entry.boundingClientRect.bottom <= 0);
-    }, { threshold: 0 });
-    observer.observe(hero);
-    return () => observer.disconnect();
-  }, []);
 
   // Smooth scroll
   useEffect(() => {
@@ -305,14 +287,14 @@ export function Villa() {
                <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto items-center gap-4 p-0 text-ivory hover:bg-transparent hover:text-ivory">
                  {t.heroCta}<span className="h-px w-8 bg-ivory transition-all duration-700 group-hover:w-12" />
                </Button>
-               <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow group flex h-auto items-center gap-2 p-0 text-ivory/85 hover:bg-transparent hover:text-ivory">
-                 {t.visitCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+               <Button asChild variant="ghost" className="eyebrow group flex h-auto items-center gap-2 p-0 text-ivory/85 hover:bg-transparent hover:text-ivory">
+                 <a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></a>
                </Button>
              </div>
           </div>
         </div>
          <div className="absolute bottom-4 right-5 hidden flex-col items-center gap-2 md:bottom-6 md:right-12 md:flex">
-          <span className="eyebrow text-[0.55rem] text-ivory/70">{t.scroll}</span>
+          <span className="eyebrow text-ivory/80">{t.scroll}</span>
           <span className="relative h-10 w-px overflow-hidden bg-ivory/20">
             <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_2.2s_ease-in-out_infinite] bg-ivory" />
           </span>
@@ -383,7 +365,7 @@ export function Villa() {
         </div>
          <figure data-bed-img2 className="relative w-full bg-ivory px-5 py-8 md:absolute md:bottom-0 md:left-0 md:z-10 md:w-[58vw] md:px-12 md:py-10">
             <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" width={1600} height={2000} className="aspect-[4/3] w-full object-cover object-center" />
-            <figcaption className="mt-3 text-xs leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
+            <figcaption className="mt-3 text-sm leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
          </figure>
       </section>
 
@@ -401,8 +383,6 @@ export function Villa() {
         </div>
       </section>
 
-      <VillarsLifestyle t={t} activeSeason={activeSeason} onSeasonChange={setActiveSeason} />
-
       {/* DETAILS */}
        <section id="details" className="grid grid-cols-12 gap-6 bg-ivory px-5 py-24 md:px-12 md:py-48">
         <div className="col-span-12 md:col-span-4">
@@ -413,8 +393,8 @@ export function Villa() {
         <dl className="col-span-12 border-t md:col-span-7 md:col-start-6">
           {t.details.map(([k, v]) => (
             <div data-fade key={k} className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] gap-4 border-b py-5">
-              <dt className="eyebrow min-w-0 self-center break-words text-[0.6rem] text-muted-foreground sm:text-[0.6875rem]">{k}</dt>
-              <dd className="min-w-0 break-words font-serif text-xl sm:text-2xl">{v}</dd>
+              <dt className="eyebrow min-w-0 self-center break-words text-muted-foreground">{k}</dt>
+              <dd className="min-w-0 break-words font-serif text-2xl sm:text-3xl">{v}</dd>
             </div>
           ))}
         </dl>
@@ -459,15 +439,16 @@ export function Villa() {
             <div className="eyebrow text-muted-foreground">{t.availability}</div>
             <div className="mt-3 font-serif text-3xl">{t.availabilityValue}</div>
           </div>
-            <Button variant="default" data-fade onClick={() => scrollTo("contact")} className="eyebrow group mt-10 flex h-auto w-full items-center justify-between bg-swiss-red px-7 py-6 text-ivory transition-colors hover:bg-swiss-red/85">
-            {t.ownCta}
-            <span className="h-px w-10 bg-gold transition-all duration-700 group-hover:w-16" />
-           </Button>
+            <Button asChild variant="default" data-fade className="eyebrow group mt-10 flex h-auto w-full items-center justify-between bg-swiss-red px-7 py-6 text-ivory transition-colors hover:bg-swiss-red/85">
+              <a href={visitUrl} target="_blank" rel="noreferrer"><span>{t.ownCta}</span><span className="h-px w-10 bg-gold transition-all duration-700 group-hover:w-16" /></a>
+            </Button>
             <Button variant="ghost" data-fade onClick={() => setDossierOpen(true)} className="eyebrow group mt-5 flex h-auto w-full items-center justify-between p-0 py-3 text-charcoal hover:bg-transparent hover:text-swiss-red">
               {t.dossierCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
             </Button>
         </div>
       </section>
+
+      <VillarsLifestyle t={t} activeSeason={activeSeason} onSeasonChange={setActiveSeason} />
 
       {/* CONTACT */}
        <section id="contact" className="relative bg-swiss-red text-ivory">
@@ -485,24 +466,24 @@ export function Villa() {
            <div data-fade className="col-span-12 mt-10 flex flex-col justify-end border-t border-ivory/20 pt-8 md:col-span-5 md:col-start-8 md:mt-0">
                <a href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(t.mailSubject)}`} className="break-all font-serif text-2xl leading-snug text-ivory transition-colors hover:text-gold sm:text-3xl md:text-4xl" aria-label={`${t.contactEmail}: ${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
                <a href={`tel:${CONTACT_PHONE_LINK}`} className="mt-6 self-start font-serif text-3xl leading-snug text-ivory transition-colors hover:text-gold md:text-4xl" aria-label={`${t.contactPhone}: ${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
-               <a href={`https://wa.me/${CONTACT_PHONE_LINK.replace("+", "")}?text=${encodeURIComponent(t.whatsappMessage)}`} target="_blank" rel="noreferrer" className="eyebrow mt-8 self-start border-b border-ivory/40 pb-1 text-ivory/80 transition-colors hover:text-ivory">{t.whatsapp} →</a>
+               <a href={visitUrl} target="_blank" rel="noreferrer" className="eyebrow mt-8 self-start border-b border-ivory/40 pb-1 text-ivory/80 transition-colors hover:text-ivory">{t.whatsapp} →</a>
            </div>
         </div>
-         <footer className="grid gap-4 border-t border-ivory/10 px-5 py-8 text-xs text-ivory/40 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-12">
+         <footer className="grid gap-4 border-t border-ivory/10 px-5 py-8 text-sm leading-relaxed text-ivory/60 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-12">
            <span>{t.reference} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
            <span className="flex flex-wrap gap-x-5 gap-y-2 md:justify-end"><span>{t.rights}</span><Link to="/legal" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.legal}</Link><Link to="/privacy" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.privacy}</Link></span>
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
-        {!contactVisible && !dossierOpen && (
+        {!dossierOpen && (
           <>
            <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/20 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-4">
                <span className="whitespace-nowrap font-serif text-xl tabular-nums">CHF 610'000.-</span>
-              <Button variant="ghost" onClick={() => scrollTo("contact")} className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right text-[0.58rem] leading-relaxed text-ivory hover:bg-transparent hover:text-ivory">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></Button>
+              <Button asChild variant="ghost" className="eyebrow h-auto min-w-0 justify-end gap-2 whitespace-normal p-0 text-right leading-relaxed text-ivory hover:bg-transparent hover:text-ivory"><a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true" className="shrink-0">→</span></a></Button>
            </div>
          </div>
-          {pastHero && <Button onClick={() => scrollTo("contact")} className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-56 items-center justify-between rounded-none border border-ivory/25 bg-swiss-red px-6 py-5 text-ivory hover:bg-swiss-red/90 md:flex">{t.visitCta}<span aria-hidden="true">→</span></Button>}
+          <Button asChild className="eyebrow fixed bottom-8 right-8 z-40 hidden h-auto min-w-64 items-center justify-between rounded-none border border-ivory/25 bg-swiss-red px-7 py-6 text-ivory hover:bg-swiss-red/90 md:flex"><a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true">→</span></a></Button>
           </>
        )}
     </div>
