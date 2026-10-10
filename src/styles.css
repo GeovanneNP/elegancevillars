@@ -101,6 +101,7 @@ html.lenis, html.lenis body { height: auto; }
   line-height: 1.55;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  @media (min-width: 768px) { font-size: 0.9375rem; }
 }
 
 @utility line-mask {
@@ -137,3 +138,4 @@ html.lenis, html.lenis body { height: auto; }
 .loc-marker[data-state="active"] .loc-dot { background: var(--swiss-red); transform: scale(1.5); box-shadow: 0 0 0 1px var(--ivory), 0 0 0 10px oklch(0.39 0.15 24 / 24%); }
 .loc-marker[data-state="active"] .loc-sub { display: block; }
 .loc-marker[data-id="villars"] .loc-label { left: auto; right: 34px; align-items: flex-end; }
+@media (min-width: 768px) { .loc-name { font-size: 20px; } .loc-sub { font-size: 12px; letter-spacing: .16em; } .loc-map .maplibregl-ctrl-attrib, .loc-map .maplibregl-ctrl-attrib.maplibregl-compact { font-size: 12px; } }
