@@ -282,12 +282,12 @@ export function Villa() {
       </header>
 
       {/* HERO */}
-        <section id="top" data-hero className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)] md:min-h-[560px]">
-        <div data-hero-wrap className="absolute inset-0">
+        <section id="top" data-hero className="relative overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)] md:min-h-[560px]">
+        <div data-hero-wrap className="relative aspect-video w-full md:absolute md:inset-0 md:h-full">
             <HeroVideo label={t.filmPlay} />
+            <div className="absolute inset-0 bg-swiss-red/30 md:bg-swiss-red/20" />
         </div>
-          <div className="absolute inset-0 bg-swiss-red/30 md:bg-swiss-red/20" />
-         <div className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-end px-5 pb-28 pt-[52svh] md:h-full md:min-h-0 md:px-12 md:pb-20 md:pt-0">
+          <div className="relative flex flex-col justify-end bg-swiss-red px-5 pb-28 pt-10 md:h-full md:min-h-0 md:bg-transparent md:px-12 md:pb-20 md:pt-0">
           <div data-hero-title>
             <p data-hero-fade className="eyebrow mb-5 text-ivory/95 md:mb-6 md:text-ivory/80">{t.heroKicker}</p>
              <h1 className="max-w-full font-serif text-5xl font-light leading-[0.98] min-[360px]:text-[3.45rem] min-[420px]:text-6xl sm:text-7xl md:text-8xl md:leading-[0.92] lg:text-9xl">
