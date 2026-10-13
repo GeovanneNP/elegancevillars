@@ -12,8 +12,11 @@ export function FilmSection({ t }: { t: T }) {
   const [playing, setPlaying] = useState(false);
 
   const play = () => {
+    const v = ref.current;
+    if (!v) return;
+    if (!v.src) v.src = window.matchMedia("(max-width: 767px)").matches ? film720.url : film1080.url;
     setPlaying(true);
-    requestAnimationFrame(() => ref.current?.play().catch(() => {}));
+    v.play().catch(() => {});
   };
 
   return (
@@ -35,10 +38,7 @@ export function FilmSection({ t }: { t: T }) {
           playsInline
           preload="none"
           onEnded={() => setPlaying(false)}
-        >
-          <source src={film720.url} type="video/mp4" media="(max-width: 767px)" />
-          <source src={film1080.url} type="video/mp4" />
-        </video>
+        />
         {!playing && (
           <button
             type="button"
