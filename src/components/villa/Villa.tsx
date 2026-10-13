@@ -8,7 +8,7 @@ import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
 import { DossierDialog } from "./DossierDialog";
 import { VillarsLifestyle } from "./VillarsLifestyle";
-import { FilmSection } from "./FilmSection";
+import { HeroVideo } from "./HeroVideo";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/brodard-logo.png.asset.json";
 import { Link } from "@tanstack/react-router";
@@ -284,7 +284,7 @@ export function Villa() {
       {/* HERO */}
         <section id="top" data-hero className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)] md:min-h-[560px]">
         <div data-hero-wrap className="absolute inset-0">
-            <img data-hero-img src={img.exterior} alt={t.galleryAlts[6]} fetchPriority="high" className="h-full w-full object-cover object-[center_42%] md:object-center" />
+            <HeroVideo label={t.filmPlay} />
         </div>
           <div className="absolute inset-0 bg-swiss-red/30 md:bg-swiss-red/20" />
          <div className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-end px-5 pb-28 pt-[52svh] md:h-full md:min-h-0 md:px-12 md:pb-20 md:pt-0">
@@ -437,7 +437,6 @@ export function Villa() {
         </div>
       </section>
 
-      <FilmSection t={t} />
 
       <Gallery t={t} visitUrl={visitUrl} onOpenChange={setGalleryOpen} />
 
