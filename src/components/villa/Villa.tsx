@@ -282,39 +282,35 @@ export function Villa() {
       </header>
 
       {/* HERO */}
-        <section id="top" data-hero className="relative overflow-hidden bg-stone text-ivory md:h-[calc(94svh-6rem)] md:min-h-[560px]">
-        <div data-hero-wrap className="relative aspect-video w-full md:absolute md:inset-0 md:h-full">
+        <section id="top" data-hero className="relative overflow-hidden bg-ivory text-charcoal">
+        <div data-hero-wrap className="relative aspect-video w-full overflow-hidden bg-charcoal md:aspect-auto md:h-[calc(100svh-6rem)] md:max-h-[64vw] md:min-h-[480px]">
             <HeroVideo label={t.filmPlay} />
-            <div className="absolute inset-0 bg-swiss-red/30 md:bg-swiss-red/20" />
+            <p className="eyebrow pointer-events-none absolute bottom-3 left-5 text-ivory [text-shadow:0_1px_12px_rgb(0_0_0/0.55)] md:bottom-8 md:left-12">Villars-sur-Ollon · 1'250 m</p>
         </div>
-          <div className="relative flex flex-col justify-end bg-swiss-red px-5 pb-28 pt-10 md:h-full md:min-h-0 md:bg-transparent md:px-12 md:pb-20 md:pt-0">
-          <div data-hero-title>
-            <p data-hero-fade className="eyebrow mb-5 text-ivory/95 md:mb-6 md:text-ivory/80">{t.heroKicker}</p>
-             <h1 className="max-w-full font-serif text-5xl font-light leading-[0.98] min-[360px]:text-[3.45rem] min-[420px]:text-6xl sm:text-7xl md:text-8xl md:leading-[0.92] lg:text-9xl">
-              <Lines lines={t.heroTitle} />
-            </h1>
+        <div className="relative px-5 pb-16 pt-10 md:px-12 md:pb-24 md:pt-16">
+          <div className="grid gap-10 md:grid-cols-12 md:items-end md:gap-12">
+            <div data-hero-title className="md:col-span-8">
+              <p data-hero-fade className="eyebrow mb-5 text-swiss-red md:mb-6">{t.heroKicker}</p>
+              <h1 className="max-w-full font-serif text-5xl font-light leading-[1] text-charcoal min-[360px]:text-[3.3rem] min-[420px]:text-6xl sm:text-7xl md:text-8xl md:leading-[0.95] lg:text-9xl">
+                <Lines lines={t.heroTitle} />
+              </h1>
+            </div>
+            <div data-hero-fade className="grid gap-5 md:col-span-4 md:pb-3">
+              <a href={visitUrl} target="_blank" rel="noreferrer" className="eyebrow flex min-h-14 w-full items-center justify-between gap-3 bg-swiss-red px-6 text-ivory transition-colors hover:bg-charcoal">
+                <span className="min-w-0 break-words">{t.visitCta}</span><span aria-hidden="true">→</span>
+              </a>
+              <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto min-h-12 w-full items-center justify-between gap-3 whitespace-normal border-b border-charcoal/30 p-0 pb-3 text-left text-charcoal hover:bg-transparent hover:text-swiss-red">
+                <span className="min-w-0 break-words">{t.heroCta}</span><span className="h-px w-8 shrink-0 bg-current transition-all duration-700 group-hover:w-12" />
+              </Button>
+            </div>
           </div>
-          <div data-hero-meta className="mt-8 flex flex-col gap-5 border-t border-ivory/35 pt-5 md:mt-10 md:flex-row md:items-center md:justify-between md:border-ivory/25 md:pt-6">
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 min-[390px]:flex min-[390px]:flex-wrap min-[390px]:gap-x-7">
+          <div data-hero-meta className="mt-10 border-t border-charcoal/20 pt-5 md:mt-14 md:pt-6">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-3 min-[390px]:flex min-[390px]:flex-wrap min-[390px]:gap-x-10">
               {t.heroMeta.map((m) => (
-                <li data-hero-fade key={m} className="eyebrow text-ivory/90">{m}</li>
+                <li data-hero-fade key={m} className="eyebrow text-charcoal/80">{m}</li>
               ))}
             </ul>
-             <div data-hero-fade className="grid gap-4 md:mr-64 md:flex md:flex-wrap md:items-center md:gap-x-8 lg:mr-72">
-                <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto min-w-0 w-full items-center justify-between gap-3 whitespace-normal p-0 text-left text-ivory hover:bg-transparent hover:text-ivory md:w-auto md:justify-start md:gap-4">
-                 <span className="min-w-0 break-words">{t.heroCta}</span><span className="h-px w-8 shrink-0 bg-ivory transition-all duration-700 group-hover:w-12" />
-               </Button>
-               <Button asChild variant="ghost" className="eyebrow group flex h-auto min-w-0 w-full items-center justify-between gap-2 whitespace-normal p-0 text-left text-ivory hover:bg-transparent md:w-auto md:justify-start md:text-ivory/85">
-                 <a href={visitUrl} target="_blank" rel="noreferrer">{t.visitCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span></a>
-               </Button>
-             </div>
           </div>
-        </div>
-         <div className="absolute bottom-4 right-5 hidden flex-col items-center gap-2 md:bottom-6 md:right-12 md:flex">
-          <span className="eyebrow text-ivory/80">{t.scroll}</span>
-          <span className="relative h-10 w-px overflow-hidden bg-ivory/20">
-            <span className="absolute inset-x-0 top-0 h-1/2 animate-[scrollcue_2.2s_ease-in-out_infinite] bg-ivory" />
-          </span>
         </div>
       </section>
 
