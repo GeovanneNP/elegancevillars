@@ -43,7 +43,7 @@ export function HeroVideo({ label }: { label: string }) {
         onClick={toggle}
         aria-label={muted ? "Son / Sound" : "Muet / Mute"}
         aria-pressed={!muted}
-        className="absolute right-5 top-5 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-ivory/70 bg-swiss-red/40 text-ivory backdrop-blur-sm md:right-12 md:top-8"
+        className="absolute bottom-2 right-3 z-20 flex h-11 w-11 items-center justify-center rounded-full border border-ivory/60 bg-charcoal/25 text-ivory backdrop-blur-md transition-colors hover:bg-charcoal/45 md:bottom-6 md:right-12 md:h-12 md:w-12"
       >
         {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
       </button>
