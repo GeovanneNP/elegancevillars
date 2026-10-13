@@ -8,6 +8,7 @@ import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
 import { DossierDialog } from "./DossierDialog";
 import { VillarsLifestyle } from "./VillarsLifestyle";
+import { FilmSection } from "./FilmSection";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/brodard-logo.png.asset.json";
 import { Link } from "@tanstack/react-router";
@@ -435,6 +436,8 @@ export function Villa() {
           ))}
         </div>
       </section>
+
+      <FilmSection t={t} />
 
       <Gallery t={t} visitUrl={visitUrl} onOpenChange={setGalleryOpen} />
 
