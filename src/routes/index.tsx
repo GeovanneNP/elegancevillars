@@ -55,7 +55,7 @@ export const Route = createFileRoute("/")({
           image: ogImage,
           description,
           inLanguage: ["fr", "en", "de"],
-           offers: { "@type": "Offer", price: 610000, priceCurrency: "CHF", availability: "https://schema.org/InStock", seller: { "@type": "Person", name: "Gregory Brodard", email: "gregory.brodard@pfgbrodard.ch", telephone: "+41797273188" } },
+           offers: { "@type": "Offer", price: 610000, priceCurrency: "CHF", availability: "https://schema.org/InStock", seller: { "@type": "Person", name: "Gregory Brodard", email: "gregory.brodard@pfgbrodard.ch", telephone: "+41762532422" } },
           about: {
             "@type": "Apartment",
             numberOfRooms: 2.5,

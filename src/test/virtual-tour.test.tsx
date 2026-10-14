@@ -41,7 +41,7 @@ describe("approved virtual tour integration", () => {
     render(<VirtualTour t={dict[lang]} lang={lang} visitUrl={getVisitUrl(lang)} />);
     const link = screen.getByRole("link", { name: dict[lang].virtualTour.viewing });
     expect(link.getAttribute("href")).toBe(getVisitUrl(lang));
-    expect(new URL(link.getAttribute("href") ?? "").pathname).toBe("/41797273188");
+    expect(new URL(link.getAttribute("href") ?? "").pathname).toBe("/41762532422");
   });
 
   it("unmounts an unresponsive iframe and offers the approved external link", () => {
