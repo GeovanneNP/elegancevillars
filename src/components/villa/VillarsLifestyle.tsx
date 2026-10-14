@@ -75,7 +75,7 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
       {/* Act 1 — Glacier 3000 panorama, full-bleed and uncluttered */}
       <section className="relative min-h-[85svh] overflow-hidden bg-swiss-red text-ivory">
         <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover" />
-        <div className="absolute inset-x-0 top-0 h-2/3 bg-swiss-red/30 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+        <div className="absolute inset-0 bg-swiss-red/20" />
         <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
           <div>
             <p className="eyebrow text-ivory/95">{t.regionalLevel}</p>
