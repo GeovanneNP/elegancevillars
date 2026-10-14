@@ -1,5 +1,12 @@
 # Roadmap
 
+## Virtual tour integration (Oct 14)
+- [x] Apply confirmed TourMkr orientation (0h / 90t) and GoThru sharing link from the latest request.
+- [x] Inspect existing architecture, translations, motion, contact and analytics; verify public embed.
+- [x] Add click-only TourMkr experience after gallery with Hero anchor and existing WhatsApp destination.
+- [x] Validate languages, desktop/mobile/tablet, navigation, fullscreen, failure state and event behavior.
+- [ ] Provider follow-up: TourMkr logs “Panorama null not found” and a 400 response internally despite rendering and navigation; owner/provider must correct the tour configuration. Cross-origin iframe failures that still emit load cannot be detected by the host; external-open alternative stays available.
+
 ## Complete mobile visual audit and correction (Oct 10)
 - [x] Rebuild the 320–430 px hero composition, wrapping and persistent viewing clearance.
 - [x] Correct mobile image framing, overlay contrast, map density and horizontal content cues.

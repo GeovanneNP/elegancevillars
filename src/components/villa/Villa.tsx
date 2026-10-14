@@ -6,6 +6,7 @@ import { dict, langs, type Lang } from "./i18n";
 import { img } from "./images";
 import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
+import { VirtualTour } from "./VirtualTour";
 import { DossierDialog } from "./DossierDialog";
 import { VillarsLifestyle } from "./VillarsLifestyle";
 import { HeroVideo } from "./HeroVideo";
@@ -247,7 +248,10 @@ export function Villa() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-    if (lenisRef.current) lenisRef.current.scrollTo(el, { duration: 1.8 });
+    if (lenisRef.current) lenisRef.current.scrollTo(el, {
+      duration: 1.8,
+      ...(id === "visite-virtuelle" ? { onComplete: () => lenisRef.current?.scrollTo(el, { immediate: true }) } : {}),
+    });
     else el.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -301,6 +305,9 @@ export function Villa() {
               </a>
               <Button variant="ghost" onClick={() => scrollTo("residence")} className="eyebrow group flex h-auto min-h-12 w-full items-center justify-between gap-3 whitespace-normal border-b border-charcoal/30 p-0 pb-3 text-left text-charcoal hover:bg-transparent hover:text-swiss-red">
                 <span className="min-w-0 break-words">{t.heroCta}</span><span className="h-px w-8 shrink-0 bg-current transition-all duration-700 group-hover:w-12" />
+              </Button>
+              <Button asChild variant="ghost" className="flex h-auto min-h-12 w-full items-center justify-between gap-3 whitespace-normal border-b border-charcoal/30 p-0 pb-3 text-left text-base text-swiss-red hover:bg-transparent hover:text-charcoal">
+                <a href="#visite-virtuelle" onClick={(event) => { event.preventDefault(); scrollTo("visite-virtuelle"); }}><span>{t.virtualTour.label}</span><span aria-hidden="true">↗</span></a>
               </Button>
             </div>
           </div>
@@ -435,6 +442,7 @@ export function Villa() {
 
 
       <Gallery t={t} visitUrl={visitUrl} onOpenChange={setGalleryOpen} />
+      <VirtualTour t={t} lang={lang} visitUrl={visitUrl} />
 
       {/* OWNERSHIP */}
        <section className="relative grid grid-cols-12 gap-6 overflow-hidden bg-stone px-5 py-24 md:px-12 md:py-48">
