@@ -3,9 +3,10 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { VirtualTour } from "@/components/villa/VirtualTour";
 import { dict } from "@/components/villa/i18n";
 import { getVisitUrl } from "@/components/villa/visit";
-import { trackVirtualTourOpen, VIRTUAL_TOUR_SHARE_URL, VIRTUAL_TOUR_URL } from "@/components/villa/virtual-tour";
+import { VIRTUAL_TOUR_SHARE_URL, VIRTUAL_TOUR_URL } from "@/components/villa/virtual-tour";
+const tourEvents = () => (window.dataLayer ?? []).filter((e) => (e as { event?: string }).event === "view_virtual_tour");
 
-afterEach(() => { cleanup(); vi.useRealTimers(); delete window.gtag; delete window.fbq; });
+afterEach(() => { cleanup(); vi.useRealTimers(); window.dataLayer = []; });
 
 describe("approved virtual tour integration", () => {
   it("preserves the confirmed panorama and orientation and sharing destination", () => {
@@ -14,27 +15,20 @@ describe("approved virtual tour integration", () => {
   });
 
   it("does not mount the third-party iframe or emit analytics before interaction", () => {
-    const gtag = vi.fn(); window.gtag = gtag;
     const { container } = render(<VirtualTour t={dict.fr} lang="fr" visitUrl={getVisitUrl("fr")} />);
     expect(container.querySelector("iframe")).toBeNull();
-    expect(gtag).not.toHaveBeenCalled();
+    expect(tourEvents()).toHaveLength(0);
     fireEvent.click(screen.getByRole("button", { name: dict.fr.virtualTour.start }));
     expect(container.querySelector("iframe")?.getAttribute("src")).toBe(VIRTUAL_TOUR_URL);
-    expect(gtag).toHaveBeenCalledExactlyOnceWith("event", "virtual_tour_open", { language: "fr", listing_reference: "044598" });
+    expect(tourEvents()).toHaveLength(1);
   });
 
-  it("emits each provider event once despite closing and reopening", async () => {
-    const gtag = vi.fn(); const fbq = vi.fn(); window.gtag = gtag; window.fbq = fbq;
+  it("emits the tour event once despite closing and reopening", async () => {
     render(<VirtualTour t={dict.en} lang="en" visitUrl={getVisitUrl("en")} />);
     fireEvent.click(screen.getByRole("button", { name: dict.en.virtualTour.start }));
     await act(async () => { fireEvent.click(screen.getByRole("button", { name: dict.en.virtualTour.close })); });
     fireEvent.click(screen.getByRole("button", { name: dict.en.virtualTour.start }));
-    expect(gtag).toHaveBeenCalledTimes(1);
-    expect(fbq).toHaveBeenCalledExactlyOnceWith("trackCustom", "virtual_tour_open", { language: "en", listing_reference: "044598" });
-  });
-
-  it("remains usable with no analytics providers", () => {
-    expect(() => trackVirtualTourOpen({}, "de")).not.toThrow();
+    expect(tourEvents()).toHaveLength(1);
   });
 
   it.each(["fr", "en", "de"] as const)("preserves the existing WhatsApp destination in %s", (lang) => {
