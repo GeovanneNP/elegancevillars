@@ -55,7 +55,7 @@ export function saveConsent(choice: { analytics: boolean; marketing: boolean }, 
 }
 
 /** GTM loads only when an ID is configured AND an optional category was granted. */
-export function loadGtm(win: Window = window, id = import.meta.env.VITE_GTM_ID as string | undefined) {
+export function loadGtm(win: Window = window, id = import.meta.env["VITE_GTM_ID"] as string | undefined) {
   const c = readConsent(win);
   if (!id || !/^GTM-[A-Z0-9]+$/.test(id) || !c || !(c.analytics || c.marketing)) return false;
   if (win.document.getElementById("gtm-script")) return true;
@@ -72,8 +72,8 @@ export function captureAttribution(win: Window = window) {
   const found: Record<string, string> = {};
   [...UTM_KEYS, ...CLICK_IDS].forEach((k) => { const v = params.get(k); if (v) found[k] = v.slice(0, 150); });
   if (Object.keys(found).length) {
-    found.landing_page = win.location.pathname;
-    found.captured_at = new Date().toISOString();
+    found["landing_page"] = win.location.pathname;
+    found["captured_at"] = new Date().toISOString();
     win.sessionStorage.setItem(ATTR_KEY, JSON.stringify(found));
   }
   return getAttribution(win);
@@ -97,7 +97,7 @@ export function track(event: TrackEvent, params: Record<string, unknown> = {}, o
   for (const [k, v] of Object.entries(params)) if (!PII_KEYS.test(k)) clean[k] = v;
   const attr = getAttribution(win);
   const utm = Object.fromEntries(UTM_KEYS.filter((k) => attr[k]).map((k) => [k, attr[k]]));
-  const payload = { event, event_id: newEventId(), property_id: PROPERTY_ID, page_language: win.document.documentElement.lang || "fr", ...utm, ...clean };
+  const payload: Record<string, unknown> & { event: TrackEvent; event_id: string; property_id: string } = { event, event_id: newEventId(), property_id: PROPERTY_ID, page_language: win.document.documentElement.lang || "fr", ...utm, ...clean };
   dl(win).push(payload);
   return payload;
 }
