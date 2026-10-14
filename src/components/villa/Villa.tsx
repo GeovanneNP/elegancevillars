@@ -17,8 +17,8 @@ import { getVisitUrl } from "./visit";
 import { MessageCircle } from "lucide-react";
 
 const CONTACT_EMAIL = "gregory.brodard@pfgbrodard.ch";
-const CONTACT_PHONE = "+41 79 727 31 88";
-const CONTACT_PHONE_LINK = "+41797273188";
+const CONTACT_PHONE = "+41 76 253 24 22";
+const CONTACT_PHONE_LINK = "+41762532422";
 
 const ids = ["residence", "location", "gallery", "details", "contact"];
 const motion = {
