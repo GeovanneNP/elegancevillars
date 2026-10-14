@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DeRouteImport } from './routes/de'
+import { Route as EnRouteImport } from './routes/en'
 import { Route as LegalRouteImport } from './routes/legal'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeRoute = DeRouteImport.update({
+  id: '/de',
+  path: '/de',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnRoute = EnRouteImport.update({
+  id: '/en',
+  path: '/en',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LegalRoute = LegalRouteImport.update({
@@ -31,30 +43,38 @@ const PrivacyRoute = PrivacyRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/de': typeof DeRoute
+  '/en': typeof EnRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/de': typeof DeRoute
+  '/en': typeof EnRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/de': typeof DeRoute
+  '/en': typeof EnRoute
   '/legal': typeof LegalRoute
   '/privacy': typeof PrivacyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/legal' | '/privacy'
+  fullPaths: '/' | '/de' | '/en' | '/legal' | '/privacy'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/legal' | '/privacy'
-  id: '__root__' | '/' | '/legal' | '/privacy'
+  to: '/' | '/de' | '/en' | '/legal' | '/privacy'
+  id: '__root__' | '/' | '/de' | '/en' | '/legal' | '/privacy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DeRoute: typeof DeRoute
+  EnRoute: typeof EnRoute
   LegalRoute: typeof LegalRoute
   PrivacyRoute: typeof PrivacyRoute
 }
@@ -66,6 +86,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de': {
+      id: '/de'
+      path: '/de'
+      fullPath: '/de'
+      preLoaderRoute: typeof DeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en': {
+      id: '/en'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/legal': {
@@ -87,6 +121,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DeRoute: DeRoute,
+  EnRoute: EnRoute,
   LegalRoute: LegalRoute,
   PrivacyRoute: PrivacyRoute,
 }

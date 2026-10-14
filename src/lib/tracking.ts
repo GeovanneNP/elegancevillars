@@ -98,7 +98,7 @@ export function track(event: TrackEvent, params: Record<string, unknown> = {}, o
   for (const [k, v] of Object.entries(params)) if (!PII_KEYS.test(k)) clean[k] = v;
   const attr = getAttribution(win);
   const utm = Object.fromEntries(UTM_KEYS.filter((k) => attr[k]).map((k) => [k, attr[k]]));
-  const payload: Record<string, unknown> & { event: TrackEvent; event_id: string; property_id: string } = { event, event_id: newEventId(), property_id: PROPERTY_ID, page_language: win.document.documentElement.lang || "fr", ...utm, ...clean };
+  const payload: Record<string, unknown> & { event: TrackEvent; event_id: string; property_id: string } = { event, event_id: newEventId(), property_id: PROPERTY_ID, page_language: (win.document.documentElement.lang || "fr").slice(0, 2), ...utm, ...clean };
   dl(win).push(payload);
   return payload;
 }
