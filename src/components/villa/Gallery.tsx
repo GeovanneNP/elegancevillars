@@ -78,9 +78,9 @@ export function Gallery({ t, visitUrl, onOpenChange }: { t: Dict; visitUrl: stri
 
       <div
         ref={cursor}
-        className="pointer-events-none fixed left-0 top-0 z-50 hidden h-24 w-24 items-center justify-center rounded-full bg-ivory/90 text-charcoal md:flex"
+        className="pointer-events-none fixed left-0 top-0 z-50 hidden min-h-14 items-center justify-between gap-4 whitespace-nowrap bg-swiss-red px-6 text-ivory md:flex"
       >
-        <span className="eyebrow">{t.view}</span>
+        <span className="eyebrow">{t.view}</span><span aria-hidden="true">→</span>
       </div>
 
       {open !== null && (
