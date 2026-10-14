@@ -21,7 +21,7 @@ describe("tracking rules", () => {
     expect(document.querySelectorAll("#gtm-script")).toHaveLength(1);
   });
   it("attaches captured UTM campaign data to events", () => {
-    history.replaceState(null, "", "/?utm_source=google["utm_campaign"]=villars");
+    history.replaceState(null, "", "/?utm_source=google&utm_campaign=villars");
     captureAttribution();
     const e = track("contact_whatsapp", {})!;
     expect(e["utm_source"]).toBe("google"); expect(e["utm_campaign"]).toBe("villars");
