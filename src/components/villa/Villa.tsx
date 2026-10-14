@@ -40,8 +40,7 @@ function Lines({ lines, className = "" }: { lines: string[]; className?: string 
   );
 }
 
-export function Villa() {
-  const [lang, setLang] = useState<Lang>("fr");
+export function Villa({ lang }: { lang: Lang }) {
   const [ready, setReady] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -54,15 +53,9 @@ export function Villa() {
   const onDone = useCallback(() => setReady(true), []);
   const visitUrl = getVisitUrl(lang);
 
-  useEffect(() => {
-    const saved = window.localStorage.getItem("villars-lang") as Lang | null;
-    const browser = navigator.language.slice(0, 2) as Lang;
-    const initial = saved && langs.includes(saved) ? saved : langs.includes(browser) ? browser : "fr";
-    if (initial !== "fr") setLang(initial);
-  }, []);
-
-  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
-  const chooseLang = (l: Lang) => { if (l !== lang) track("change_language", { from_language: lang, to_language: l, interaction_type: "language_switch" }); setLang(l); window.localStorage.setItem("villars-lang", l); };
+  // Language comes from the URL (/, /en, /de); no browser-based switching or redirect.
+  useEffect(() => { document.documentElement.lang = HTML_LANG[lang]; window.localStorage.setItem("villars-lang", lang); }, [lang]);
+  const chooseLang = (l: Lang) => { if (l !== lang) track("change_language", { from_language: lang, to_language: l, interaction_type: "language_switch" }); };
 
   // Tracking: one property view per page load + delegated contact clicks (no PII in params).
   useEffect(() => {
@@ -296,7 +289,9 @@ export function Villa() {
             {langs.map((l, i) => (
               <span key={l} className="flex items-center gap-2">
                 {i > 0 && <span className="hidden text-ivory/40 sm:inline">|</span>}
-                 <Button variant="ghost" onClick={() => chooseLang(l)} aria-pressed={lang === l} aria-label={l.toUpperCase()} className={`eyebrow h-11 w-11 p-0 sm:h-auto sm:w-auto hover:bg-transparent ${lang === l ? "text-ivory" : "text-ivory/50 hover:text-ivory"}`}>{l.toUpperCase()}</Button>
+                 <Button asChild variant="ghost" className={`eyebrow h-11 w-11 p-0 sm:h-auto sm:w-auto hover:bg-transparent ${lang === l ? "text-ivory" : "text-ivory/50 hover:text-ivory"}`}>
+                   <Link to={LANG_PATH[l]} hrefLang={HTML_LANG[l]} onClick={() => chooseLang(l)} aria-current={lang === l ? "page" : undefined} aria-label={l.toUpperCase()}>{l.toUpperCase()}</Link>
+                 </Button>
               </span>
             ))}
           </div>
