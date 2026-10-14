@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { track } from "@/lib/tracking";
 import gsap from "gsap";
 import { galleryImages } from "./images";
 import type { Dict } from "./i18n";
@@ -65,7 +66,7 @@ export function Gallery({ t, visitUrl, onOpenChange }: { t: Dict; visitUrl: stri
             variant="ghost"
             key={g.src}
             data-gal
-            onClick={() => setOpen(i)}
+            onClick={() => { track("view_gallery", { image_index: i + 1, interaction_type: "open_lightbox" }); setOpen(i); }}
             onMouseEnter={() => showCursor(true)}
             onMouseLeave={() => showCursor(false)}
             className={`group relative h-auto w-full overflow-hidden rounded-none p-0 [@media(hover:hover)_and_(pointer:fine)]:md:cursor-none ${layout[i]}`}

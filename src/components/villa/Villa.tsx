@@ -8,6 +8,8 @@ import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
 import { VirtualTour } from "./VirtualTour";
 import { DossierDialog } from "./DossierDialog";
+import { ConsentBanner, openCookieSettings } from "./ConsentBanner";
+import { track } from "@/lib/tracking";
 import { VillarsLifestyle } from "./VillarsLifestyle";
 import { HeroVideo } from "./HeroVideo";
 import { Button } from "@/components/ui/button";
@@ -60,7 +62,23 @@ export function Villa() {
   }, []);
 
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
-  const chooseLang = (l: Lang) => { setLang(l); window.localStorage.setItem("villars-lang", l); };
+  const chooseLang = (l: Lang) => { if (l !== lang) track("change_language", { from_language: lang, to_language: l, interaction_type: "language_switch" }); setLang(l); window.localStorage.setItem("villars-lang", l); };
+
+  // Tracking: one property view per page load + delegated contact clicks (no PII in params).
+  useEffect(() => {
+    track("view_property", { property_type: "apartment", location: "Villars-sur-Ollon" }, { onceKey: "view_property" });
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement | null)?.closest?.("a");
+      if (!a) return;
+      const href = a.getAttribute("href") || "";
+      const section = a.closest("section, footer, [data-hero]")?.getAttribute("id") || (a.closest(".fixed") ? "floating_cta" : "page");
+      if (href.includes("wa.me/")) track("contact_whatsapp", { button_location: section, interaction_type: "click" });
+      else if (href.startsWith("tel:")) track("contact_click", { contact_method: "phone", button_location: section, interaction_type: "click" });
+      else if (href.startsWith("mailto:")) track("contact_click", { contact_method: "email", button_location: section, interaction_type: "click" });
+    };
+    document.addEventListener("click", onClick, true);
+    return () => document.removeEventListener("click", onClick, true);
+  }, []);
 
   // Smooth scroll
   useEffect(() => {
@@ -464,7 +482,7 @@ export function Villa() {
             <Button asChild variant="default" data-fade className="eyebrow group mt-10 flex h-auto w-full items-center justify-between bg-swiss-red px-7 py-6 text-ivory transition-colors hover:bg-swiss-red/85">
               <a href={visitUrl} target="_blank" rel="noreferrer"><span>{t.ownCta}</span><span className="h-px w-10 bg-gold transition-all duration-700 group-hover:w-16" /></a>
             </Button>
-            <Button variant="ghost" data-fade onClick={() => setDossierOpen(true)} className="eyebrow group mt-5 flex h-auto w-full items-center justify-between p-0 py-3 text-charcoal hover:bg-transparent hover:text-swiss-red">
+            <Button variant="ghost" data-fade onClick={() => { track("request_dossier", { button_location: "price", interaction_type: "open_form" }); setDossierOpen(true); }} className="eyebrow group mt-5 flex h-auto w-full items-center justify-between p-0 py-3 text-charcoal hover:bg-transparent hover:text-swiss-red">
               {t.dossierCta}<span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
             </Button>
         </div>
@@ -493,10 +511,11 @@ export function Villa() {
         </div>
          <footer className="grid gap-4 border-t border-ivory/10 px-5 py-8 text-sm leading-relaxed text-ivory/60 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-12">
            <span>{t.reference} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
-           <span className="flex flex-wrap gap-x-5 gap-y-2 md:justify-end"><span>{t.rights}</span><Link to="/legal" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.legal}</Link><Link to="/privacy" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.privacy}</Link></span>
+           <span className="flex flex-wrap gap-x-5 gap-y-2 md:justify-end"><span>{t.rights}</span><Link to="/legal" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.legal}</Link><Link to="/privacy" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.privacy}</Link><button type="button" onClick={openCookieSettings} className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">Cookies</button></span>
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />
+       <ConsentBanner lang={lang} />
         {!dossierOpen && !galleryOpen && (
           <>
            <div ref={mobileVisitBar} className="fixed inset-x-0 bottom-0 z-40 border-t border-ivory/25 bg-swiss-red px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-ivory md:hidden">
