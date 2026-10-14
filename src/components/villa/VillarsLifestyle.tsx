@@ -72,24 +72,32 @@ export function VillarsLifestyle({ t, activeSeason, onSeasonChange }: Props) {
         </div>
       </section>
 
+      {/* Act 1 — Glacier 3000 panorama, full-bleed and uncluttered */}
       <section className="relative min-h-[85svh] overflow-hidden bg-swiss-red text-ivory">
-        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover opacity-90 md:opacity-80" />
-        <div className="absolute inset-0 bg-swiss-red/15 md:bg-swiss-red/25" />
+        <img src={img.glacier3000} alt={t.imageAlts.glacier} loading="lazy" width={2400} height={1600} className="absolute inset-0 h-full w-full object-cover" />
+        <div className="absolute inset-0 bg-swiss-red/20" />
         <div className="relative flex min-h-[85svh] flex-col justify-between px-5 py-20 md:px-12 md:py-24">
-          <p className="eyebrow text-ivory/95 md:text-ivory/80">{t.regionalLevel}</p>
           <div>
-            <h2 className="font-serif text-6xl font-light md:text-9xl">{t.glacierTitle}</h2>
+            <p className="eyebrow text-ivory/95">{t.regionalLevel}</p>
+            <h2 className="mt-6 font-serif text-6xl font-light md:text-9xl">{t.glacierTitle}</h2>
             <p className="mt-6 max-w-3xl font-serif text-3xl font-light leading-[1.08] md:text-6xl md:leading-[1.02]">{t.glacierHeadline[0]}<br /><span className="italic">{t.glacierHeadline[1]}</span></p>
           </div>
-          <div className="grid grid-cols-12 gap-6 border-t border-ivory/30 pt-6">
-            <div className="col-span-7 md:col-span-3"><p className="eyebrow text-ivory/95 md:text-ivory/75">{t.glacierFeature}</p><p className="mt-3 font-serif text-5xl">{t.glacierStat}</p></div>
-            <p className="col-span-12 max-w-sm self-end font-serif text-2xl italic md:col-span-4 md:col-start-8 md:text-3xl">{t.glacierText}</p>
-          </div>
-          <figure className="mt-10 w-full text-ivory md:mt-12 md:w-[58vw]">
-            <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[16/9] w-full object-cover" />
+          <div className="text-ivory"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
+        </div>
+      </section>
+
+      {/* Act 2 — Peak Walk experience on solid Swiss red */}
+      <section className="bg-swiss-red px-5 py-20 text-ivory md:px-12 md:py-28">
+        <div className="grid grid-cols-12 gap-6 md:items-end">
+          <figure className="col-span-12 md:col-span-8">
+            <img src={img.peakWalk} alt={t.imageAlts.peakWalk} loading="lazy" width={2400} height={1799} className="aspect-[4/3] w-full object-cover md:aspect-[16/10]" />
             <PhotoCredit label={t.photoCredit} credit={photoCredits.peakWalk} />
           </figure>
-          <div className="mt-6 border-t border-ivory/30 pt-4 text-ivory"><PhotoCredit label={t.photoCredit} credit={photoCredits.glacier} /></div>
+          <div className="col-span-12 mt-8 md:col-span-4 md:mt-0 md:pl-6">
+            <p className="eyebrow text-ivory/90">{t.glacierFeature}</p>
+            <p className="mt-3 font-serif text-6xl font-light md:text-7xl">{t.glacierStat}</p>
+            <p className="mt-8 border-t border-ivory/30 pt-6 font-serif text-2xl italic md:text-3xl">{t.glacierText}</p>
+          </div>
         </div>
       </section>
 
