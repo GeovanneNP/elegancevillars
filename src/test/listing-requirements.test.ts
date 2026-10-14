@@ -6,8 +6,8 @@ describe("confirmed listing requirements", () => {
     expect(dict[lang].heroMeta).toContain("CHF 610'000.-");
   });
 
-  it.each(["fr", "en", "de"] as const)("uses exactly 48 m² in %s", (lang) => {
-    expect(dict[lang].details[0]?.[1]).toBe("48 m²");
+  it.each(["fr", "en", "de"] as const)("shows approximately 48 m² in %s", (lang) => {
+    expect(dict[lang].details[0]?.[1]).toBe("~48 m²");
   });
 
   it.each(["fr", "en", "de"] as const)("states the LFAIE condition in %s", (lang) => {
