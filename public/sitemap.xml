@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.brodardproperty.ch/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.brodardproperty.ch/</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/"/>
+  </url>
+  <url>
+    <loc>https://www.brodardproperty.ch/en</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/"/>
+  </url>
+  <url>
+    <loc>https://www.brodardproperty.ch/de</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/"/>
+  </url>
   <url><loc>https://www.brodardproperty.ch/legal</loc></url>
   <url><loc>https://www.brodardproperty.ch/privacy</loc></url>
 </urlset>

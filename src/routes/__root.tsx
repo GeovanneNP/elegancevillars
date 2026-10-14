@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { HTML_LANG, langFromPath } from "../components/villa/seo";
+import { useRouterState } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -100,8 +102,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
-    <html lang="fr">
+    <html lang={HTML_LANG[langFromPath(pathname)]} suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
