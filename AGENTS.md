@@ -21,3 +21,4 @@
 - Viewing links use the shared visit URL helper; overlays expose their own viewing link while suppressing the floating action — this keeps the destination consistent and prevents covered controls.
 - Public URLs and listing metadata use brodardproperty.ch as canonical while legacy domains redirect to it — this keeps search and sharing signals on the Brodard Property identity.
 - VirtualTour owns the click-mounted provider iframe after Gallery, uses the shared viewing URL, and calls only already-enabled analytics providers without initializing tracking — this isolates third-party loading and preserves consent and sales flow.
+- Tracking has one source: src/lib/tracking.ts pushes standardized events to window.dataLayer; GTM (VITE_GTM_ID) loads only after optional consent from ConsentBanner with Consent Mode v2 defaults denied, and forwards to GA4/Meta/Ads — never add direct gtag/fbq installs (duplicates) or PII in event params.
