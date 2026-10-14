@@ -55,7 +55,8 @@ export function saveConsent(choice: { analytics: boolean; marketing: boolean }, 
 }
 
 /** GTM loads only when an ID is configured AND an optional category was granted. */
-export function loadGtm(win: Window = window, id = import.meta.env["VITE_GTM_ID"] as string | undefined) {
+export const GTM_ID = "GTM-KQ7N2XC2"; // public container ID (www.brodardproperty.ch)
+export function loadGtm(win: Window = window, id = (import.meta.env["VITE_GTM_ID"] as string | undefined) || GTM_ID) {
   const c = readConsent(win);
   if (!id || !/^GTM-[A-Z0-9]+$/.test(id) || !c || !(c.analytics || c.marketing)) return false;
   if (win.document.getElementById("gtm-script")) return true;
