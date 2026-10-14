@@ -4,6 +4,7 @@ import { ArrowRight, MessageCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { requestDossier } from "@/lib/dossier.functions";
+import { track } from "@/lib/tracking";
 import type { Lang } from "./i18n";
 import { Link } from "@tanstack/react-router";
 import { dict } from "./i18n";
@@ -70,6 +71,8 @@ export function DossierDialog({ open, onOpenChange, lang }: { open: boolean; onO
         language: lang,
       } });
       setStatus("success");
+      // Real conversion: only after the server confirmed the save. No form values are sent.
+      track("generate_lead", { lead_type: "dossier_request", form_language: lang, interaction_type: "form_submit_success" });
     } catch {
       setStatus("error");
     }
