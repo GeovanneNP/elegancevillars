@@ -3,7 +3,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { dict, langs, type Lang } from "./i18n";
-import { Link } from "@tanstack/react-router";
 import { HTML_LANG, LANG_PATH } from "./seo";
 import { img } from "./images";
 import { Preloader } from "./Preloader";
