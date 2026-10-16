@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { Lang } from "./i18n";
+import { pagePath } from "./seo";
 import { captureAttribution, initConsentDefaults, loadGtm, readConsent, saveConsent } from "@/lib/tracking";
 
 const copy = {
@@ -33,7 +34,7 @@ export function ConsentBanner({ lang }: { lang: Lang }) {
 
   return (
     <div role="dialog" aria-live="polite" aria-label={t.settings} className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-xl border border-charcoal/15 bg-ivory p-5 text-charcoal shadow-2xl md:inset-x-auto md:bottom-8 md:left-8">
-      <p className="text-base leading-relaxed">{t.text} <a href="/privacy" className="underline underline-offset-4">{t.more}</a></p>
+      <p className="text-base leading-relaxed">{t.text} <a href={pagePath(lang, "privacy")} className="underline underline-offset-4">{t.more}</a></p>
       {custom && (
         <div className="mt-4 grid gap-3 text-base">
           <label className="flex min-h-11 items-center gap-3"><input type="checkbox" className="size-5 accent-[var(--swiss-red,currentColor)]" checked={analytics} onChange={(e) => setAnalytics(e.target.checked)} />{t.analytics}</label>

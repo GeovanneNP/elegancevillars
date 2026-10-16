@@ -6,14 +6,14 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { HTML_LANG, langFromPath } from "../components/villa/seo";
-import { useRouterState } from "@tanstack/react-router";
+import { HTML_LANG, SITE_VERIFICATION, altLocales, langFromPath } from "../components/villa/seo";
 
 function NotFoundComponent() {
   return (
@@ -103,10 +103,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const lang = langFromPath(pathname);
   return (
-    <html lang={HTML_LANG[langFromPath(pathname)]} suppressHydrationWarning>
+    <html lang={HTML_LANG[lang]} suppressHydrationWarning>
       <head>
         <HeadContent />
+        {altLocales(lang).map((l) => <meta key={l} property="og:locale:alternate" content={l} />)}
+        {SITE_VERIFICATION.google && <meta name="google-site-verification" content={SITE_VERIFICATION.google} />}
+        {SITE_VERIFICATION.facebook && <meta name="facebook-domain-verification" content={SITE_VERIFICATION.facebook} />}
       </head>
       <body>
         {children}
