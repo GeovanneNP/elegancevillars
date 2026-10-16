@@ -13,7 +13,7 @@ export const altLocales = (lang: Lang) => (["fr", "en", "de"] as Lang[]).filter(
 export const pagePath = (l: Lang, page: "legal" | "privacy") => (l === "fr" ? `/${page}` : `/${l}/${page}`);
 export const pageUrl = (l: Lang, page: "legal" | "privacy") => `${SITE}${pagePath(l, page)}`;
 /** Empty until the owner supplies tokens; non-empty values emit verification metas. */
-export const SITE_VERIFICATION = { google: "", facebook: "" };
+export const SITE_VERIFICATION = { google: "1cNjaJsSH1LUrB44vWE3UddnJXlYKzTLpouRcQDp8Ro", facebook: "" };
 
 export const langFromPath = (path: string): Lang => (path === "/en" || path.startsWith("/en/") ? "en" : path === "/de" || path.startsWith("/de/") ? "de" : "fr");
 

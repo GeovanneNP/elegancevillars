@@ -37,3 +37,9 @@ describe("localised sub-pages", () => {
     expect(h.links.find((l) => l.hrefLang === "x-default")?.href).toBe("https://www.brodardproperty.ch/privacy");
   });
 });
+
+import { SITE_VERIFICATION } from "@/components/villa/seo";
+it("uses the supplied Google verification token and leaves Facebook empty", () => {
+  expect(SITE_VERIFICATION.google).toBe("1cNjaJsSH1LUrB44vWE3UddnJXlYKzTLpouRcQDp8Ro");
+  expect(SITE_VERIFICATION.facebook).toBe("");
+});
