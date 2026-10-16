@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { dict, langs, type Lang } from "./i18n";
-import { HTML_LANG, LANG_PATH } from "./seo";
+import { HTML_LANG, LANG_PATH, pagePath } from "./seo";
 import { img } from "./images";
 import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
@@ -507,7 +507,7 @@ export function Villa({ lang }: { lang: Lang }) {
         </div>
          <footer className="grid gap-4 border-t border-ivory/10 px-5 py-8 text-sm leading-relaxed text-ivory/60 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:px-12">
            <span>{t.reference} 044598 — Villars-sur-Ollon, Vaud, {t.country}</span>
-           <span className="flex flex-wrap gap-x-5 gap-y-2 md:justify-end"><span>{t.rights}</span><Link to="/legal" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.legal}</Link><Link to="/privacy" className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.privacy}</Link><button type="button" onClick={openCookieSettings} className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">Cookies</button></span>
+           <span className="flex flex-wrap gap-x-5 gap-y-2 md:justify-end"><span>{t.rights}</span><a href={pagePath(lang, "legal")} className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.legal}</a><a href={pagePath(lang, "privacy")} className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">{t.privacy}</a><button type="button" onClick={openCookieSettings} className="text-ivory/70 underline decoration-ivory/30 underline-offset-4 hover:text-ivory">Cookies</button></span>
         </footer>
       </section>
        <DossierDialog open={dossierOpen} onOpenChange={setDossierOpen} lang={lang} />

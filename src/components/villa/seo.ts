@@ -3,10 +3,18 @@ import type { Lang } from "./i18n";
 export const SITE = "https://www.brodardproperty.ch";
 export const LANG_PATH: Record<Lang, "/" | "/en" | "/de"> = { fr: "/", en: "/en", de: "/de" };
 export const HTML_LANG: Record<Lang, string> = { fr: "fr-CH", en: "en", de: "de-CH" };
-const OG_LOCALE: Record<Lang, string> = { fr: "fr_CH", en: "en_US", de: "de_CH" };
+export const OG_LOCALE: Record<Lang, string> = { fr: "fr_CH", en: "en_US", de: "de_CH" };
 const OG_IMAGE = `${SITE}/og-villars.jpg`;
 
 export const langUrl = (l: Lang) => (l === "fr" ? `${SITE}/` : `${SITE}${LANG_PATH[l]}`);
+/** og:locale:alternate tags are rendered in RootShell: the router dedupes metas sharing a property. */
+export const altLocales = (lang: Lang) => (["fr", "en", "de"] as Lang[]).filter((l) => l !== lang).map((l) => OG_LOCALE[l]);
+/** Localised URL for a sub-page such as "legal": FR at /legal, others at /en/legal, /de/legal. */
+export const pagePath = (l: Lang, page: "legal" | "privacy") => (l === "fr" ? `/${page}` : `/${l}/${page}`);
+export const pageUrl = (l: Lang, page: "legal" | "privacy") => `${SITE}${pagePath(l, page)}`;
+/** Empty until the owner supplies tokens; non-empty values emit verification metas. */
+export const SITE_VERIFICATION = { google: "", facebook: "" };
+
 export const langFromPath = (path: string): Lang => (path === "/en" || path.startsWith("/en/") ? "en" : path === "/de" || path.startsWith("/de/") ? "de" : "fr");
 
 const COPY: Record<Lang, { title: string; description: string; name: string; alt: string }> = {
@@ -33,7 +41,6 @@ const COPY: Record<Lang, { title: string; description: string; name: string; alt
 export function listingHead(lang: Lang) {
   const c = COPY[lang];
   const url = langUrl(lang);
-  const others = (["fr", "en", "de"] as Lang[]).filter((l) => l !== lang);
   return {
     meta: [
       { title: c.title },
@@ -44,7 +51,6 @@ export function listingHead(lang: Lang) {
       { property: "og:url", content: url },
       { property: "og:site_name", content: "Brodard Property" },
       { property: "og:locale", content: OG_LOCALE[lang] },
-      ...others.map((l) => ({ property: "og:locale:alternate", content: OG_LOCALE[l] })),
       { property: "og:image", content: OG_IMAGE },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },

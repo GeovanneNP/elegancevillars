@@ -18,3 +18,22 @@ describe("international SEO", () => {
     expect(langFromPath("/de")).toBe("de");
   });
 });
+
+import { altLocales, pagePath } from "@/components/villa/seo";
+import { legalHead } from "@/components/villa/legalPages";
+describe("localised sub-pages", () => {
+  it("lists the two other locales as alternates", () => {
+    expect(altLocales("fr")).toEqual(["en_US", "de_CH"]);
+    expect(altLocales("en")).toEqual(["fr_CH", "de_CH"]);
+    expect(altLocales("de")).toEqual(["fr_CH", "en_US"]);
+  });
+  it("keeps French legal pages at the root", () => {
+    expect(pagePath("fr", "legal")).toBe("/legal");
+    expect(pagePath("de", "privacy")).toBe("/de/privacy");
+  });
+  it("/en/privacy canonical self-references with x-default to French", () => {
+    const h = legalHead("privacy", "en");
+    expect(h.links.find((l) => l.rel === "canonical")?.href).toBe("https://www.brodardproperty.ch/en/privacy");
+    expect(h.links.find((l) => l.hrefLang === "x-default")?.href).toBe("https://www.brodardproperty.ch/privacy");
+  });
+});

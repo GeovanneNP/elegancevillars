@@ -21,6 +21,46 @@
     <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/"/>
   </url>
-  <url><loc>https://www.brodardproperty.ch/legal</loc></url>
-  <url><loc>https://www.brodardproperty.ch/privacy</loc></url>
+  <url>
+    <loc>https://www.brodardproperty.ch/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en/legal"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de/legal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/legal"/>
+  </url>
+  <url>
+    <loc>https://www.brodardproperty.ch/en/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en/legal"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de/legal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/legal"/>
+  </url>
+  <url>
+    <loc>https://www.brodardproperty.ch/de/legal</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en/legal"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de/legal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/legal"/>
+  </url>
+  <url>
+    <loc>https://www.brodardproperty.ch/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/privacy"/>
+  </url>
+  <url>
+    <loc>https://www.brodardproperty.ch/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/privacy"/>
+  </url>
+  <url>
+    <loc>https://www.brodardproperty.ch/de/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr-CH" href="https://www.brodardproperty.ch/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.brodardproperty.ch/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de-CH" href="https://www.brodardproperty.ch/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.brodardproperty.ch/privacy"/>
+  </url>
 </urlset>
