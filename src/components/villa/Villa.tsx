@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import { dict, langs, type Lang } from "./i18n";
-import { HTML_LANG, LANG_PATH } from "./seo";
+import { HTML_LANG, LANG_PATH, pagePath } from "./seo";
 import { img } from "./images";
 import { Preloader } from "./Preloader";
 import { Gallery } from "./Gallery";
