@@ -1,4 +1,6 @@
 import type { Lang } from "./i18n";
+/** Opening poster: phone-sized copies of the same frame, full HD for desktop. */
+export const HERO_POSTER_SRCSET = "/hero-poster-480.webp 480w, /hero-poster-828.webp 828w, /hero-poster.webp 1920w";
 
 export const SITE = "https://www.brodardproperty.ch";
 export const LANG_PATH: Record<Lang, "/" | "/en" | "/de"> = { fr: "/", en: "/en", de: "/de" };
