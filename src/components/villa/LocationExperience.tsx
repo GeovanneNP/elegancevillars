@@ -38,15 +38,28 @@ export function LocationExperience({ t }: Props) {
 
   const fallback = <div className="h-full w-full bg-ivory" />;
 
+  // Load the map library only when the map is about one screen away.
+  const mapBox = useRef<HTMLDivElement>(null);
+  const [nearMap, setNearMap] = useState(false);
+  useEffect(() => {
+    const el = mapBox.current;
+    if (!el || nearMap) return;
+    const io = new IntersectionObserver((e) => { if (e.some((x) => x.isIntersecting)) { setNearMap(true); io.disconnect(); } }, { rootMargin: "100% 0px" });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [nearMap]);
+
   return (
     <section id="vivre-villars" data-location-experience className="bg-ivory">
       <div className="md:grid md:grid-cols-12">
         {/* Map: sticky on desktop, simple block on mobile */}
-        <div className="relative h-[min(68svh,34rem)] min-h-[26rem] md:sticky md:top-0 md:order-2 md:col-span-7 md:h-svh">
+        <div ref={mapBox} className="relative h-[min(68svh,34rem)] min-h-[26rem] md:sticky md:top-0 md:order-2 md:col-span-7 md:h-svh">
           <ClientOnly fallback={fallback}>
-            <Suspense fallback={fallback}>
-              <LocationMap names={loc.pois} category={category} activeId={activeId} onSelect={setActiveId} label={loc.mapLabel} routeLabel={loc.routeNote} />
-            </Suspense>
+            {nearMap ? (
+              <Suspense fallback={fallback}>
+                <LocationMap names={loc.pois} category={category} activeId={activeId} onSelect={setActiveId} label={loc.mapLabel} routeLabel={loc.routeNote} />
+              </Suspense>
+            ) : fallback}
           </ClientOnly>
           <nav aria-label={loc.label} className="absolute inset-x-3 top-3 grid grid-cols-3 items-start gap-2 md:inset-x-auto md:left-8 md:top-8 md:flex md:items-center md:gap-3">
             {categories.map((c, i) => (
