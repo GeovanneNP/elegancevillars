@@ -53,3 +53,24 @@ export const galleryImages = [
   { src: img.balcony, alt: "Balcon avec vue sur les montagnes" },
   { src: img.exterior, alt: "Le bâtiment au centre de Villars" },
 ];
+
+import livingM from "@/assets/living-m.webp";
+import living2M from "@/assets/living2-m.webp";
+import kitchenM from "@/assets/kitchen-m.webp";
+import bedroomM from "@/assets/bedroom-m.webp";
+import bedroom2M from "@/assets/bedroom2-m.webp";
+import bathM from "@/assets/bath-m.webp";
+import balconyM from "@/assets/balcony-m.webp";
+import exteriorM from "@/assets/exterior-m.webp";
+
+// Phone-sized copies (1080w) of the apartment photos; originals are 2528×1696.
+const mobileCopy: Record<string, string> = {
+  [living]: livingM, [living2]: living2M, [kitchen]: kitchenM, [bedroom]: bedroomM,
+  [bedroom2]: bedroom2M, [bath]: bathM, [balcony]: balconyM, [exterior]: exteriorM,
+};
+
+/** Responsive attributes for an apartment photo: srcset, sizes and intrinsic size. */
+export function photo(src: string, sizes = "100vw") {
+  const m = mobileCopy[src];
+  return m ? { src, srcSet: `${m} 1080w, ${src} 2528w`, sizes, width: 2528, height: 1696 } : { src };
+}

@@ -274,7 +274,7 @@ export function Villa({ lang }: { lang: Lang }) {
       {/* NAV */}
        <header className="relative z-40 grid min-h-20 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 bg-swiss-red px-5 py-3 text-ivory md:flex md:min-h-24 md:justify-between md:px-12">
          <a href="#top" aria-label="Brodard Property — Villars-sur-Ollon" className="block min-w-0 w-28 sm:w-36 md:w-56">
-           <img src={logo.url} alt="Brodard Property" className="w-full object-contain" />
+           <img src={logoWebp} alt="Brodard Property" width={440} height={164} className="w-full object-contain" />
          </a>
         <nav className="flex items-center gap-6 md:gap-10">
           <ul className="hidden gap-8 md:flex">
@@ -339,7 +339,7 @@ export function Villa({ lang }: { lang: Lang }) {
         <section id="residence" data-living className="relative bg-ivory md:h-[150svh]">
          <div className="relative h-[78svh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-living-frame className="absolute inset-0 overflow-hidden">
-             <img data-living-img src={img.living2} alt={t.imageAlts.living} loading="lazy" className="absolute inset-x-0 -top-[6%] h-[112%] w-full object-cover object-[center_62%] md:inset-0 md:h-full md:object-center" />
+             <img data-living-img {...photo(img.living2)} alt={t.imageAlts.living} loading="lazy" className="absolute inset-x-0 -top-[6%] h-[112%] w-full object-cover object-[center_62%] md:inset-0 md:h-full md:object-center" />
               <div className="absolute inset-0 bg-swiss-red/30 md:bg-swiss-red/20" />
           </div>
           <div data-living-text className="absolute bottom-10 inset-x-5 text-ivory md:bottom-16 md:left-12 md:right-auto">
@@ -370,7 +370,7 @@ export function Villa({ lang }: { lang: Lang }) {
       {/* INTERIOR */}
        <section className="grid grid-cols-12 items-center gap-6 bg-stone px-5 py-24 md:px-12 md:py-48">
         <div className="relative col-span-12 aspect-[4/5] overflow-hidden md:col-span-7 md:aspect-[5/6]">
-           <img data-speed="6" src={img.kitchen} alt={t.imageAlts.kitchen} loading="lazy" className="absolute inset-0 h-[115%] w-full -translate-y-[7%] object-cover" />
+           <img data-speed="6" {...photo(img.kitchen)} alt={t.imageAlts.kitchen} loading="lazy" className="absolute inset-0 h-[115%] w-full -translate-y-[7%] object-cover" />
         </div>
         <div className="col-span-12 md:col-span-4 md:col-start-9">
           <p data-fade className="eyebrow mb-8 text-wood">{t.interiorKicker}</p>
@@ -393,12 +393,12 @@ export function Villa({ lang }: { lang: Lang }) {
             </h2>
           </div>
           <div data-bed-img className="relative h-[70vh] overflow-hidden md:absolute md:inset-0 md:h-auto">
-             <img src={img.bedroom} alt={t.imageAlts.bedroom} loading="lazy" className="h-full w-full object-cover" />
+             <img {...photo(img.bedroom)} alt={t.imageAlts.bedroom} loading="lazy" className="h-full w-full object-cover" />
              <div className="absolute inset-0 bg-swiss-red/10" />
           </div>
         </div>
          <figure data-bed-img2 className="relative w-full bg-ivory px-5 py-8 md:absolute md:bottom-0 md:left-0 md:z-10 md:w-[58vw] md:px-12 md:py-10">
-            <img src={img.bedroom2} alt={t.imageAlts.bedroomDetail} loading="lazy" width={1600} height={2000} className="aspect-[4/3] w-full object-cover object-center" />
+            <img {...photo(img.bedroom2)} alt={t.imageAlts.bedroomDetail} loading="lazy" className="aspect-[4/3] w-full object-cover object-center" />
             <figcaption className="mt-3 text-sm leading-relaxed text-charcoal/75">{t.bedroomCaption}</figcaption>
          </figure>
       </section>
@@ -407,7 +407,7 @@ export function Villa({ lang }: { lang: Lang }) {
        <section data-balcony className="relative bg-ivory md:h-[160svh]">
         <div className="relative h-[90vh] overflow-hidden md:sticky md:top-0 md:h-svh">
           <div data-bal-frame className="absolute inset-0 overflow-hidden">
-             <img src={img.balcony} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover object-[58%_center] md:object-center" />
+             <img {...photo(img.balcony)} alt={t.imageAlts.balcony} loading="lazy" className="h-full w-full object-cover object-[58%_center] md:object-center" />
               <div className="absolute inset-0 bg-swiss-red/30" />
           </div>
           <div data-bal-text className="absolute inset-x-5 bottom-14 text-ivory md:inset-x-12 md:bottom-20">

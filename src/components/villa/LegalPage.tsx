@@ -7,7 +7,7 @@ export function LegalPage({ eyebrow, title, intro, sections, back }: { eyebrow: 
   return (
     <main className="min-h-screen bg-ivory text-charcoal">
       <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 bg-swiss-red px-5 py-4 text-ivory md:px-12">
-        <Link to="/" aria-label="Brodard Property" className="w-36 min-w-0 md:w-52"><img src={logo.url} alt="Brodard Property" className="w-full object-contain" /></Link>
+        <Link to="/" aria-label="Brodard Property" className="w-36 min-w-0 md:w-52"><img src={logoWebp} alt="Brodard Property" width={440} height={164} className="w-full object-contain" /></Link>
         <Link to="/" className="eyebrow border-b border-ivory/40 pb-1 text-ivory">{back}</Link>
       </header>
       <article className="mx-auto max-w-5xl px-5 py-20 md:px-12 md:py-32">
