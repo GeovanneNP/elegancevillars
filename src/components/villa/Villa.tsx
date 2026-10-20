@@ -239,6 +239,9 @@ export function Villa({ lang }: { lang: Lang }) {
       if (!image.complete) image.addEventListener("load", refresh, { once: true });
     });
     document.fonts?.ready.then(refresh);
+    // Photos that receive their source after load (laterPhoto) also re-measure.
+    const pageEl = root.current;
+    pageEl?.addEventListener("load", refresh, true);
     window.addEventListener("resize", refresh);
     window.addEventListener("orientationchange", refresh);
     ScrollTrigger.refresh();
@@ -246,6 +249,7 @@ export function Villa({ lang }: { lang: Lang }) {
       window.clearTimeout(refreshTimer);
       window.removeEventListener("resize", refresh);
       window.removeEventListener("orientationchange", refresh);
+      pageEl?.removeEventListener("load", refresh, true);
       images.forEach((image) => image.removeEventListener("load", refresh));
       marquee.current = null;
       mm?.revert();
