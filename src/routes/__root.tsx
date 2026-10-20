@@ -12,8 +12,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import cormorant300 from "@fontsource/cormorant-garamond/files/cormorant-garamond-latin-300-normal.woff2?url";
-import manrope400 from "@fontsource/manrope/files/manrope-latin-400-normal.woff2?url";
+import cormorant300 from "../assets/fonts/cormorant-garamond-latin-300-normal.woff2?url";
+import manrope400 from "../assets/fonts/manrope-latin-400-normal.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { HTML_LANG, SITE_VERIFICATION, altLocales, langFromPath } from "../components/villa/seo";
 

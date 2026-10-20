@@ -2,16 +2,18 @@
 @source "../src";
 @import "tw-animate-css";
 /* Self-hosted fonts (latin subset, font-display: swap); each file downloads only when text uses it. */
-@import "@fontsource/cormorant-garamond/latin-300.css";
 @import "@fontsource/cormorant-garamond/latin-400.css";
 @import "@fontsource/cormorant-garamond/latin-500.css";
 @import "@fontsource/cormorant-garamond/latin-300-italic.css";
 @import "@fontsource/cormorant-garamond/latin-400-italic.css";
 @import "@fontsource/manrope/latin-300.css";
-@import "@fontsource/manrope/latin-400.css";
 @import "@fontsource/manrope/latin-500.css";
 
 @custom-variant dark (&:is(.dark *));
+
+/* The two first-screen fonts are served from src/assets so their preload URL matches exactly. */
+@font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 300; font-display: swap; src: url("./assets/fonts/cormorant-garamond-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 400; font-display: swap; src: url("./assets/fonts/manrope-latin-400-normal.woff2") format("woff2"); }
 
 /* Metric-matched fallbacks: system fonts sized like the web fonts so the swap does not shift layout. */
 @font-face { font-family: "Cormorant Fallback"; src: local("Times New Roman"), local("Times"), local("Liberation Serif"); size-adjust: 90%; ascent-override: 103%; descent-override: 32%; line-gap-override: 0%; }
