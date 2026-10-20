@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import logo from "@/assets/brodard-logo.png.asset.json";
+import logoWebp from "@/assets/brodard-logo-440.webp";
 
 export function Preloader({ onDone }: { onDone: () => void }) {
   const ref = useRef<HTMLDivElement>(null);

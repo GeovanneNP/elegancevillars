@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { track } from "@/lib/tracking";
 import gsap from "gsap";
-import { galleryImages } from "./images";
+import { galleryImages, photo } from "./images";
 import type { Dict } from "./i18n";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";

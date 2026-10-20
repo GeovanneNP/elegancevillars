@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, LoaderCircle, Maximize, MessageCircle, Minimize, Play, RotateCw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Dict, Lang } from "./i18n";
-import { img } from "./images";
+import { img, photo } from "./images";
 import { trackVirtualTourOpen, VIRTUAL_TOUR_URL, VIRTUAL_TOUR_SHARE_URL } from "./virtual-tour";
 
 type Props = { t: Dict; lang: Lang; visitUrl: string };

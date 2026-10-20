@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/brodard-logo.png.asset.json";
+import logoWebp from "@/assets/brodard-logo-440.webp";
 
 type Section = { title: string; paragraphs: string[] };
 
