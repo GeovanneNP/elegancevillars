@@ -1,4 +1,6 @@
 import type { Lang } from "./i18n";
+/** Opening poster: phone-sized copies of the same frame, full HD for desktop. */
+export const HERO_POSTER_SRCSET = "/hero-poster-480.webp 480w, /hero-poster-828.webp 828w, /hero-poster.webp 1920w";
 
 export const SITE = "https://www.brodardproperty.ch";
 export const LANG_PATH: Record<Lang, "/" | "/en" | "/de"> = { fr: "/", en: "/en", de: "/de" };
@@ -61,7 +63,7 @@ export function listingHead(lang: Lang) {
       { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
-      { rel: "preload", as: "image", href: "/hero-poster.webp", type: "image/webp", fetchPriority: "high" as const },
+      { rel: "preload", as: "image", href: "/hero-poster.webp", imageSrcSet: HERO_POSTER_SRCSET, imageSizes: "100vw", type: "image/webp", fetchPriority: "high" as const },
       { rel: "canonical", href: url },
       { rel: "alternate", hrefLang: "fr-CH", href: langUrl("fr") },
       { rel: "alternate", hrefLang: "en", href: langUrl("en") },

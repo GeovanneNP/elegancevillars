@@ -12,6 +12,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import cormorant300 from "../assets/fonts/cormorant-garamond-latin-300-normal.woff2?url";
+import manrope400 from "../assets/fonts/manrope-latin-400-normal.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { HTML_LANG, SITE_VERIFICATION, altLocales, langFromPath } from "../components/villa/seo";
 
@@ -88,9 +90,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500&display=swap" },
+      // Only the two first-screen fonts are preloaded; the rest load on use.
+      { rel: "preload", as: "font", type: "font/woff2", href: cormorant300, crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", type: "font/woff2", href: manrope400, crossOrigin: "anonymous" },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
     ],

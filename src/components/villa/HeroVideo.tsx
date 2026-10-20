@@ -2,19 +2,32 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import film1080 from "@/assets/villars-film-1080.mp4.asset.json";
 import film720 from "@/assets/villars-film-720.mp4.asset.json";
+import { HERO_POSTER_SRCSET } from "./seo";
 
 /** Same frame as the original JPG poster, re-encoded as WebP (lighter, identical look). */
 export const HERO_POSTER = "/hero-poster.webp";
 
+type NetInfo = { saveData?: boolean; effectiveType?: string };
+
+/** No film on data-saver or 2g connections: the poster stays. */
+export function shouldLoadFilm(conn: NetInfo | undefined): boolean {
+  if (!conn) return true;
+  if (conn.saveData) return false;
+  return !["slow-2g", "2g"].includes(conn.effectiveType ?? "");
+}
+
 export function HeroVideo({ label }: { label: string }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const posterRef = useRef<HTMLImageElement>(null);
   const [muted, setMuted] = useState(true);
 
-  // The poster paints first (LCP); the film is attached only once the page has loaded
-  // so its download never competes with the first render.
+  // The poster <img> is the LCP. The film is attached only after the poster has painted,
+  // the page has loaded and the browser is idle — and never on data-saver / 2g.
   useEffect(() => {
     const v = ref.current;
-    if (!v) return;
+    const poster = posterRef.current;
+    if (!v || !poster) return;
+    if (!shouldLoadFilm((navigator as Navigator & { connection?: NetInfo }).connection)) return;
     let cancelled = false;
     const start = () => {
       if (cancelled || v.src) return;
@@ -28,10 +41,21 @@ export function HeroVideo({ label }: { label: string }) {
       if (ric) ric(start, { timeout: 1500 });
       else setTimeout(start, 200);
     };
-    if (document.readyState === "complete") idle();
-    else window.addEventListener("load", idle, { once: true });
+    const afterLoad = () => {
+      if (document.readyState === "complete") idle();
+      else window.addEventListener("load", idle, { once: true });
+    };
+    // Two frames after the poster is decoded = it has been painted.
+    const afterPaint = () => requestAnimationFrame(() => requestAnimationFrame(afterLoad));
+    if (poster.complete && poster.naturalWidth) afterPaint();
+    else {
+      poster.addEventListener("load", afterPaint, { once: true });
+      poster.addEventListener("error", afterPaint, { once: true });
+    }
     return () => {
       cancelled = true;
+      poster.removeEventListener("load", afterPaint);
+      poster.removeEventListener("error", afterPaint);
       window.removeEventListener("load", idle);
     };
   }, []);
@@ -46,20 +70,33 @@ export function HeroVideo({ label }: { label: string }) {
 
   return (
     <>
-      <video
-        ref={ref}
-        data-hero-img
-        poster={HERO_POSTER}
-        width={1920}
-        height={1080}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-label={label}
-        className="h-full w-full object-cover"
-      />
+      <div data-hero-img className="relative h-full w-full">
+        <img
+          ref={posterRef}
+          src={HERO_POSTER}
+          srcSet={HERO_POSTER_SRCSET}
+          sizes="100vw"
+          width={1920}
+          height={1080}
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <video
+          ref={ref}
+          width={1920}
+          height={1080}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          aria-label={label}
+          className="relative h-full w-full object-cover"
+        />
+      </div>
       <button
         type="button"
         onClick={toggle}

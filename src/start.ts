@@ -1,7 +1,6 @@
 import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
-import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
 
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {
@@ -26,6 +25,9 @@ const csrfMiddleware = createCsrfMiddleware({
 });
 
 export const startInstance = createStart(() => ({
-  functionMiddleware: [attachSupabaseAuth],
+  // No signed-in server functions exist (the dossier form is public), so the auth attacher
+  // is intentionally omitted: it would ship the whole database client in the first-screen script.
+  // Re-add attachSupabaseAuth here if a requireSupabaseAuth function is ever introduced.
+  functionMiddleware: [],
   requestMiddleware: [errorMiddleware, csrfMiddleware],
 }));
