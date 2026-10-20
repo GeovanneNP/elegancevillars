@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, LoaderCircle, Maximize, MessageCircle, Minimize, Play, RotateCw, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Dict, Lang } from "./i18n";
-import { img } from "./images";
+import { img, photo } from "./images";
 import { trackVirtualTourOpen, VIRTUAL_TOUR_URL, VIRTUAL_TOUR_SHARE_URL } from "./virtual-tour";
 
 type Props = { t: Dict; lang: Lang; visitUrl: string };
@@ -78,7 +78,7 @@ export function VirtualTour({ t, lang, visitUrl }: Props) {
           <div className={`relative min-h-0 w-full ${fullscreen ? "flex-1" : "h-[clamp(420px,65svh,500px)] md:h-[600px]"}`}>
             {state === "preview" ? (
               <>
-                <img src={img.living} alt={t.galleryAlts[0]} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+                <img {...photo(img.living)} alt={t.galleryAlts[0]} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 flex items-center justify-center px-5">
                   <div className="flex max-w-full flex-col items-center gap-5 bg-ivory/95 px-5 py-7 text-center md:px-10">
                     <span aria-hidden="true" className="flex items-center gap-2 font-serif text-3xl text-swiss-red"><RotateCw className="size-6" />360°</span>

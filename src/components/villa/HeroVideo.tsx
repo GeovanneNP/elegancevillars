@@ -2,18 +2,38 @@ import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import film1080 from "@/assets/villars-film-1080.mp4.asset.json";
 import film720 from "@/assets/villars-film-720.mp4.asset.json";
-import poster from "@/assets/villars-film-poster.jpg.asset.json";
+
+/** Same frame as the original JPG poster, re-encoded as WebP (lighter, identical look). */
+export const HERO_POSTER = "/hero-poster.webp";
 
 export function HeroVideo({ label }: { label: string }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
 
+  // The poster paints first (LCP); the film is attached only once the page has loaded
+  // so its download never competes with the first render.
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    v.src = window.matchMedia("(max-width: 767px)").matches ? film720.url : film1080.url;
-    v.muted = true;
-    v.play().catch(() => {});
+    let cancelled = false;
+    const start = () => {
+      if (cancelled || v.src) return;
+      v.src = window.matchMedia("(max-width: 767px)").matches ? film720.url : film1080.url;
+      v.preload = "auto";
+      v.muted = true;
+      v.play().catch(() => {});
+    };
+    const idle = () => {
+      const ric = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
+      if (ric) ric(start, { timeout: 1500 });
+      else setTimeout(start, 200);
+    };
+    if (document.readyState === "complete") idle();
+    else window.addEventListener("load", idle, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", idle);
+    };
   }, []);
 
   const toggle = () => {
@@ -29,12 +49,14 @@ export function HeroVideo({ label }: { label: string }) {
       <video
         ref={ref}
         data-hero-img
-        poster={poster.url}
+        poster={HERO_POSTER}
+        width={1920}
+        height={1080}
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
+        preload="none"
         aria-label={label}
         className="h-full w-full object-cover"
       />

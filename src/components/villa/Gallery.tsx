@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { track } from "@/lib/tracking";
 import gsap from "gsap";
-import { galleryImages } from "./images";
+import { galleryImages, photo } from "./images";
 import type { Dict } from "./i18n";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
@@ -72,7 +72,7 @@ export function Gallery({ t, visitUrl, onOpenChange }: { t: Dict; visitUrl: stri
             className={`group relative h-auto w-full overflow-hidden rounded-none p-0 [@media(hover:hover)_and_(pointer:fine)]:md:cursor-none ${layout[i]}`}
              aria-label={t.galleryAlts[i] ?? g.alt}
           >
-             <img src={g.src} alt={t.galleryAlts[i] ?? g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.035]" />
+             <img {...photo(g.src, "(min-width: 768px) 50vw, 100vw")} alt={t.galleryAlts[i] ?? g.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out motion-reduce:transition-none [@media(hover:hover)_and_(pointer:fine)]:group-hover:scale-[1.035]" />
           </Button>
         ))}
       </div>
@@ -91,7 +91,7 @@ export function Gallery({ t, visitUrl, onOpenChange }: { t: Dict; visitUrl: stri
              <Button variant="ghost" onClick={() => setOpen(null)} className="eyebrow text-ivory hover:text-gold">ESC — {t.galleryClose}</Button>
           </div>
           <div className="relative flex min-h-0 flex-1 items-center justify-center px-4 md:px-24">
-             <img key={open} src={galleryImages[open]?.src} alt={t.galleryAlts[open]} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
+             <img key={open} {...photo(galleryImages[open]?.src ?? "")} alt={t.galleryAlts[open]} className="max-h-[78vh] w-auto max-w-full animate-scale-in object-contain" />
              <Button variant="ghost" onClick={() => go(-1)} aria-label={t.galleryPrevious} className="absolute left-0 p-3 font-serif text-4xl text-ivory/70 hover:text-ivory md:left-8 md:p-4">←</Button>
              <Button variant="ghost" onClick={() => go(1)} aria-label={t.galleryNext} className="absolute right-0 p-3 font-serif text-4xl text-ivory/70 hover:text-ivory md:right-8 md:p-4">→</Button>
           </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import logo from "@/assets/brodard-logo.png.asset.json";
+import logoWebp from "@/assets/brodard-logo-440.webp";
 
 export function Preloader({ onDone }: { onDone: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
       className="fixed inset-0 z-[100] flex items-center justify-center bg-swiss-red text-ivory"
     >
       <div className="flex w-[min(84vw,560px)] flex-col items-center text-center">
-        <img data-pl-logo src={logo.url} alt="Brodard Property" className="w-full object-contain" />
+        <img data-pl-logo src={logoWebp} alt="Brodard Property" width={440} height={164} className="w-full object-contain" />
         <div data-pl-line className="mt-8 h-px w-full origin-left bg-ivory/40" />
         <span data-pl-tag className="eyebrow mt-5 text-ivory/75">Villars-sur-Ollon · Suisse</span>
       </div>
