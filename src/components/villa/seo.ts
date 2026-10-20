@@ -61,7 +61,7 @@ export function listingHead(lang: Lang) {
       { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
-      { rel: "preload", as: "image", href: "/hero-poster.webp", type: "image/webp", fetchPriority: "high" },
+      { rel: "preload", as: "image", href: "/hero-poster.webp", type: "image/webp", fetchPriority: "high" as const },
       { rel: "canonical", href: url },
       { rel: "alternate", hrefLang: "fr-CH", href: langUrl("fr") },
       { rel: "alternate", hrefLang: "en", href: langUrl("en") },
