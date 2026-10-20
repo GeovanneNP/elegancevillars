@@ -74,3 +74,11 @@ export function photo(src: string, sizes = "100vw") {
   const m = mobileCopy[src];
   return m ? { src, srcSet: `${m} 1080w, ${src} 2528w`, sizes, width: 2528, height: 1696 } : { src };
 }
+
+/** Below-the-fold photo: keeps its intrinsic size but gets no source until `on` (after page load),
+ *  so native lazy-loading's large look-ahead cannot pull it in before the opening image. */
+export function laterPhoto(src: string, on: boolean, sizes = "100vw") {
+  if (on) return photo(src, sizes);
+  const p = photo(src, sizes);
+  return { width: p.width, height: p.height };
+}
