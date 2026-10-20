@@ -1,6 +1,15 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+/* Self-hosted fonts (latin subset, font-display: swap); each file downloads only when text uses it. */
+@import "@fontsource/cormorant-garamond/latin-300.css";
+@import "@fontsource/cormorant-garamond/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-300-italic.css";
+@import "@fontsource/cormorant-garamond/latin-400-italic.css";
+@import "@fontsource/manrope/latin-300.css";
+@import "@fontsource/manrope/latin-400.css";
+@import "@fontsource/manrope/latin-500.css";
 
 @custom-variant dark (&:is(.dark *));
 
