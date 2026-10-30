@@ -20,7 +20,7 @@ import { Link } from "@tanstack/react-router";
 import { getVisitUrl } from "./visit";
 import { MessageCircle } from "lucide-react";
 
-const CONTACT_EMAIL = "gregory.brodard@pfgbrodard.ch";
+const CONTACT_EMAIL = "brodard.gregory@gmail.com";
 const CONTACT_PHONE = "+41 76 253 24 22";
 const CONTACT_PHONE_LINK = "+41762532422";
 
